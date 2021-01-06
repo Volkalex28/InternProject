@@ -1,6 +1,6 @@
 #include "main.h"
 
-#define DELAY   100000
+#define DELAY   200000
 
 int main() {
 
