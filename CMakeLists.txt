@@ -8,7 +8,7 @@ set(CMAKE_C_STANDARD_REQUIRED ON)
 set(CMAKE_C_EXTENSIONS OFF)
 
 set(HEADER 
-#    ../Core/Inc/main.h
+    ../Core/Inc/main.h
 #    ../Core/Inc/stm32f0xx_hal_conf.h
 #    ../Core/Inc/stm32f0xx_it.h
 )
@@ -52,8 +52,8 @@ target_include_directories(${EXECUTABLE} PRIVATE
     ${CMAKE_SOURCE_DIR}/Core/Inc
 #    ${CMAKE_SOURCE_DIR}/Drivers/STM32F0xx_HAL_Driver/Inc
 #    ${CMAKE_SOURCE_DIR}/Drivers/STM32F0xx_HAL_Driver/Inc/Legacy
-#    ${CMAKE_SOURCE_DIR}/Drivers/CMSIS/Device/ST/STM32F0xx/Include
-#    ${CMAKE_SOURCE_DIR}/Drivers/CMSIS/Include
+    ${CMAKE_SOURCE_DIR}/Drivers/CMSIS/Device/ST/STM32F0xx/Include
+    ${CMAKE_SOURCE_DIR}/Drivers/CMSIS/Include
 )
 
 target_compile_options(${EXECUTABLE} PRIVATE
@@ -68,7 +68,7 @@ target_compile_options(${EXECUTABLE} PRIVATE
 
     --specs=nano.specs
 
-    $<$<CONFIG:Debug>:-Ofast>
+    $<$<CONFIG:Debug>:-O0>
 )
 
 target_link_options(${EXECUTABLE} PRIVATE
