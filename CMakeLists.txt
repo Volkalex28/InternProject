@@ -10,7 +10,7 @@ set(CMAKE_C_EXTENSIONS OFF)
 set(HEADER 
     ../Core/Inc/main.h
 #    ../Core/Inc/stm32f0xx_hal_conf.h
-#    ../Core/Inc/stm32f0xx_it.h
+    ../Core/Inc/stm32f0xx_it.h
 )
 set(SOURCE
 #    ../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal.c
@@ -31,7 +31,7 @@ set(SOURCE
 
     ../Core/Src/main.c
 #    ../Core/Src/stm32f0xx_hal_msp.c
-#    ../Core/Src/stm32f0xx_it.c
+    ../Core/Src/stm32f0xx_it.c
 #    ../Core/Src/system_stm32f0xx.c
 )
 set(STARTUP
@@ -68,7 +68,7 @@ target_compile_options(${EXECUTABLE} PRIVATE
 
     --specs=nano.specs
 
-    $<$<CONFIG:Debug>:-O0>
+    $<$<CONFIG:Debug>:-Ofast>
 )
 
 target_link_options(${EXECUTABLE} PRIVATE

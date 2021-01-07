@@ -1,7 +1,10 @@
 #ifndef _MAIN_H_
 #define _MAIN_H_
 
-#include "stm32f051x8.h"
+// #ifndef STM32F051x8 
+//     #define STM32F051x8
+// #endif
+#include "stm32f0xx.h"
 
 #define GPIO_PIN_0                 ((uint16_t)0x0001U)  /* Pin 0 selected    */
 #define GPIO_PIN_1                 ((uint16_t)0x0002U)  /* Pin 1 selected    */
@@ -20,5 +23,7 @@
 #define GPIO_PIN_14                ((uint16_t)0x4000U)  /* Pin 14 selected   */
 #define GPIO_PIN_15                ((uint16_t)0x8000U)  /* Pin 15 selected   */
 #define GPIO_PIN_All               ((uint16_t)0xFFFFU)  /* All pins selected */
+
+extern volatile uint32_t ticks;
 
 #endif /* _MAIN_H_ */
