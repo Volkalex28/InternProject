@@ -28,7 +28,7 @@ inline void GPIO_ResetPin(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin)
  * @param GPIO_Pin specifies the pin
  * @retval None
  */
-inline void GPIO_ToggletPin(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin) 
+inline void GPIO_TogglePin(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin) 
 {
   // reading curent Output Data Register value
   uint32_t odr = GPIOx->ODR;
@@ -58,6 +58,7 @@ uint32_t GPIO_Init(void)
   SET_BIT(RCC->AHBENR, RCC_AHBENR_GPIOCEN);
   // Configurate pin 9 to output
   SET_BIT(GPIOC->MODER, GPIO_MODER_MODER9_0);
+  SET_BIT(GPIOC->MODER, GPIO_MODER_MODER8_0);
 
   return 0;
 }

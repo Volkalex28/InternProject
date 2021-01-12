@@ -9,7 +9,8 @@ volatile uint32_t ticks = 0;
  * @brief Initialization RCC and SysTick
  * @retval RCC init status
  */
-uint32_t RCC_Init(void) {
+uint32_t RCC_Init(void) 
+{
   // ---- HSI ----
   // Start HSI oscillator
   SET_BIT(RCC->CR, RCC_CR_HSION); 
@@ -63,6 +64,10 @@ uint32_t RCC_Init(void) {
   // Enable Power interface clock
   SET_BIT(RCC->APB1ENR, RCC_APB1ENR_PWREN);
 
+  // ---- USART1 ----
+  MODIFY_REG(RCC->CFGR3, RCC_CFGR3_USART1SW, RCC_CFGR3_USART1SW_PCLK);
+
+
   return 0;
 }
 
@@ -71,9 +76,10 @@ uint32_t RCC_Init(void) {
  * @param timeout number of milliseconds to wait
  * @retval None
  */
-inline void Delay(volatile uint32_t timeout) {
+inline void Delay(volatile uint32_t timeout) 
+{
   // Number of ticks at the start of waiting
-  uint32_t ticks_start = ticks;
+  uint32_t tickStart = ticks;
   // Waiting 
-  while(ticks < (ticks_start + timeout));
+  while(ticks < (tickStart + timeout));
 }

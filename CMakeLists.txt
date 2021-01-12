@@ -10,6 +10,7 @@ set(CMAKE_C_EXTENSIONS OFF)
 set(HEADER 
   ../Drivers/STM32F051_Driver/Inc/stm32f051_rcc.h
   ../Drivers/STM32F051_Driver/Inc/stm32f051_gpio.h
+  ../Drivers/STM32F051_Driver/Inc/stm32f051_uart.h
 
   ../Core/Inc/main.h
 #    ../Core/Inc/stm32f0xx_hal_conf.h
@@ -34,6 +35,7 @@ set(SOURCE
 
   ../Drivers/STM32F051_Driver/Src/stm32f051_rcc.c
   ../Drivers/STM32F051_Driver/Src/stm32f051_gpio.c
+  ../Drivers/STM32F051_Driver/Src/stm32f051_uart.c
 
   ../Core/Src/main.c
 #  ../Core/Src/stm32f0xx_hal_msp.c
@@ -75,7 +77,7 @@ target_compile_options(${EXECUTABLE} PRIVATE
 
   --specs=nano.specs
 
-  $<$<CONFIG:Debug>:-Ofast>
+  $<$<CONFIG:Debug>:-O0>
 )
 
 target_link_options(${EXECUTABLE} PRIVATE

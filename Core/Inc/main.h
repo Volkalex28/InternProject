@@ -5,8 +5,11 @@
 
 #include "stm32f051_rcc.h"
 #include "stm32f051_gpio.h"
+#include "stm32f051_uart.h"
 
-#define LED_Green_Port  GPIOC
-#define LED_Green_Pin   GPIO_Pin_9
+#define LED_GREEN_Port  GPIOC
+#define LED_GREEN_Pin   GPIO_PIN_9
+#define LED_BLUE_Port   GPIOC
+#define LED_BLUE_Pin    GPIO_PIN_8
 
 #endif /* _MAIN_H_ */
