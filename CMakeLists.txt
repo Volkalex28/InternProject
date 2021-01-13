@@ -11,18 +11,22 @@ set(HEADER
   ../Drivers/STM32F051_Driver/Inc/stm32f051_rcc.h
   ../Drivers/STM32F051_Driver/Inc/stm32f051_gpio.h
   ../Drivers/STM32F051_Driver/Inc/stm32f051_uart.h
+  ../Drivers/STM32F051_Driver/Inc/stm32f051_i2c.h
 
   ../Core/Inc/main.h
   ../Core/Inc/stm32f0xx_it.h
   ../Core/Inc/pins.h
+  ../Core/Inc/ds3231.h
 )
 set(SOURCE
   ../Drivers/STM32F051_Driver/Src/stm32f051_rcc.c
   ../Drivers/STM32F051_Driver/Src/stm32f051_gpio.c
   ../Drivers/STM32F051_Driver/Src/stm32f051_uart.c
+  ../Drivers/STM32F051_Driver/Src/stm32f051_i2c.c
 
   ../Core/Src/main.c
   ../Core/Src/stm32f0xx_it.c
+  ../Core/Src/ds3231.c
 )
 set(STARTUP
   ../Core/Startup/startup_stm32f051r8tx.s
