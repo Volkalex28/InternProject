@@ -1,21 +1,30 @@
+#include "stm32f0xx.h"
+
+#include "pins.h"
 #include "main.h"
+#include <string.h>
 
-#define DELAY   200000
+uint8_t buf[] = "Hello Vlados! You are the best!!\n";
 
-int main() {
+int main() 
+{
 
-    RCC->CR |= RCC_CR_HSION;
+  RCC_Init();
+  GPIO_Init();
+  UART1_Init();
 
-    RCC->AHBENR |= RCC_AHBENR_GPIOCEN;
-    // --- GPIO setup ----
-    GPIOC->MODER |= GPIO_MODER_MODER9_0;
-    //GPIOC->OTYPER &= ~(uint32_t)GPIO_OTYPER_OT_9
-    //GPIOC->OSPEEDR &= ~(uint32_t)GPIO_OSPEEDR_
+  UART1_ReceiveIT(buf, 1);
 
-    while(1) {
-        GPIOC->BRR = GPIO_PIN_9;
-        for(int i = 0; i < DELAY; i++) {};
-        GPIOC->BSRR = GPIO_PIN_9;
-        for(int i = 0; i < DELAY; i++) {};
-    }
+  while(1) 
+  {
+    UART1_Transmit(buf, strlen((char*)buf), 1000);
+    GPIO_TogglePin(LED_BLUE_Port, LED_BLUE_Pin);
+    Delay(500);
+  }
+}
+
+void UART1_RxCallback(void) 
+{
+  GPIO_TogglePin(LED_GREEN_Port, LED_GREEN_Pin);
+  UART1_ReceiveIT(buf, 1);
 }
