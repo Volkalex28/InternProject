@@ -1,5 +1,13 @@
 #include "stm32f051_uart.h"
 
+struct stm32f051_uart
+{
+  uint8_t* pDataRx;
+  uint16_t countRx;
+  uint16_t sizeRx;
+
+} uart1;
+
 uint32_t UART1_Init(void) 
 {
   SET_BIT(RCC->APB2ENR, RCC_APB2ENR_USART1EN);
@@ -23,13 +31,14 @@ uint32_t UART1_Init(void)
 
   CLEAR_BIT(USART1->CR1, USART_CR1_UE);
 
-  MODIFY_REG(USART1->CR1, USART_CR1_M | USART_CR1_PCE | USART_CR1_PS | USART_CR1_TE | USART_CR1_RE | USART_CR1_OVER8,
-    USART_CR1_RE | USART_CR1_TE);
+  MODIFY_REG(USART1->CR1, USART_CR1_M | USART_CR1_PCE | USART_CR1_PS | 
+    USART_CR1_TE | USART_CR1_RE | USART_CR1_OVER8, USART_CR1_RE | USART_CR1_TE);
   MODIFY_REG(USART1->CR2, USART_CR2_STOP, 0);
   MODIFY_REG(USART1->CR3, USART_CR3_RTSE | USART_CR3_CTSE | USART_CR3_ONEBIT, 0);
 
-  uint32_t usartdiv = ( 48000000 + 19200 / 2U ) / 19200;
-  WRITE_REG(USART1->BRR, (uint16_t)(usartdiv & 0xFFF0U) + (uint16_t)((usartdiv & (uint16_t)0x000FU) >> 1U));
+  const uint32_t usartdiv = ( 48000000 + 19200 / 2U ) / 19200;
+  WRITE_REG(USART1->BRR, (uint16_t)(usartdiv & 0xFFF0U) + 
+    (uint16_t)((usartdiv & (uint16_t)0x000FU) >> 1U));
 
   CLEAR_BIT(USART1->CR2, (USART_CR2_LINEN | USART_CR2_CLKEN));
   CLEAR_BIT(USART1->CR3, (USART_CR3_SCEN | USART_CR3_HDSEL | USART_CR3_IREN));
@@ -41,7 +50,7 @@ uint32_t UART1_Init(void)
 
 uint32_t UART1_WaitFlag(uint32_t Flag, FlagStatus Status, uint32_t Timeout)
 {
-  uint32_t tickStart = ticks;
+  const uint32_t tickStart = ticks;
   while((READ_BIT(USART1->ISR, Flag) ? SET : RESET) == Status) 
   {
     if(ticks >= (tickStart + Timeout))
@@ -52,9 +61,9 @@ uint32_t UART1_WaitFlag(uint32_t Flag, FlagStatus Status, uint32_t Timeout)
       return 1;
     }
 
-    if((READ_BIT(USART1->CR1, USART_CR1_RE) ? SET : RESET) != RESET)
+    if(READ_BIT(USART1->CR1, USART_CR1_RE) != 0)
     {
-      if((READ_BIT(USART1->ISR, USART_ISR_RTOF) ? SET : RESET) == SET)
+      if(READ_BIT(USART1->ISR, USART_ISR_RTOF) != 0)
       {
         CLEAR_BIT(USART1->ICR, USART_ICR_RTOCF);
 
@@ -68,7 +77,7 @@ uint32_t UART1_WaitFlag(uint32_t Flag, FlagStatus Status, uint32_t Timeout)
   return 0;
 }
 
-uint32_t UART1_Transmit(uint8_t* pData, uint16_t Size, uint32_t Timeout)
+uint32_t UART1_Transmit(uint8_t *  pData, uint16_t Size, uint32_t Timeout)
 {
   if ((pData == NULL) || (Size == 0U))
   {
@@ -90,15 +99,6 @@ uint32_t UART1_Transmit(uint8_t* pData, uint16_t Size, uint32_t Timeout)
   return 0;
 }
 
-struct stm32f051_uart
-{
-  uint8_t* pDataRx;
-  uint16_t countRx;
-  uint16_t sizeRx;
-
-} uart1;
-
-
 uint32_t UART1_ReceiveIT(uint8_t *pData, uint16_t Size)
 {
   if ((pData == NULL) || (Size == 0U))
@@ -109,7 +109,7 @@ uint32_t UART1_ReceiveIT(uint8_t *pData, uint16_t Size)
   uart1.pDataRx = pData;
   uart1.sizeRx = uart1.countRx = Size;
 
-  if((READ_BIT(USART1->CR1, USART_CR1_RE) ? SET : RESET) != RESET)
+  if(READ_BIT(USART1->CR1, USART_CR1_RE) != 0)
   {
     SET_BIT(USART1->CR1, USART_CR1_RTOIE);
   }
@@ -128,13 +128,14 @@ __WEAK void UART1_RxCallback(void)
 
 void UART1_IRQHandler(void)
 {
-  uint32_t isrflags   = READ_REG(USART1->ISR);
-  uint32_t cr1its     = READ_REG(USART1->CR1);
-  //uint32_t cr3its     = READ_REG(USART1->CR3);
+  const uint32_t isrflags   = READ_REG(USART1->ISR);
+  const uint32_t cr1its     = READ_REG(USART1->CR1);
 
-  if(READ_BIT(isrflags, USART_ISR_PE | USART_ISR_FE | USART_ISR_ORE | USART_ISR_NE | USART_ISR_RTOF) == 0)
+  if(READ_BIT(isrflags, USART_ISR_PE | USART_ISR_FE | \
+      USART_ISR_ORE | USART_ISR_NE | USART_ISR_RTOF) == 0)
   {
-    if(READ_BIT(isrflags, USART_ISR_RXNE) != 0 && READ_BIT(cr1its, USART_CR1_RXNEIE) != 0) 
+    if((READ_BIT(isrflags, USART_ISR_RXNE) != 0) && 
+      (READ_BIT(cr1its, USART_CR1_RXNEIE) != 0)) 
     {
       // Receive Handler
       uint16_t  data = READ_REG(USART1->RDR);

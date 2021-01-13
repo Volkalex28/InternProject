@@ -13,34 +13,16 @@ set(HEADER
   ../Drivers/STM32F051_Driver/Inc/stm32f051_uart.h
 
   ../Core/Inc/main.h
-#    ../Core/Inc/stm32f0xx_hal_conf.h
-    ../Core/Inc/stm32f0xx_it.h
+  ../Core/Inc/stm32f0xx_it.h
+  ../Core/Inc/pins.h
 )
 set(SOURCE
-#  ../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal.c
-#  ../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_cortex.c
-#  ../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_dma.c
-#  ../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_exti.c
-#  ../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_flash.c
-#  ../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_flash_ex.c
-#  ../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_gpio.c
-#  ../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c.c
-#  ../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c
-#  ../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_pwr.c
-#  ../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_pwr_ex.c
-#  ../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_rcc.c
-#  ../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_rcc_ex.c
-#  ../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_tim.c
-#  ../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_tim_ex.c
-
   ../Drivers/STM32F051_Driver/Src/stm32f051_rcc.c
   ../Drivers/STM32F051_Driver/Src/stm32f051_gpio.c
   ../Drivers/STM32F051_Driver/Src/stm32f051_uart.c
 
   ../Core/Src/main.c
-#  ../Core/Src/stm32f0xx_hal_msp.c
   ../Core/Src/stm32f0xx_it.c
-#  ../Core/Src/system_stm32f0xx.c
 )
 set(STARTUP
   ../Core/Startup/startup_stm32f051r8tx.s
@@ -52,14 +34,11 @@ add_executable(${EXECUTABLE} ${HEADER} ${SOURCE} ${STARTUP})
 
 target_compile_definitions(${EXECUTABLE} PRIVATE
   -DSTM32F051x8
-  -DDEBAG
-#  -DUSE_HAL_DRIVER
+  -DDEBUG
 )
 
 target_include_directories(${EXECUTABLE} PRIVATE
   ${CMAKE_SOURCE_DIR}/Core/Inc
-#  ${CMAKE_SOURCE_DIR}/Drivers/STM32F0xx_HAL_Driver/Inc
-#  ${CMAKE_SOURCE_DIR}/Drivers/STM32F0xx_HAL_Driver/Inc/Legacy
   ${CMAKE_SOURCE_DIR}/Drivers/STM32F051_Driver/Inc
   ${CMAKE_SOURCE_DIR}/Drivers/CMSIS/Device/ST/STM32F0xx/Include
   ${CMAKE_SOURCE_DIR}/Drivers/CMSIS/Include
@@ -73,6 +52,7 @@ target_compile_options(${EXECUTABLE} PRIVATE
   -fdata-sections
   -ffunction-sections
   -Wall
+  -Winline
   -fstack-usage
 
   --specs=nano.specs
@@ -85,6 +65,7 @@ target_link_options(${EXECUTABLE} PRIVATE
   -mcpu=cortex-m0
   -mthumb
   -mfloat-abi=soft
+  -u _printf_float
 
   --specs=nano.specs
   --specs=nosys.specs

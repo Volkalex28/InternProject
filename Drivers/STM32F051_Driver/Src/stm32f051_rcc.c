@@ -27,7 +27,7 @@ uint32_t RCC_Init(void)
     (uint32_t)(RCC_CFGR_PLLMUL12 | RCC_CFGR_PLLSRC_HSI_DIV2));
   // Start PLL
   SET_BIT(RCC->CR, RCC_CR_PLLON);
-  // White PLL Ready state
+  // Wait PLL Ready state
   while(READ_BIT(RCC->CR, RCC_CR_PLLRDY) == SET);
 
   // ---- HCLK ----
@@ -65,7 +65,7 @@ uint32_t RCC_Init(void)
   SET_BIT(RCC->APB1ENR, RCC_APB1ENR_PWREN);
 
   // ---- USART1 ----
-  MODIFY_REG(RCC->CFGR3, RCC_CFGR3_USART1SW, RCC_CFGR3_USART1SW_PCLK);
+  MODIFY_REG(RCC->CFGR3, RCC_CFGR3_USART1SW, RCC_CFGR3_USART1SW_SYSCLK);
 
 
   return 0;
