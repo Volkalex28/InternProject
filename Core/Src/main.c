@@ -8,13 +8,6 @@
 #include "ds3231.h"
 
 uint8_t bufUART[256] = "Hello Vlados! You are the best!!\n";
-uint8_t bufI2C[19] = {};
-
-uint8_t RTC_FromDec(uint8_t v)
-{
-	return ((v >> 4) * 10 + (v & 0xF));
-}
-
 DS3231_t DS3231;
 
 int main() 
