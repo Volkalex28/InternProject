@@ -6,4 +6,6 @@
 #include "stm32f051_uart.h"
 #include "stm32f051_i2c.h"
 
+#define SIZE_ARR(_ARR_) (sizeof(_ARR_)/sizeof(_ARR_[0]))
+
 #endif /* _MAIN_H_ */

@@ -5,7 +5,6 @@ struct stm32f051_uart
   uint8_t* pDataRx;
   uint16_t countRx;
   uint16_t sizeRx;
-
 } uart1;
 
 uint32_t UART1_Init(void) 
