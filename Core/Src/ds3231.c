@@ -1,11 +1,22 @@
 #include "ds3231.h"
 
-void DS3231_GetDate(DS3231_t* pDS)
+uint32_t DS3231_GetDate(DS3231_t* pDS)
 {
+  if(pDS == NULL)
+  {
+    return 1;
+  }
+
   uint8_t buf[4] = {[0] = 3, 0};
 
-  I2C_Transmit(pDS->Adress, buf, 1, 100);
-  I2C_Receive(pDS->Adress, buf, 4, 100);
+  if(I2C1_Transmit(pDS->Adress, buf, 1, 100) != 0)
+  {
+    return 1;
+  }
+  if(I2C1_Receive(pDS->Adress, buf, 4, 100) != 0)
+  {
+    return 1;
+  }
 
   const DS3231_Mem_Date_t* pDate = (DS3231_Mem_Date_t*)buf;
 
@@ -13,41 +24,81 @@ void DS3231_GetDate(DS3231_t* pDS)
   pDS->Date.Month = pDate->Date.Month.Month10 * 10 + pDate->Date.Month.Month;
   pDS->Date.Year = pDate->Date.Year.Year10 * 10 + pDate->Date.Year.Year;
   pDS->Date.Day = pDate->Day;
+
+  return 0;
 }
 
-void DS3231_GetTime(DS3231_t* pDS)
+uint32_t DS3231_GetTime(DS3231_t* pDS)
 {
+  if(pDS == NULL)
+  {
+    return 1;
+  }
+
   uint8_t buf[3] = {[0] = 0, 0};
 
-  I2C_Transmit(pDS->Adress, buf, 1, 100);
-  I2C_Receive(pDS->Adress, buf, 3, 100);
+  if(I2C1_Transmit(pDS->Adress, buf, 1, 100) != 0)
+  {
+    return 1;
+  }
+  if(I2C1_Receive(pDS->Adress, buf, 3, 100) != 0)
+  {
+    return 1;
+  }
 
   const DS3231_Mem_Time_t* pTime = (DS3231_Mem_Time_t*)buf;
 
   pDS->Time.Hours = pTime->Hours.Hour10 * 10 + pTime->Hours.Hour;
   pDS->Time.Minutes = pTime->Minutes.Min10 * 10 + pTime->Minutes.Min;
   pDS->Time.Seconds = pTime->Seconds.Sec10 * 10 + pTime->Seconds.Sec;
+
+  return 0;
 }
 
-void DS3231_SetAddress(DS3231_t* pDS, const uint8_t addr) 
+uint32_t DS3231_SetAddress(DS3231_t* pDS, const uint8_t addr) 
 {
+  if(pDS == NULL)
+  {
+    return 1;
+  }
+
   pDS->Adress = addr;
+
+  return 0;
 }
 
-void DS3231_GetTemp(DS3231_t* pDS)
+uint32_t DS3231_GetTemp(DS3231_t* pDS)
 {
+  if(pDS == NULL)
+  {
+    return 1;
+  }
+
   uint8_t buf[2] = {[0] = 0x11, 0};
 
-  I2C_Transmit(pDS->Adress, buf, 1, 100);
-  I2C_Receive(pDS->Adress, buf, 2, 100);
+  if(I2C1_Transmit(pDS->Adress, buf, 1, 100) != 0)
+  {
+    return 1;
+  }
+  if(I2C1_Receive(pDS->Adress, buf, 2, 100) != 0)
+  {
+    return 1;
+  }
 
   const DS3231_Temp_t* pTemp = (DS3231_Temp_t*)buf;
 
   pDS->Temp = pTemp->Integer + pTemp->Fraction * 0.25f;
+
+  return 0;
 }
 
-void DS3231_SetDate(const DS3231_t* pDS, const DS3231_Date_t* pDSDate)
+uint32_t DS3231_SetDate(const DS3231_t* pDS, const DS3231_Date_t* pDSDate)
 {
+  if(pDS == NULL || pDSDate == NULL)
+  {
+    return 1;
+  }
+
   uint8_t buf[5] = {[0] = 3, 0};
 
   DS3231_Mem_Date_t* pDate = (DS3231_Mem_Date_t*)&buf[1];
@@ -59,11 +110,16 @@ void DS3231_SetDate(const DS3231_t* pDS, const DS3231_Date_t* pDSDate)
   pDate->Date.Year.Year     = (pDSDate->Year & 0xFF) % 10;
   pDate->Day = pDSDate->Day & 0x07;
 
-  I2C_Transmit(pDS->Adress, buf, 5, 100);
+  return I2C1_Transmit(pDS->Adress, buf, 5, 100);
 }
 
-void DS3231_SetTime(const DS3231_t* pDS, const DS3231_Time_t* pDSTime)
+uint32_t DS3231_SetTime(const DS3231_t* pDS, const DS3231_Time_t* pDSTime)
 {
+  if(pDS == NULL || pDSTime == NULL)
+  {
+    return 1;
+  }
+
   uint8_t buf[4] = {[0] = 0, 0};
 
   DS3231_Mem_Time_t* pTime = (DS3231_Mem_Time_t*)&buf[1];
@@ -74,5 +130,5 @@ void DS3231_SetTime(const DS3231_t* pDS, const DS3231_Time_t* pDSTime)
   pTime->Hours.Hour10   = (pDSTime->Hours & 0x1F) / 10;
   pTime->Hours.Hour     = (pDSTime->Hours & 0x1F) % 10;
 
-  I2C_Transmit(pDS->Adress, buf, 4, 100);
+  return I2C1_Transmit(pDS->Adress, buf, 4, 100);
 }

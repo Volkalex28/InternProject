@@ -2,6 +2,7 @@
 #define _DS3231_H_
 
 #include "stm32f051_i2c.h"
+#include <stddef.h>
 
 typedef struct 
 {
@@ -187,12 +188,12 @@ typedef struct
   
 } DS3231_t;
 
-void DS3231_GetDate(DS3231_t* pDS);
-void DS3231_GetTime(DS3231_t* pDS);
-void DS3231_GetTemp(DS3231_t* pDS);
-void DS3231_SetAddress(DS3231_t* pDS, const uint8_t addr);
+uint32_t DS3231_GetDate(DS3231_t* pDS);
+uint32_t DS3231_GetTime(DS3231_t* pDS);
+uint32_t DS3231_GetTemp(DS3231_t* pDS);
+uint32_t DS3231_SetAddress(DS3231_t* pDS, const uint8_t addr);
 
-void DS3231_SetDate(const DS3231_t* pDS, const DS3231_Date_t* pDSDate);
-void DS3231_SetTime(const DS3231_t* pDS, const DS3231_Time_t* pDSTime);
+uint32_t DS3231_SetDate(const DS3231_t* pDS, const DS3231_Date_t* pDSDate);
+uint32_t DS3231_SetTime(const DS3231_t* pDS, const DS3231_Time_t* pDSTime);
 
 #endif // _DS3231_H_
