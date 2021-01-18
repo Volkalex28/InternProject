@@ -1,8 +1,22 @@
+/**
+ * @file main.c
+ * @author Oleksandr Ananiev (alexander.ananiev@sigma.sofware)
+ * @brief 
+ * @version 0.1
+ * @date 2021-01-17
+ * 
+ * @copyright Copyright (c) 2021
+ * 
+ */
 
 #include <string.h>
 #include <stdio.h>
 
 #include "stm32f0xx.h"
+#include "stm32f051_rcc.h"
+#include "stm32f051_gpio.h"
+#include "stm32f051_uart.h"
+#include "stm32f051_i2c.h"
 
 #include "main.h"
 #include "pins.h"
@@ -19,10 +33,10 @@ void UARTComander(void)
   if(commandFromUART == 'd')
   {
     DS3231_Date_t date;
-    date.Date = 14;
+    date.Date = 17;
     date.Month = 1;
     date.Year = 21;
-    date.Day = 4;
+    date.Day = 7;
 
     DS3231_SetDate(&DS3231, &date);
   }
@@ -37,13 +51,18 @@ void UARTComander(void)
   }
 }
 
+/**
+ * @brief 
+ * 
+ * @return int 
+ */
 int main() 
 {
 
   RCC_Init();
   GPIO_Init();
   UART1_Init();
-  I2C_Init();
+  I2C1_Init();
 
   DS3231_SetAddress(&DS3231, 0xD0);
 

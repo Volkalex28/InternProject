@@ -1,13 +1,63 @@
+/**
+ * @file stm32f051_rcc.c
+ * @author Oleksandr Ananiev (alexander.ananiev@sigma.software)
+ * @brief Source file of RCC module driver
+ * @version 0.1
+ * @date 2021-01-14
+ * 
+ * @copyright Copyright (c) 2021
+ * 
+ */
+
+/**
+ * @addtogroup STM32f051_Driver Driver for STM32F051
+ */
+
+/**
+ * @defgroup RCC RCC
+ * @ingroup STM32f051_Driver
+ * @brief RCC module driver
+ */
+
 #include "stm32f051_rcc.h"
 
 // Exported variables ---------------------------------------------------------
-/** @defgroup Private_Variables_RCC
- */
-volatile uint32_t ticks = 0;
+/** 
+ * @defgroup RCC_Exported_Variables RCC Exported Variables
+ * @ingroup RCC
+ * 
+ * RCC module variables available from other files
+ * @{
+ */ 
 
 /**
- * @brief Initialization RCC and SysTick
- * @retval RCC init status
+ * @brief A variable that stores the number of milliseconds that have passed since the 
+ * controller was turned on.
+ * 
+ * It is incremented in SysTick ISR and used in the Delay() function.
+ */
+static volatile uint32_t ticks = 0;
+/// @}
+
+// Exported Function ---------------------------------------------------------
+/** @defgroup RCC_Exported_Function RCC Exported Function
+ * @ingroup RCC
+ * 
+ * RCC module function available from other files
+ * @{
+ */
+
+/**
+ * @brief Initialization RCC, SysTick and Peripheral clocks
+ * 
+ * We switch to the internal clock pulse generator, configure 
+ * the PLL and switch to it, configure the clocking of the HCLK, 
+ * SYSCLK and PCLK1 buses, configure the SysTick at 1000 interrupts 
+ * per second, configure the clocking for the periphery
+ * 
+ * @return RCC init status
+ * @retval 0 If initialization was successful.
+ * @retval 1 If an initialization error occurs.
  */
 uint32_t RCC_Init(void) 
 {
@@ -74,8 +124,16 @@ uint32_t RCC_Init(void)
 }
 
 /**
- * @brief function for waits a specified amount of time
- * @param timeout number of milliseconds to wait
+ * @brief Stops program execution
+ * 
+ * Waits for the specified number of milliseconds
+ * 
+ * @warning Not recommended for long delays. Also cannot be used 
+ * in interrupts. The function stops the program until 
+ * the specified amount of time has passed, while all 
+ * interrupts continue to work
+ * 
+ * @param[in] timeout Number of milliseconds to wait
  * @retval None
  */
 inline void Delay(volatile uint32_t timeout) 
@@ -85,3 +143,32 @@ inline void Delay(volatile uint32_t timeout)
   // Waiting 
   while(ticks < (tickStart + timeout));
 }
+
+/**
+ * @brief Provides a tick value in millisecond
+ * 
+ * This function is declared as __weak  to be overwritten  in case of other 
+ * implementations in user file.
+ * 
+ * @return tick value 
+ */
+__WEAK uint32_t GetTick(void)
+{
+  return ticks;
+}
+
+/**
+ * @brief This function called to increment variable @link ticks @endlink
+ * 
+ * This function is declared as __weak  to be overwritten  in case of other 
+ * implementations in user file.
+ * 
+ * @retval None
+ */
+__WEAK void IncTick(void)
+{
+  ticks++;
+}
+/// @}
+
+/// @}
