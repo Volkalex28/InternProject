@@ -9,14 +9,10 @@ typedef struct {
   uint32_t pc;
   uint32_t lr;
   uint32_t line;
-  // I don't suggest actually using these, but they
-  // are included for the examples.
-  char file[256];
-  char msg[256];
 } sAssertInfo_t;
 
 #define GET_LR() __builtin_return_address(0)
-// This is ARM and GCC specific syntax
+
 #define GET_PC(_a) __asm volatile ("mov %0, pc" : "=r" (_a))
 
 #define ASSERT_RECORD()     \
