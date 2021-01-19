@@ -291,7 +291,6 @@ void UART_IRQHandler(STM32F051_UART_t* pUART)
   #ifdef DEBUG
     ASSERT(pUART);
     ASSERT(pUART->handle);
-    ASSERT(pUART->pRxCall);
   #endif
 
   const uint32_t isrflags   = READ_REG(pUART->handle->ISR);
@@ -314,7 +313,10 @@ void UART_IRQHandler(STM32F051_UART_t* pUART)
         CLEAR_BIT(pUART->handle->CR1, (USART_CR1_RXNEIE | USART_CR1_PEIE));
         CLEAR_BIT(pUART->handle->CR3, USART_CR3_EIE);
 
-        pUART->pRxCall(pUART);
+        if(pUART->pRxCall != NULL)
+        {
+          pUART->pRxCall(pUART);
+        }
       }
     }
   }
