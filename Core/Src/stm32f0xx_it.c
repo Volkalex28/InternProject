@@ -56,7 +56,7 @@ void SysTick_Handler(void)
   */
 void USART1_IRQHandler(void)
 {
-  UART1_IRQHandler();
+  UART_IRQHandler(&uart1);
 }
 
 /******************************************************************************/

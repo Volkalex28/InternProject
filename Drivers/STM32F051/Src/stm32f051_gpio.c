@@ -20,6 +20,7 @@
  */
 
 #include "stm32f051_gpio.h"
+#include "user_assert.h"
 
 // Exported Function ----------------------------------------------------------
 /** @defgroup GPIO_Exported_Function GPIO Exported Function
@@ -38,6 +39,9 @@
  */
 inline void GPIO_SetPin(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin) 
 {
+  #ifdef DEBUG
+    ASSERT(GPIOx);
+  #endif
   GPIOx->BSRR = (uint32_t)GPIO_Pin;
 }
 
@@ -50,6 +54,9 @@ inline void GPIO_SetPin(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin)
  */
 inline void GPIO_ResetPin(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin) 
 {
+  #ifdef DEBUG
+    ASSERT(GPIOx);
+  #endif
   GPIOx->BRR = (uint32_t)GPIO_Pin;
 }
 
@@ -62,6 +69,9 @@ inline void GPIO_ResetPin(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin)
  */
 inline void GPIO_TogglePin(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin) 
 {
+  #ifdef DEBUG
+    ASSERT(GPIOx);
+  #endif
   // reading curent Output Data Register value
   uint32_t odr = GPIOx->ODR;
   // set or reset selected pin
@@ -77,6 +87,9 @@ inline void GPIO_TogglePin(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin)
  */
 inline GPIO_PinState GPIO_ReadPin(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin) 
 {
+  #ifdef DEBUG
+    ASSERT(GPIOx);
+  #endif
   return ((GPIOx->IDR & GPIO_Pin) != (uint32_t)GPIO_PIN_RESET) ? 
     GPIO_PIN_SET : GPIO_PIN_RESET;
 }

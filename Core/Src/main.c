@@ -9,8 +9,9 @@
  * 
  */
 
-#include <string.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 #include "stm32f0xx.h"
 #include "stm32f051_rcc.h"
@@ -22,33 +23,49 @@
 #include "pins.h"
 
 #include "ds3231.h"
+#include "ring_buffer.h"
 
-uint8_t bufUART[256] = {};
+struct
+{
+  char strOut[100];
+  uint8_t count;
+  char bufIn[100];
+  uint8_t bufRing[55];
+} bufUART;
+
 DS3231_t DS3231;
+RingBuffer_t ring;
 
-char commandFromUART = 0;
+uint16_t delay = 500;
 
 void UARTComander(void)
 {
-  if(commandFromUART == 'd')
+  if(strcmp(bufUART.bufIn, "Set date") == 0)
   {
-    DS3231_Date_t date;
-    date.Date = 17;
-    date.Month = 1;
-    date.Year = 21;
-    date.Day = 7;
+    DS3231.Date.Date = 18;
+    DS3231.Date.Month = 1;
+    DS3231.Date.Year = 21;
+    DS3231.Date.Day = 1;
 
-    DS3231_SetDate(&DS3231, &date);
+    DS3231_SetDate(&DS3231, &DS3231.Date);
   }
-  else if (commandFromUART == 't')
+  else if (strcmp(bufUART.bufIn, "Set time") == 0)
   {
-    DS3231_Time_t time;
-    time.Hours = 14;
-    time.Minutes = 9;
-    time.Seconds = 20;
+    DS3231.Time.Hours = 4;
+    DS3231.Time.Minutes = 47;
+    DS3231.Time.Seconds = 20;
 
-    DS3231_SetTime(&DS3231, &time);
+    DS3231_SetTime(&DS3231, &DS3231.Time);
   }
+  else {
+    const uint16_t val = atoi(bufUART.bufIn);
+    if(val != 0)
+    {
+      delay = val;
+    }
+  }
+  memset(bufUART.bufIn, 0, SIZE_ARR(bufUART.bufIn));
+  bufUART.count = 0;
 }
 
 /**
@@ -65,30 +82,44 @@ int main()
   I2C1_Init();
 
   DS3231_SetAddress(&DS3231, 0xD0);
+  RING_Init(&ring, bufUART.bufRing, SIZE_ARR(bufUART.bufRing));
 
-  UART1_ReceiveIT((uint8_t*)&commandFromUART, 1);
+  UART_ReceiveIT(&uart1, &ring.temp, 1);
 
   while(1) 
   {
-    if(commandFromUART != 0)
-    {
-      UARTComander();
-      GPIO_TogglePin(LED_GREEN_Port, LED_GREEN_Pin);
-      UART1_ReceiveIT((uint8_t*)&commandFromUART, 1);
-      commandFromUART = 0;
-    }
-
     DS3231_GetDate(&DS3231);
     DS3231_GetTime(&DS3231);
     DS3231_GetTemp(&DS3231);
 
-    snprintf((char*)bufUART, (size_t)SIZE_ARR(bufUART), "\nDate: %02d/%02d/20%02d\nTime: %02d:%02d:%02d\nCurrent Day: %d\nTemp: %02.2f\n",
+    while(RING_GetCount(&ring) != 0)
+    {
+      bufUART.bufIn[bufUART.count] = RING_Pop(&ring);
+
+      if(bufUART.bufIn[bufUART.count] == '\n')
+      {
+        GPIO_TogglePin(LED_GREEN_Port, LED_GREEN_Pin);
+        bufUART.bufIn[bufUART.count] = '\0';
+        UARTComander();
+        break;
+      }
+      bufUART.count++;
+    }
+
+    snprintf(bufUART.strOut, (size_t)SIZE_ARR(bufUART.strOut), 
+      "\nDate: %02d/%02d/20%02d\nTime: %02d:%02d:%02d\nCurrent Day: %d\nTemp: %02.2f\n",
       DS3231.Date.Date, DS3231.Date.Month, DS3231.Date.Year,
       DS3231.Time.Hours, DS3231.Time.Minutes, DS3231.Time.Seconds,
       DS3231.Date.Day, DS3231.Temp);
 
-    UART1_Transmit(bufUART, strlen((char*)bufUART), 1000);
+    UART_Transmit(&uart1, (uint8_t*)bufUART.strOut, strlen(bufUART.strOut), 1000);
     GPIO_TogglePin(LED_BLUE_Port, LED_BLUE_Pin);
-    Delay(500);
+    Delay(delay);
   }
+}
+
+void UART1_RxCallback(void)
+{
+  RING_Append(&ring, ring.temp);
+  UART_ReceiveIT(&uart1, &ring.temp, 1);
 }
