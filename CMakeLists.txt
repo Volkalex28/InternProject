@@ -16,8 +16,10 @@ set(HEADER
   ../Drivers/DS3231/ds3231.h
 
   ../Core/Inc/main.h
+  ../Core/Inc/user_assert.h
   ../Core/Inc/stm32f0xx_it.h
   ../Core/Inc/pins.h
+  ../Core/Inc/ring_buffer.h
 )
 set(SOURCE
   ../Drivers/STM32F051/Src/stm32f051_rcc.c
@@ -28,7 +30,9 @@ set(SOURCE
   ../Drivers/DS3231/ds3231.c
 
   ../Core/Src/main.c
+  ../Core/Src/user_assert.c
   ../Core/Src/stm32f0xx_it.c
+  ../Core/Src/ring_buffer.c
 )
 set(STARTUP
   ../Core/Startup/startup_stm32f051r8tx.s
