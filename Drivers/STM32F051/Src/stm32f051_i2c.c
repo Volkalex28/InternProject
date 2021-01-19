@@ -21,6 +21,7 @@
 
 #include "stm32f051_i2c.h"
 #include "stm32f051_rcc.h"
+#include "user_assert.h"
 
 // Private Function -----------------------------------------------------------
 /** @defgroup I2C_Private_Function I2C Private Function
@@ -216,6 +217,9 @@ uint32_t I2C1_WaitSTOPFlag(const uint32_t tickStart, const uint32_t Timeout)
  */
 uint32_t I2C1_Receive(const uint16_t DevAddress, uint8_t *pData, uint16_t Size, const uint32_t Timeout)
 {
+  ASSERT(pData);
+  ASSERT(Size > 0);
+
   const uint32_t tickStart = GetTick();
   if(I2C1_WaitFlag(I2C_ISR_BUSY, SET, tickStart, 25))
   {
@@ -265,6 +269,9 @@ uint32_t I2C1_Receive(const uint16_t DevAddress, uint8_t *pData, uint16_t Size, 
  */
 uint32_t I2C1_Transmit(const uint16_t DevAddress, uint8_t *pData, uint16_t Size, const uint32_t Timeout)
 {
+  ASSERT(pData);
+  ASSERT(Size > 0);
+
   const uint32_t tickStart = GetTick();
   if(I2C1_WaitFlag(I2C_ISR_BUSY, SET, tickStart, 25))
   {
