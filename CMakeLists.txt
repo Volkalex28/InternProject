@@ -8,18 +8,24 @@ set(CMAKE_C_STANDARD_REQUIRED ON)
 set(CMAKE_C_EXTENSIONS OFF)
 
 set(HEADER 
-  ../Drivers/STM32F051_Driver/Inc/stm32f051_rcc.h
-  ../Drivers/STM32F051_Driver/Inc/stm32f051_gpio.h
-  ../Drivers/STM32F051_Driver/Inc/stm32f051_uart.h
+  ../Drivers/STM32F051/Inc/stm32f051_rcc.h
+  ../Drivers/STM32F051/Inc/stm32f051_gpio.h
+  ../Drivers/STM32F051/Inc/stm32f051_uart.h
+  ../Drivers/STM32F051/Inc/stm32f051_i2c.h
+
+  ../Drivers/DS3231/ds3231.h
 
   ../Core/Inc/main.h
   ../Core/Inc/stm32f0xx_it.h
   ../Core/Inc/pins.h
 )
 set(SOURCE
-  ../Drivers/STM32F051_Driver/Src/stm32f051_rcc.c
-  ../Drivers/STM32F051_Driver/Src/stm32f051_gpio.c
-  ../Drivers/STM32F051_Driver/Src/stm32f051_uart.c
+  ../Drivers/STM32F051/Src/stm32f051_rcc.c
+  ../Drivers/STM32F051/Src/stm32f051_gpio.c
+  ../Drivers/STM32F051/Src/stm32f051_uart.c
+  ../Drivers/STM32F051/Src/stm32f051_i2c.c
+
+  ../Drivers/DS3231/ds3231.c
 
   ../Core/Src/main.c
   ../Core/Src/stm32f0xx_it.c
@@ -39,9 +45,10 @@ target_compile_definitions(${EXECUTABLE} PRIVATE
 
 target_include_directories(${EXECUTABLE} PRIVATE
   ${CMAKE_SOURCE_DIR}/Core/Inc
-  ${CMAKE_SOURCE_DIR}/Drivers/STM32F051_Driver/Inc
+  ${CMAKE_SOURCE_DIR}/Drivers/STM32F051/Inc
   ${CMAKE_SOURCE_DIR}/Drivers/CMSIS/Device/ST/STM32F0xx/Include
   ${CMAKE_SOURCE_DIR}/Drivers/CMSIS/Include
+  ${CMAKE_SOURCE_DIR}/Drivers/DS3231
 )
 
 target_compile_options(${EXECUTABLE} PRIVATE
@@ -86,3 +93,4 @@ add_custom_command(TARGET ${EXECUTABLE}
   POST_BUILD
   COMMAND arm-none-eabi-objcopy -O ihex ${EXECUTABLE} ${PROJECT_NAME}.hex
   COMMAND arm-none-eabi-objcopy -O binary ${EXECUTABLE} ${PROJECT_NAME}.bin)
+  

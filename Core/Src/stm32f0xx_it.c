@@ -16,8 +16,9 @@
   ******************************************************************************
   */
 
-#include "main.h"
 #include "stm32f0xx_it.h"
+#include "stm32f051_rcc.h"
+#include "stm32f051_uart.h"
 
 /******************************************************************************/
 /*           Cortex-M0 Processor Interruption and Exception Handlers          */
@@ -47,7 +48,7 @@ void HardFault_Handler(void)
   */
 void SysTick_Handler(void)
 {
-  ticks++;
+  IncTick();
 }
 
 /**
