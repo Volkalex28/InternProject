@@ -13,28 +13,22 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "stm32f0xx.h"
-#include "stm32f051_rcc.h"
-#include "stm32f051_gpio.h"
-#include "stm32f051_uart.h"
-#include "stm32f051_i2c.h"
-
 #include "main.h"
 #include "pins.h"
 
 #include "ds3231.h"
-#include "ring_buffer.h"
+#include "uart_ring.h"
 
 struct
 {
   char strOut[100];
   uint8_t count;
   char bufIn[100];
-  uint8_t bufRing[55];
 } bufUART;
 
 DS3231_t DS3231;
-RingBuffer_t ring;
+UART_Ring_t uart1;
+STM32F051_UART_t* puart1 = &uart1.uart;
 
 uint16_t delay = 500;
 
@@ -78,13 +72,11 @@ int main()
 
   RCC_Init();
   GPIO_Init();
-  UART1_Init();
   I2C1_Init();
+  UART1_Init(&uart1.uart);
+  UART_Ring_Init(&uart1);
 
   DS3231_SetAddress(&DS3231, 0xD0);
-  RING_Init(&ring, bufUART.bufRing, SIZE_ARR(bufUART.bufRing));
-
-  UART_ReceiveIT(&uart1, &ring.temp, 1);
 
   while(1) 
   {
@@ -92,16 +84,15 @@ int main()
     DS3231_GetTime(&DS3231);
     DS3231_GetTemp(&DS3231);
 
-    while(RING_GetCount(&ring) != 0)
+    while(RING_GetCount(&uart1.ring) != 0)
     {
-      bufUART.bufIn[bufUART.count] = RING_Pop(&ring);
+      bufUART.bufIn[bufUART.count] = RING_Pop(&uart1.ring);
 
       if(bufUART.bufIn[bufUART.count] == '\n')
       {
-        GPIO_TogglePin(LED_GREEN_Port, LED_GREEN_Pin);
         bufUART.bufIn[bufUART.count] = '\0';
         UARTComander();
-        break;
+        continue;
       }
       bufUART.count++;
     }
@@ -112,14 +103,13 @@ int main()
       DS3231.Time.Hours, DS3231.Time.Minutes, DS3231.Time.Seconds,
       DS3231.Date.Day, DS3231.Temp);
 
-    UART_Transmit(&uart1, (uint8_t*)bufUART.strOut, strlen(bufUART.strOut), 1000);
+    UART_Transmit(&uart1.uart, (uint8_t*)bufUART.strOut, strlen(bufUART.strOut), 1000);
     GPIO_TogglePin(LED_BLUE_Port, LED_BLUE_Pin);
     Delay(delay);
   }
 }
 
-void UART1_RxCallback(void)
+void UART_RxCallback(STM32F051_UART_t* pUART)
 {
-  RING_Append(&ring, ring.temp);
-  UART_ReceiveIT(&uart1, &ring.temp, 1);
+  GPIO_TogglePin(LED_GREEN_Port, LED_GREEN_Pin);
 }

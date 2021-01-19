@@ -17,8 +17,7 @@
   */
 
 #include "stm32f0xx_it.h"
-#include "stm32f051_rcc.h"
-#include "stm32f051_uart.h"
+#include "main.h"
 
 /******************************************************************************/
 /*           Cortex-M0 Processor Interruption and Exception Handlers          */
@@ -56,7 +55,7 @@ void SysTick_Handler(void)
   */
 void USART1_IRQHandler(void)
 {
-  UART_IRQHandler(&uart1);
+  UART_IRQHandler(puart1);
 }
 
 /******************************************************************************/

@@ -310,7 +310,7 @@ uint32_t I2C1_Transmit(const uint16_t DevAddress, uint8_t *pData, uint16_t Size,
  * with the I2C1 module, configures the module itself to a frequency 
  * of 400 KHz, and also disables the analog and digital filters
  * 
- * @return I2C1 init status
+ * @return I2C1 initialization status
  * @retval 0 If initialization was successful.
  * @retval 1 If an initialization error occurs. 
  */

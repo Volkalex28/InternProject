@@ -23,14 +23,6 @@
 #include "stm32f051_rcc.h"
 #include "user_assert.h"
 
-// Exported variables ----------------------------------------------------------
-/*
- * Variables to work with USART1
- * 
- * Used to save the parameters USART1
- */
-STM32F051_UART_t uart1;
-
 // Private Function ---------------------------------------------------------
 /** @defgroup UART_Private_Function UART/USART Private Function
  * @ingroup UART
@@ -139,7 +131,7 @@ uint32_t UART_Init(const STM32F051_UART_t* pUART)
  * 
  * @retval None
  */
-__WEAK void UART1_RxCallback(void)
+__WEAK void UART_RxCallback(STM32F051_UART_t* pUART)
 {
 
 }
@@ -166,12 +158,17 @@ __WEAK void UART1_RxCallback(void)
   Stop bits: 1
   @endverbatim
  * 
- * @return UART1 init status
+ * @return UART1 initialization status
  * @retval 0 If initialization was successful.
  * @retval 1 If an initialization error occurs. 
  */
-uint32_t UART1_Init(void) 
+
+uint32_t UART1_Init(STM32F051_UART_t* pUART) 
 {
+  #ifdef DEBUG
+    ASSERT(pUART);
+  #endif
+
   SET_BIT(RCC->APB2ENR, RCC_APB2ENR_USART1EN);
   SET_BIT(RCC->AHBENR, RCC_AHBENR_GPIOAEN);
 
@@ -190,11 +187,11 @@ uint32_t UART1_Init(void)
   NVIC_SetPriority(USART1_IRQn, 0);
   NVIC_EnableIRQ(USART1_IRQn);
 
-  uart1.handle = USART1;
-  uart1.baudRate = 19200;
-  uart1.pRxCall = UART1_RxCallback;
+  pUART->handle = USART1;
+  pUART->baudRate = 19200;
+  pUART->pRxCall = UART_RxCallback;
 
-  return UART_Init(&uart1);
+  return UART_Init(&pUART);
 }
 
 /**
@@ -317,7 +314,7 @@ void UART_IRQHandler(STM32F051_UART_t* pUART)
         CLEAR_BIT(pUART->handle->CR1, (USART_CR1_RXNEIE | USART_CR1_PEIE));
         CLEAR_BIT(pUART->handle->CR3, USART_CR3_EIE);
 
-        pUART->pRxCall();
+        pUART->pRxCall(pUART);
       }
     }
   }

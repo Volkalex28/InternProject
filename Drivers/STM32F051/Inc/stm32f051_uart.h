@@ -27,7 +27,7 @@
  * @brief Declaring a structure to work with USART
  * 
  */
-typedef struct 
+typedef struct STM32F051_UART_t
 {
   USART_TypeDef* handle;  ///< Pointer to the UART module peripheral
   uint32_t baudRate;      ///< Speed of the UART module
@@ -36,24 +36,8 @@ typedef struct
   uint16_t countRx;       ///< Counter of bytes remaining until the end of reception
   uint16_t sizeRx;        ///< Amount of data to be received
 
-  void (*pRxCall)(void);  ///< Pointer to Callback function of reception on UART module
+  void (*pRxCall)(struct STM32F051_UART_t*);  ///< Pointer to Callback function of reception on UART module
 } STM32F051_UART_t;
-///@}
-
-// Exported variables ----------------------------------------------------------
-/** @defgroup UART_Exported_Variables UART/USART Exported Variables
- * @ingroup UART
- * 
- * Variables available from other files
- * @{
- */
-
-/**
- * @brief Variables to work with USART1
- * 
- * Used to save the parameters USART1
- */
-extern STM32F051_UART_t uart1;
 ///@}
 
 // Exported Function ---------------------------------------------------------
@@ -62,7 +46,7 @@ extern STM32F051_UART_t uart1;
  * @{
  */
 
-uint32_t UART1_Init(void);
+uint32_t UART1_Init(STM32F051_UART_t* pUART);
 uint32_t UART_Transmit(const STM32F051_UART_t* pUART, uint8_t* pData, uint16_t Size, const uint32_t Timeout);
 uint32_t UART_ReceiveIT(STM32F051_UART_t* pUART, uint8_t *pData, uint16_t Size);
 
@@ -75,7 +59,7 @@ void UART_IRQHandler(STM32F051_UART_t* pUART);
  * @{
  */
 
-void UART1_RxCallback(void);
+void UART_RxCallback(STM32F051_UART_t* pUART);
 ///@}
 
 #endif // __STM32F051_UART__

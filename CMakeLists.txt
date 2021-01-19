@@ -20,6 +20,7 @@ set(HEADER
   ../Core/Inc/stm32f0xx_it.h
   ../Core/Inc/pins.h
   ../Core/Inc/ring_buffer.h
+  ../Core/Inc/uart_ring.h
 )
 set(SOURCE
   ../Drivers/STM32F051/Src/stm32f051_rcc.c
@@ -33,6 +34,7 @@ set(SOURCE
   ../Core/Src/user_assert.c
   ../Core/Src/stm32f0xx_it.c
   ../Core/Src/ring_buffer.c
+  ../Core/Src/uart_ring.c
 )
 set(STARTUP
   ../Core/Startup/startup_stm32f051r8tx.s
