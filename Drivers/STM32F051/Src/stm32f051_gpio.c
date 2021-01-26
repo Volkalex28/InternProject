@@ -10,7 +10,9 @@
  */
 
 /**
- * @addtogroup STM32f051_Driver Driver for STM32F051
+ * @addtogroup Drivers
+ * @addtogroup STM32f051_Driver STM32F051
+ * @ingroup Drivers
  */
 
 /**
@@ -23,7 +25,7 @@
 #include "user_assert.h"
 
 // Exported Function ----------------------------------------------------------
-/** @defgroup GPIO_Exported_Function GPIO Exported Function
+/** @defgroup GPIO_Exported_Function Exported Function
  * @ingroup GPIO
  * 
  * GPIO module function available from other files
@@ -39,9 +41,7 @@
  */
 inline void GPIO_SetPin(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin) 
 {
-  #ifdef DEBUG
-    ASSERT(GPIOx);
-  #endif
+  ASSERT(GPIOx);
   GPIOx->BSRR = (uint32_t)GPIO_Pin;
 }
 
@@ -54,9 +54,7 @@ inline void GPIO_SetPin(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin)
  */
 inline void GPIO_ResetPin(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin) 
 {
-  #ifdef DEBUG
-    ASSERT(GPIOx);
-  #endif
+  ASSERT(GPIOx);
   GPIOx->BRR = (uint32_t)GPIO_Pin;
 }
 
@@ -69,9 +67,7 @@ inline void GPIO_ResetPin(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin)
  */
 inline void GPIO_TogglePin(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin) 
 {
-  #ifdef DEBUG
-    ASSERT(GPIOx);
-  #endif
+  ASSERT(GPIOx);
   // reading curent Output Data Register value
   uint32_t odr = GPIOx->ODR;
   // set or reset selected pin
@@ -87,9 +83,7 @@ inline void GPIO_TogglePin(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin)
  */
 inline GPIO_PinState GPIO_ReadPin(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin) 
 {
-  #ifdef DEBUG
-    ASSERT(GPIOx);
-  #endif
+  ASSERT(GPIOx);
   return ((GPIOx->IDR & GPIO_Pin) != (uint32_t)GPIO_PIN_RESET) ? 
     GPIO_PIN_SET : GPIO_PIN_RESET;
 }

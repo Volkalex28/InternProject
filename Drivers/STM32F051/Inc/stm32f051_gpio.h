@@ -16,7 +16,7 @@
 
 // Exported Types -------------------------------------------------------------
 /**
- * @defgroup GPIO_Exported_Types GPIO Exported Types
+ * @defgroup GPIO_Exported_Types Exported Types
  * @ingroup GPIO
  * 
  * Data type declarations that are accessible from other files
@@ -36,7 +36,7 @@ typedef enum
 
 // Exported Enumeration -------------------------------------------------------------
 /**
- * @defgroup GPIO_Exported_Enumeration GPIO Exported Enumeration
+ * @defgroup GPIO_Exported_Enumeration Exported Enumeration
  * @ingroup GPIO
  * 
  * Enumerations and constants that are accessible from other files

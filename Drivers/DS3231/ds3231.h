@@ -15,7 +15,7 @@
 #include <stddef.h>
 
 // Exported Types -------------------------------------------------------------
-/** @defgroup DS3231_Exported_Types UDS3231 Exported Types
+/** @defgroup DS3231_Exported_Types Exported Types
  * @ingroup DS3231_Driver
  * 
  * DS3231 module types available from other files

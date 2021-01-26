@@ -46,7 +46,7 @@ add_executable(${EXECUTABLE} ${HEADER} ${SOURCE} ${STARTUP})
 
 target_compile_definitions(${EXECUTABLE} PRIVATE
   -DSTM32F051x8
-  -DDEBUG
+  $<$<CONFIG:Debug>: -DDEBUG>
 )
 
 target_include_directories(${EXECUTABLE} PRIVATE
@@ -70,7 +70,8 @@ target_compile_options(${EXECUTABLE} PRIVATE
 
   --specs=nano.specs
 
-  $<$<CONFIG:Debug>:-O0>
+  $<$<CONFIG:Debug>: -Og>
+  $<$<CONFIG:Release>: -O3>
 )
 
 target_link_options(${EXECUTABLE} PRIVATE

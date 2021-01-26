@@ -10,11 +10,13 @@
  */
 
 /**
- * @addtogroup STM32f051_Driver Driver for STM32F051
+ * @addtogroup Drivers
+ * @addtogroup STM32f051_Driver STM32F051
+ * @ingroup Drivers
  */
 
 /**
- * @defgroup UART UART/USART
+ * @defgroup UART UART
  * @ingroup STM32f051_Driver
  * @brief UART module driver
  */
@@ -24,7 +26,7 @@
 #include "user_assert.h"
 
 // Private Function ---------------------------------------------------------
-/** @defgroup UART_Private_Function UART/USART Private Function
+/** @defgroup UART_Private_Function Private Function
  * @ingroup UART
  * 
  * Functions required for the needs of the UART module driver
@@ -47,10 +49,8 @@
 uint32_t UART_WaitFlag(const STM32F051_UART_t* pUART, const uint32_t Flag, 
   const FlagStatus Status, const uint32_t tickStart, const uint32_t Timeout)
 {
-  #ifdef DEBUG
-    ASSERT(pUART);
-    ASSERT(pUART->handle);
-  #endif
+  ASSERT(pUART);
+  ASSERT(pUART->handle);
 
   while((READ_BIT(pUART->handle->ISR, Flag) ? SET : RESET) == Status) 
   {
@@ -89,16 +89,15 @@ uint32_t UART_WaitFlag(const STM32F051_UART_t* pUART, const uint32_t Flag,
  */
 uint32_t UART_Init(const STM32F051_UART_t* pUART)
 {
-  #ifdef DEBUG
-    ASSERT(pUART);
-    ASSERT(pUART->handle);
-    ASSERT(pUART->baudRate <= 256000U);
-  #endif
+  ASSERT(pUART);
+  ASSERT(pUART->handle);
+  ASSERT(pUART->baudRate <= 256000U);
 
   CLEAR_BIT(pUART->handle->CR1, USART_CR1_UE);
 
-  MODIFY_REG(pUART->handle->CR1, USART_CR1_M | USART_CR1_PCE | USART_CR1_PS | 
-    USART_CR1_TE | USART_CR1_RE | USART_CR1_OVER8, USART_CR1_RE | USART_CR1_TE);
+  MODIFY_REG(pUART->handle->CR1, 
+    USART_CR1_M | USART_CR1_PCE | USART_CR1_PS | USART_CR1_OVER8, 
+    USART_CR1_RE | USART_CR1_TE);
   MODIFY_REG(pUART->handle->CR2, USART_CR2_STOP, 0);
   MODIFY_REG(pUART->handle->CR3, USART_CR3_RTSE | USART_CR3_CTSE | USART_CR3_ONEBIT, 0);
 
@@ -116,7 +115,7 @@ uint32_t UART_Init(const STM32F051_UART_t* pUART)
 ///@}
 
 // CallBack Function ---------------------------------------------------------
-/** @defgroup UART_CallBack_Function UART/USART CallBack Function
+/** @defgroup UART_CallBack_Function CallBack Function
  * @ingroup UART
  * 
  * UART module function callback
@@ -129,6 +128,8 @@ uint32_t UART_Init(const STM32F051_UART_t* pUART)
  * The function is declared __weak, since it is assumed that 
  * the user will override it
  * 
+ * @param[in] pUART Pointer to UART module object
+ * 
  * @retval None
  */
 __WEAK void UART_RxCallback(STM32F051_UART_t* pUART)
@@ -138,7 +139,7 @@ __WEAK void UART_RxCallback(STM32F051_UART_t* pUART)
 ///@}
 
 // Exported Function ---------------------------------------------------------
-/** @defgroup UART_Exported_Function UART/USART Exported Function
+/** @defgroup UART_Exported_Function Exported Function
  * @ingroup UART
  * 
  * UART module function available from other files
@@ -158,6 +159,8 @@ __WEAK void UART_RxCallback(STM32F051_UART_t* pUART)
   Stop bits: 1
   @endverbatim
  * 
+ * @param[in, out] pUART Pointer to object of UART1 module
+ * 
  * @return UART1 initialization status
  * @retval 0 If initialization was successful.
  * @retval 1 If an initialization error occurs. 
@@ -165,9 +168,7 @@ __WEAK void UART_RxCallback(STM32F051_UART_t* pUART)
 
 uint32_t UART1_Init(STM32F051_UART_t* pUART) 
 {
-  #ifdef DEBUG
-    ASSERT(pUART);
-  #endif
+  ASSERT(pUART);
 
   SET_BIT(RCC->APB2ENR, RCC_APB2ENR_USART1EN);
   SET_BIT(RCC->AHBENR, RCC_AHBENR_GPIOAEN);
@@ -191,7 +192,7 @@ uint32_t UART1_Init(STM32F051_UART_t* pUART)
   pUART->baudRate = 19200;
   pUART->pRxCall = UART_RxCallback;
 
-  return UART_Init(&pUART);
+  return UART_Init(pUART);
 }
 
 /**
@@ -211,12 +212,10 @@ uint32_t UART1_Init(STM32F051_UART_t* pUART)
  */
 uint32_t UART_Transmit(const STM32F051_UART_t* pUART, uint8_t* pData, uint16_t Size, const uint32_t Timeout)
 {
-  #ifdef DEBUG
-    ASSERT(pUART);
-    ASSERT(pUART->handle);
-    ASSERT(pData);
-    ASSERT(Size > 0U);
-  #endif
+  ASSERT(pUART);
+  ASSERT(pUART->handle);
+  ASSERT(pData);
+  ASSERT(Size > 0U);
 
   const uint32_t tickStart = GetTick();
   while((Size--) > 0)
@@ -241,8 +240,8 @@ uint32_t UART_Transmit(const STM32F051_UART_t* pUART, uint8_t* pData, uint16_t S
  * The function configures the USART1 module to receive @p Size bytes, 
  * place them in the @p pData memory area, and then trigger an interrupt.
  * 
- * @note Interrupt handler: UART1_IRQHandler()
- * @note Callback at the end of reception: UART1_RxCallback()
+ * @note Interrupt handler: UART_IRQHandler()
+ * @note Callback at the end of reception: UART_RxCallback()
  * 
  * @param[in] pUART Pointer to UART module object
  * @param[out] pData Pointer to data buffer
@@ -254,12 +253,10 @@ uint32_t UART_Transmit(const STM32F051_UART_t* pUART, uint8_t* pData, uint16_t S
  */
 uint32_t UART_ReceiveIT(STM32F051_UART_t* pUART, uint8_t *pData, uint16_t Size)
 {
-  #ifdef DEBUG
-    ASSERT(pUART);
-    ASSERT(pUART->handle);
-    ASSERT(pData);
-    ASSERT(Size > 0U);
-  #endif
+  ASSERT(pUART);
+  ASSERT(pUART->handle);
+  ASSERT(pData);
+  ASSERT(Size > 0U);
 
   pUART->pDataRx = pData;
   pUART->sizeRx = pUART->countRx = Size;
@@ -288,10 +285,8 @@ uint32_t UART_ReceiveIT(STM32F051_UART_t* pUART, uint8_t *pData, uint16_t Size)
  */
 void UART_IRQHandler(STM32F051_UART_t* pUART)
 {
-  #ifdef DEBUG
-    ASSERT(pUART);
-    ASSERT(pUART->handle);
-  #endif
+  ASSERT(pUART);
+  ASSERT(pUART->handle);
 
   const uint32_t isrflags   = READ_REG(pUART->handle->ISR);
   const uint32_t cr1its     = READ_REG(pUART->handle->CR1);

@@ -16,7 +16,7 @@
 #include <stddef.h>
 
 // Exported types --------------------------------------------------------------
-/** @defgroup UART_Exported_Types UART/USART Exported Types
+/** @defgroup UART_Exported_Types Exported Types
  * @ingroup UART
  * 
  * Declaring types available from other files
@@ -27,7 +27,7 @@
  * @brief Declaring a structure to work with USART
  * 
  */
-typedef struct STM32F051_UART_t
+typedef struct sSTM32F051_UART_t
 {
   USART_TypeDef* handle;  ///< Pointer to the UART module peripheral
   uint32_t baudRate;      ///< Speed of the UART module
@@ -36,7 +36,7 @@ typedef struct STM32F051_UART_t
   uint16_t countRx;       ///< Counter of bytes remaining until the end of reception
   uint16_t sizeRx;        ///< Amount of data to be received
 
-  void (*pRxCall)(struct STM32F051_UART_t*);  ///< Pointer to Callback function of reception on UART module
+  void (*pRxCall)(struct sSTM32F051_UART_t*);  ///< Pointer to Callback function of reception on UART module
 } STM32F051_UART_t;
 ///@}
 

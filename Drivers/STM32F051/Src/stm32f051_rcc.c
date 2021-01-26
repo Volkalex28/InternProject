@@ -10,7 +10,9 @@
  */
 
 /**
- * @addtogroup STM32f051_Driver Driver for STM32F051
+ * @addtogroup Drivers
+ * @addtogroup STM32f051_Driver STM32F051
+ * @ingroup Drivers
  */
 
 /**
@@ -23,7 +25,7 @@
 
 // Exported variables ---------------------------------------------------------
 /** 
- * @defgroup RCC_Exported_Variables RCC Exported Variables
+ * @defgroup RCC_Exported_Variables Exported Variables
  * @ingroup RCC
  * 
  * RCC module variables available from other files
@@ -40,7 +42,7 @@ static volatile uint32_t ticks = 0;
 /// @}
 
 // Exported Function ---------------------------------------------------------
-/** @defgroup RCC_Exported_Function RCC Exported Function
+/** @defgroup RCC_Exported_Function Exported Function
  * @ingroup RCC
  * 
  * RCC module function available from other files

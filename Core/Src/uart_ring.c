@@ -1,30 +1,129 @@
+/**
+ * @file uart_ring.c
+ * @author Oleksandr Ananiev (alexander.ananiev@sigma.sofware)
+ * @brief Source file for UART with ring buffer support
+ * @version 0.1
+ * @date 2021-01-26
+ * 
+ * @copyright Copyright (c) 2021
+ * 
+ */
+
+/**
+ * @defgroup UART_Ring UART with ring buffer
+ * @ingroup Core
+ * 
+ * @brief UART interface that must support ring buffer
+ */
+
 #include "uart_ring.h"
 #include "user_assert.h"
 
-static uint8_t temp;
+// Private Variables ----------------------------------------------------------
+/**
+ * @defgroup UART_Ring_Private_Variables Private Variables
+ * @ingroup UART_Ring
+ * 
+ * @brief Variables for internal needs UART with a ring buffer
+ */
+///@{
 
-void UART_Ring_RxCallback(STM32F051_UART_t* pUART)
+static uint8_t plug; ///< Cap for receiving function
+///@}
+
+// Private Functions ----------------------------------------------------------
+/**
+ * @defgroup UART_Ring_Private_Functions Private Functions
+ * @ingroup UART_Ring
+ * 
+ * @brief Functions for internal needs UART with a ring buffer
+ */
+///@{
+
+/**
+ * @brief Callback for receiving one byte via UART interface
+ * 
+ * The function reads the received byte via the UART interface, 
+ * adds it to the ring buffer and calls the standard callback at the end 
+ * of the reception. It also restarts the reception of one byte.
+ * 
+ * @param[in, out] pUART Pointer to the object of the UART module
+ * 
+ * @return None
+ */
+void UART_Ring_RxCallback(STM32F051_UART_t* const pUART)
 {
+  ASSERT(pUART);
+  ASSERT(pUART->handle);
+
   RING_Append(&((UART_Ring_t*)pUART)->ring, (uint8_t)pUART->handle->RDR);
-  UART_ReceiveIT(pUART, &temp, 1);
 
-  ((UART_Ring_t*)pUART)->UART_RxCallback();
+  if(((UART_Ring_t*)pUART)->UART_RxCallback != NULL)
+  {
+    ((UART_Ring_t*)pUART)->UART_RxCallback();
+  }
+
+  UART_ReceiveIT(pUART, &plug, 1);
 }
+///@}
 
-uint32_t UART_Ring_Init(UART_Ring_t* ptr)
+// Exported Functions ----------------------------------------------------------
+/**
+ * @defgroup UART_Ring_Exported_Functions Exported Functions
+ * @ingroup UART_Ring
+ * 
+ * @brief UART functionality with a ring buffer to be reached from the outside
+ */
+///@{
+
+/**
+ * @brief Ring Buffer UART Initialization
+ * 
+ * The function initializes the ring buffer, overrides the callback 
+ * and starts the reception of one byte via the UART interface in interrupt mode
+ * 
+ * @param ptr Pointer to UART object with ring buffer
+ * 
+ * @return Initialization status
+ * @retval 0 If initialization was successfully
+ * @retval 1 If problems occur during initialization
+ */
+uint32_t UART_Ring_Init(UART_Ring_t* const ptr)
 {
-  #ifdef DEBUG
-    ASSERT(ptr);
-    ASSERT(ptr->UART_RxCallback);
-  #endif
+  ASSERT(ptr);
 
   if(RING_Init(&ptr->ring, ptr->buff, UART_RING_SIZE) != 0)
   {
-    return 0;
+    return 1;
   }
 
   ptr->UART_RxCallback = ptr->uart.pRxCall;
   ptr->uart.pRxCall = UART_Ring_RxCallback;
 
-  return UART_ReceiveIT(&ptr->uart, &temp, 1);
+  return UART_ReceiveIT(&ptr->uart, &plug, 1);
 }
+
+/**
+ * @brief Extracting one byte from the UART buffer
+ * 
+ * The function returns the extracted byte from the UART buffer, 
+ * or status 0 in case of an error
+ * 
+ * @param ptr Pointer to UART object with ring buffer
+ * 
+ * @return Byte value or status
+ * @retval 0 If the buffer is empty
+ * @retval uint8_t Byte value
+ */
+uint8_t UART_Ring_PopByte(UART_Ring_t* const ptr)
+{
+  ASSERT(ptr);
+
+  if(RING_GetCount(&ptr->ring) != 0)
+  {
+    return RING_Pop(&ptr->ring);
+  }
+  return 0;
+}
+
+///@}

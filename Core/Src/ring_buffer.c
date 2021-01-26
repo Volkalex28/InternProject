@@ -1,7 +1,41 @@
+/**
+ * @file ring_buffer.c
+ * @author Oleksandr Ananiev (alexander.ananiev@sigma.sofware)
+ * @brief Ring Buffer Source File
+ * @version 0.1
+ * @date 2021-01-26
+ * 
+ * @copyright Copyright (c) 2021
+ * 
+ */
+
+/**
+ * @defgroup Ring_Buff Ring buffer
+ * @ingroup Core
+ * 
+ * Ring Buffer Implementation
+ */
+
 #include "ring_buffer.h"
 #include "user_assert.h"
 
-void RING_Clear(RingBuffer_t* pRing)
+// Exported Function ----------------------------------------------------------
+/**
+ * @defgroup RingBuff_Exported_Function Exported Function
+ * @ingroup Ring_Buff
+ * 
+ * Functionality for the ring buffer accessible from the outside
+ */
+///@{
+
+/**
+ * @brief Clearing the ring buffer
+ * 
+ * The function resets the entire ring buffer to the initial setting
+ * 
+ * @param pRing A pointer to a circular buffer object
+ */
+void RING_Clear(RingBuffer_t* const pRing)
 {
   ASSERT(pRing);
   
@@ -10,7 +44,21 @@ void RING_Clear(RingBuffer_t* pRing)
   pRing->empty = 1;
 }
 
-uint32_t RING_Init(RingBuffer_t* pRing, uint8_t* pMemory, uint16_t size)
+/**
+ * @brief Ring buffer initialization
+ * 
+ * The function initializes memory for the ring buffer 
+ * and clears it with the RING_Clear() function
+ * 
+ * @param[out] pRing A pointer to a circular buffer object
+ * @param[in]  pMemory Pointer to memory area for circular buffer
+ * @param[in]  size Memory area size in bytes
+ * 
+ * @return Initialization status
+ * @retval 0 If initialization was successfully 
+ * @retval 1 If problems occur during initialization  
+ */
+uint32_t RING_Init(RingBuffer_t* const pRing, uint8_t* const pMemory, const uint16_t size)
 {
   ASSERT(pRing);
   ASSERT(pMemory);
@@ -22,11 +70,26 @@ uint32_t RING_Init(RingBuffer_t* pRing, uint8_t* pMemory, uint16_t size)
   return 0;
 }
 
-void RING_Append(RingBuffer_t* pRing, uint8_t value)
+/**
+ * @brief Adding a value to the buffer
+ * 
+ * The function adds a byte to the buffer and returns the add status
+ * 
+ * @param[out] pRing A pointer to a circular buffer object
+ * @param[in]  value The value to add
+ * 
+ * @return Add status
+ * @retval 1 If added was successfully
+ * @retval 0 If the buffer is full
+ */
+uint32_t RING_Append(RingBuffer_t* const pRing, const uint8_t value)
 {
-  if(pRing == NULL || pRing->fulled == 1)
+  ASSERT(pRing);
+  ASSERT(pRing->pMemory);
+
+  if(pRing->fulled == 1)
   {
-    return;
+    return 0;
   }
 
   pRing->pMemory[pRing->tail++] = value;
@@ -38,11 +101,27 @@ void RING_Append(RingBuffer_t* pRing, uint8_t value)
     pRing->fulled = 1;
   }
   pRing->empty = 0;
+
+  return 1;
 }
 
-uint8_t RING_Pop(RingBuffer_t* pRing)
+/**
+ * @brief Retrieving data from the buffer
+ * 
+ * The function retrieves one byte from the buffer or returns the retrieval status
+ * 
+ * @param pRing A pointer to a circular buffer object
+ * 
+ * @return Byte value or status
+ * @retval 0 If the buffer is empty
+ * @retval uint8_t Byte value
+ */
+uint8_t RING_Pop(RingBuffer_t* const pRing)
 {
-  if(pRing == NULL || pRing->empty == 1)
+  ASSERT(pRing);
+  ASSERT(pRing->pMemory);
+
+  if(pRing->empty == 1)
   {
     return 0;
   }
@@ -60,12 +139,43 @@ uint8_t RING_Pop(RingBuffer_t* pRing)
   return rValue;
 }
 
-uint16_t RING_GetCount(RingBuffer_t* pRing)
+/**
+ * @brief View the last byte in the buffer
+ * 
+ * The function shows the last byte from the buffer 
+ * without deleting it or returns the retrieval status.
+ * 
+ * @param pRing A pointer to a circular buffer object
+ * 
+ * @return Byte value or status
+ * @retval 0 If the buffer is empty
+ * @retval uint8_t Byte value
+ */
+uint8_t RING_Check(const RingBuffer_t* const pRing)
 {
-  if(pRing == NULL)
+  ASSERT(pRing);
+  ASSERT(pRing->pMemory);
+
+  if(pRing->empty == 1)
   {
     return 0;
   }
+
+  return pRing->pMemory[pRing->head];
+}
+
+/**
+ * @brief Getting the number of bytes in the buffer
+ * 
+ * The function returns the number of bytes in the circular buffer
+ * 
+ * @param pRing A pointer to a circular buffer object
+ * 
+ * @retval uint16_t Number of bytes in the buffer
+ */
+uint16_t RING_GetCount(const RingBuffer_t* const pRing)
+{
+  ASSERT(pRing);
 
   if(pRing->empty == 1)
   {
@@ -80,3 +190,5 @@ uint16_t RING_GetCount(RingBuffer_t* pRing)
     return (pRing->tail < pRing->head ? pRing->size : 0) + pRing->tail - pRing->head;
   }
 }
+
+///@}
