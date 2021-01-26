@@ -47,8 +47,11 @@ typedef struct
   STM32F051_UART_t uart;         ///< UART module object
   RingBuffer_t ring;             ///< Ring buffer object
   uint8_t buff[UART_RING_SIZE];  ///< Ring buffer memory area
-
-  void (*UART_RxCallback)(void); ///< Pointer to the standard callback function for at the end of reception via the UART interface
+  /**
+   * @brief Pointer to the standard callback function 
+   * for at the end of reception via the UART interface
+   */
+  void (*UART_RxCallback)(STM32F051_UART_t*);
   
 } UART_Ring_t;
 ///@}

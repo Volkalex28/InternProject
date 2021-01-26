@@ -60,7 +60,7 @@ void UART_Ring_RxCallback(STM32F051_UART_t* const pUART)
 
   if(((UART_Ring_t*)pUART)->UART_RxCallback != NULL)
   {
-    ((UART_Ring_t*)pUART)->UART_RxCallback();
+    ((UART_Ring_t*)pUART)->UART_RxCallback(pUART);
   }
 
   UART_ReceiveIT(pUART, &plug, 1);
