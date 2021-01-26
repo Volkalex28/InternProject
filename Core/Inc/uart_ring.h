@@ -48,12 +48,12 @@ typedef struct
   RingBuffer_t ring;             ///< Ring buffer object
   uint8_t buff[UART_RING_SIZE];  ///< Ring buffer memory area
 
-  void (*UART_RxCallback)(void); ///< Pointer to the standard callback function for at the end of reception via the UART interface
+  void (*UART_RxCallback)(STM32F051_UART_t*); ///< Pointer to the standard callback function for at the end of reception via the UART interface
   
 } UART_Ring_t;
 ///@}
 
 uint32_t UART_Ring_Init(UART_Ring_t* const ptr);
-uint8_t UART_Ring_PopByte(UART_Ring_t* const ptr);
+uint8_t UART_Ring_PopByte(UART_Ring_t* const ptr, uint8_t* pVarGetValue);
 
 #endif // _UART_RING_H_
