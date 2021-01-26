@@ -79,7 +79,7 @@ void UART_Ring_RxCallback(STM32F051_UART_t* const pUART)
 /**
  * @brief Ring Buffer UART Initialization
  * 
- * The function initializes the ring buffer, overrides the callback 
+ * The function initializes the ring buffer and UART module, overrides the callback 
  * and starts the reception of one byte via the UART interface in interrupt mode
  * 
  * @param ptr Pointer to UART object with ring buffer
@@ -92,10 +92,12 @@ uint32_t UART_Ring_Init(UART_Ring_t* const ptr)
 {
   ASSERT(ptr);
 
-  if(RING_Init(&ptr->ring, ptr->buff, UART_RING_SIZE) != 0)
+  if(UART1_Init(&ptr->uart) != 0)
   {
     return 1;
   }
+
+  RING_Init(&ptr->ring, ptr->buff, UART_RING_SIZE);
 
   ptr->UART_RxCallback = ptr->uart.pRxCall;
   ptr->uart.pRxCall = UART_Ring_RxCallback;

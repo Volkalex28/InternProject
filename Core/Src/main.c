@@ -30,6 +30,22 @@
 #include "ds3231.h"
 #include "uart_ring.h"
 
+// Private macros -----------------------------------------------------------
+/** 
+ * @defgroup Main_Private_Macros Main Private Macros
+ * @ingroup Main_program_body
+ * 
+ * @brief Macros used in the program loop and
+ * are not accessible from the outside
+ */
+///@{
+
+/**
+ * @brief Size for UART input and output buffers
+ */
+#define SIZE_UART_BUFFERS 100
+///@}
+
 // Private variable -----------------------------------------------------------
 /** 
  * @defgroup Main_Private_Variable Main Private Variable
@@ -44,9 +60,9 @@
  */
 struct
 {
-  char strOut[100]; ///< The string that is sent over the UART interface
-  uint8_t count;    ///< Received bytes counter
-  char bufIn[100];  ///< Command input buffer
+  char strOut[SIZE_UART_BUFFERS]; ///< The string that is sent over the UART interface
+  uint8_t count;                  ///< Received bytes counter
+  char bufIn[SIZE_UART_BUFFERS];  ///< Command input buffer
 } bufUART;
 
 DS3231_t DS3231;    ///< Real time clock module object
@@ -129,7 +145,6 @@ int main(void)
   RCC_Init();
   GPIO_Init();
   I2C1_Init();
-  UART1_Init(&uart1.uart);
   UART_Ring_Init(&uart1);
 
   DS3231_SetAddress(&DS3231, 0xD0);

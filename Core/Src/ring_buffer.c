@@ -54,11 +54,9 @@ void RING_Clear(RingBuffer_t* const pRing)
  * @param[in]  pMemory Pointer to memory area for circular buffer
  * @param[in]  size Memory area size in bytes
  * 
- * @return Initialization status
- * @retval 0 If initialization was successfully 
- * @retval 1 If problems occur during initialization  
+ * @return None 
  */
-uint32_t RING_Init(RingBuffer_t* const pRing, uint8_t* const pMemory, const uint16_t size)
+void RING_Init(RingBuffer_t* const pRing, uint8_t* const pMemory, const uint16_t size)
 {
   ASSERT(pRing);
   ASSERT(pMemory);
@@ -66,8 +64,6 @@ uint32_t RING_Init(RingBuffer_t* const pRing, uint8_t* const pMemory, const uint
   pRing->pMemory = pMemory;
   pRing->size = size;
   RING_Clear(pRing);
-
-  return 0;
 }
 
 /**
@@ -180,10 +176,6 @@ uint16_t RING_GetCount(const RingBuffer_t* const pRing)
   if(pRing->empty == 1)
   {
     return 0;
-  }
-  else if(pRing->fulled == 1)
-  {
-    return pRing->size;
   }
   else 
   {
