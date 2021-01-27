@@ -1,0 +1,14 @@
+{
+  "cmake.generator": "MinGW Makefiles",
+  "cmake.configureEnvironment": {
+      "CMAKE_EXPORT_COMPILE_COMMANDS": "on"
+  },
+  "cmake.configureSettings": {
+      "TOOLCHAIN_PREFIX": "/usr/local/gcc-arm-none-eabi-9-2020-q2-update",
+      "TARGET_TRIPLET":"arm-none-eabi-",
+      "STM32_CHIP": "STM32F051R8TX",
+      "STM32Cube_DIR": "C:/Users/alexander.ananiev/STM32Cube/Repository/STM32Cube_FW_F0_V1.11.2",
+      "STM32_LINKER_SCRIPT":"${workspaceFolder}/STM32F051R8TX_FLASH.ld"
+  },
+  "C_Cpp.default.intelliSenseMode": "gcc-arm"
+}
