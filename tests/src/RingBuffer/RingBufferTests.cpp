@@ -9,8 +9,11 @@ extern "C"
 
 using namespace std;
 
+// ============================= / Funtions prototypes / ======================
 vector<uint8_t> BufferFilling(RingBuffer_t& pRing);
 
+// ============================= / Testing / ==================================
+// Create test group for testing ring buffer functionality
 TEST_GROUP(RingBuffer)
 {
   static const uint8_t sizeRingBuffer = 20;
@@ -26,6 +29,7 @@ TEST_GROUP(RingBuffer)
 };
 
 // ******************************* Init ***************************************
+// Verifying correct ring buffer initializations 
 TEST(RingBuffer, correctInitializationBuffer)
 {
   CHECK_TRUE(ring.empty);
@@ -35,6 +39,7 @@ TEST(RingBuffer, correctInitializationBuffer)
 }
 
 // ******************************* Clear **************************************
+// Verifying correct ring buffer flushed
 TEST(RingBuffer, clearingBuffer)
 {
   RING_Clear(&ring);
@@ -44,6 +49,7 @@ TEST(RingBuffer, clearingBuffer)
 }
 
 // ******************************* Append *************************************
+// Checking that one byte is correctly added to an empty circular buffer
 TEST(RingBuffer, appendOneByteToEmptyBuffer)
 {
   RING_Clear(&ring);
@@ -54,7 +60,9 @@ TEST(RingBuffer, appendOneByteToEmptyBuffer)
   CHECK_FALSE(ring.fulled);
 }
 
-TEST(RingBuffer, appendOneByteToNonEmptyBuffer)
+// Verifying that one byte is correctly added to a circular buffer 
+// that already contains data
+TEST(RingBuffer, appendBytesToNonEmptyBuffer)
 {
   const uint8_t countCell = 3;
 
@@ -71,9 +79,10 @@ TEST(RingBuffer, appendOneByteToNonEmptyBuffer)
   CHECK_FALSE(ring.fulled);
 }
 
-TEST(RingBuffer, appendBytesToAllCellBuffer)
+// Verifying that one byte is correctly added to a circular buffer
+// that already contains data
+TEST(RingBuffer, appendBytesInAllCellBuffer)
 {
-  RING_Clear(&ring);
   vector<uint8_t> values = BufferFilling(ring);
 
   for(size_t i = 0; i < sizeRingBuffer; i++)
@@ -84,6 +93,7 @@ TEST(RingBuffer, appendBytesToAllCellBuffer)
   CHECK_TRUE(ring.fulled);
 }
 
+// Checking for an error when trying to add bytes to a full buffer
 TEST(RingBuffer, appendOneByteToFullBuffer)
 {
   BufferFilling(ring);
@@ -94,6 +104,7 @@ TEST(RingBuffer, appendOneByteToFullBuffer)
 }
 
 // ******************************* Pop ****************************************
+// Checking for an error when trying to extract a byte from an empty buffer
 TEST(RingBuffer, popByteFromEmptyBuffer)
 {
   uint8_t value = 0;
@@ -103,6 +114,7 @@ TEST(RingBuffer, popByteFromEmptyBuffer)
   CHECK_EQUAL(0, RING_Pop(&ring, &value));
 }
 
+// Validating Data Retrieval Under Normal Conditions
 TEST(RingBuffer, popByteFromNonEmptyBuffer)
 {
   uint8_t value = 0;
@@ -112,8 +124,10 @@ TEST(RingBuffer, popByteFromNonEmptyBuffer)
 
   CHECK_EQUAL(1, RING_Pop(&ring, &value));
   CHECK_TRUE(value == appendByteValue);
+  CHECK_TRUE(ring.empty);
 }
 
+// Checking the correctness of data retrieval when the buffer is full
 TEST(RingBuffer, popBytesFromFullBuffer)
 {
   uint8_t value = 0;
@@ -125,6 +139,7 @@ TEST(RingBuffer, popBytesFromFullBuffer)
 }
 
 // ******************************* Check **************************************
+// Checking for an error when trying to view data in an empty buffer
 TEST(RingBuffer, checkingByteInEmptyBuffer)
 {
   uint8_t value = 0;
@@ -134,6 +149,8 @@ TEST(RingBuffer, checkingByteInEmptyBuffer)
   CHECK_EQUAL(0, RING_Check(&ring, &value));
 }
 
+// Checking that the data is viewed correctly and that the buffer state
+// does not change
 TEST(RingBuffer, checkingByteInNonEmptyBuffer)
 {
   uint8_t value = 0;
@@ -146,6 +163,8 @@ TEST(RingBuffer, checkingByteInNonEmptyBuffer)
   CHECK_FALSE(ring.empty);
 }
 
+// Checking the correctness of data viewing and that the state of the
+// filled buffer does not change
 TEST(RingBuffer, checkingBytesInFullBuffer)
 {
   uint8_t value = 0;
@@ -157,6 +176,7 @@ TEST(RingBuffer, checkingBytesInFullBuffer)
 }
 
 // ******************************* Get count **********************************
+// Checking the number of bytes in an empty buffer
 TEST(RingBuffer, checkingByteCountInEmptyBuffer)
 {
   RING_Clear(&ring);
@@ -164,6 +184,7 @@ TEST(RingBuffer, checkingByteCountInEmptyBuffer)
   CHECK_EQUAL(0, RING_GetCount(&ring));
 }
 
+// Checking the number of bytes in a non-empty buffer
 TEST(RingBuffer, checkingByteCountInNonEmptyBuffer)
 {
   const uint8_t countBytes = 5;
@@ -177,6 +198,7 @@ TEST(RingBuffer, checkingByteCountInNonEmptyBuffer)
   CHECK_EQUAL(countBytes, RING_GetCount(&ring));
 }
 
+// Checking the number of bytes in the filled buffer.
 TEST(RingBuffer, checkingByteCountInFullBuffer)
 {
   BufferFilling(ring);
@@ -185,6 +207,8 @@ TEST(RingBuffer, checkingByteCountInFullBuffer)
   CHECK_TRUE(ring.fulled);
 }
 
+// Checking the number of bytes in a non-empty buffer. In this case,
+// the full buffer has already been looped
 TEST(RingBuffer, checkingByteCountInFullOffsetBuffer)
 {
   const uint8_t countBytes = 2;
@@ -200,8 +224,8 @@ TEST(RingBuffer, checkingByteCountInFullOffsetBuffer)
   CHECK_EQUAL(ring.size, RING_GetCount(&ring));
   CHECK_TRUE(ring.fulled);
 }
-// ***************************** / Functions / ********************************
-// Function to fill ring buffer
+// ============================= / Functions / ================================
+// Function to clear and fill ring buffer
 vector<uint8_t> BufferFilling(RingBuffer_t& refRing)
 {
   vector<uint8_t> valueForBuffer(refRing.size);
