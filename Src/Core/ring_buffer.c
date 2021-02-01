@@ -109,7 +109,7 @@ uint32_t RING_Append(RingBuffer_t* const pRing, const uint8_t value)
  * @param[in] pRing A pointer to a circular buffer object
  * @param[out] pRing Pointer to the memory area where the cell value should be placed
  * 
- * @return Byte value or status
+ * @return Status
  * @retval 0 If the buffer is empty
  * @retval 1 If value retrieves
  */

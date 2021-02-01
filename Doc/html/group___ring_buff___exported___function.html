@@ -99,12 +99,12 @@ Functions</h2></td></tr>
 <tr class="memitem:gaa3a4c325db66fbb009ae808333583bbb"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___ring_buff___exported___function.html#gaa3a4c325db66fbb009ae808333583bbb">RING_Append</a> (<a class="el" href="struct_ring_buffer__t.html">RingBuffer_t</a> *const pRing, const uint8_t value)</td></tr>
 <tr class="memdesc:gaa3a4c325db66fbb009ae808333583bbb"><td class="mdescLeft">&#160;</td><td class="mdescRight">&#x202A;Adding a value to the buffer.  <a href="group___ring_buff___exported___function.html#gaa3a4c325db66fbb009ae808333583bbb">More...</a><br /></td></tr>
 <tr class="separator:gaa3a4c325db66fbb009ae808333583bbb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga9e0c0010fcd8903c221708f751114235"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___ring_buff___exported___function.html#ga9e0c0010fcd8903c221708f751114235">RING_Pop</a> (<a class="el" href="struct_ring_buffer__t.html">RingBuffer_t</a> *const pRing)</td></tr>
-<tr class="memdesc:ga9e0c0010fcd8903c221708f751114235"><td class="mdescLeft">&#160;</td><td class="mdescRight">&#x202A;Retrieving data from the buffer.  <a href="group___ring_buff___exported___function.html#ga9e0c0010fcd8903c221708f751114235">More...</a><br /></td></tr>
-<tr class="separator:ga9e0c0010fcd8903c221708f751114235"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga8e05cd27d6af727496724b326b848fd2"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___ring_buff___exported___function.html#ga8e05cd27d6af727496724b326b848fd2">RING_Check</a> (const <a class="el" href="struct_ring_buffer__t.html">RingBuffer_t</a> *const pRing)</td></tr>
-<tr class="memdesc:ga8e05cd27d6af727496724b326b848fd2"><td class="mdescLeft">&#160;</td><td class="mdescRight">&#x202A;View the last byte in the buffer.  <a href="group___ring_buff___exported___function.html#ga8e05cd27d6af727496724b326b848fd2">More...</a><br /></td></tr>
-<tr class="separator:ga8e05cd27d6af727496724b326b848fd2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gad74a75b159dd4d0a97a9c7488a99f1ab"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___ring_buff___exported___function.html#gad74a75b159dd4d0a97a9c7488a99f1ab">RING_Pop</a> (<a class="el" href="struct_ring_buffer__t.html">RingBuffer_t</a> *const pRing, uint8_t *const pValue)</td></tr>
+<tr class="memdesc:gad74a75b159dd4d0a97a9c7488a99f1ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">&#x202A;Retrieving data from the buffer.  <a href="group___ring_buff___exported___function.html#gad74a75b159dd4d0a97a9c7488a99f1ab">More...</a><br /></td></tr>
+<tr class="separator:gad74a75b159dd4d0a97a9c7488a99f1ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gae308d4e495b1ebfadfd61a5f250bec91"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___ring_buff___exported___function.html#gae308d4e495b1ebfadfd61a5f250bec91">RING_Check</a> (const <a class="el" href="struct_ring_buffer__t.html">RingBuffer_t</a> *const pRing, uint8_t *const pValue)</td></tr>
+<tr class="memdesc:gae308d4e495b1ebfadfd61a5f250bec91"><td class="mdescLeft">&#160;</td><td class="mdescRight">&#x202A;View the last byte in the buffer.  <a href="group___ring_buff___exported___function.html#gae308d4e495b1ebfadfd61a5f250bec91">More...</a><br /></td></tr>
+<tr class="separator:gae308d4e495b1ebfadfd61a5f250bec91"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaca870994fa3f0a3409cd5c2265d8fb65"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___ring_buff___exported___function.html#gaca870994fa3f0a3409cd5c2265d8fb65">RING_GetCount</a> (const <a class="el" href="struct_ring_buffer__t.html">RingBuffer_t</a> *const pRing)</td></tr>
 <tr class="memdesc:gaca870994fa3f0a3409cd5c2265d8fb65"><td class="mdescLeft">&#160;</td><td class="mdescRight">&#x202A;Getting the number of bytes in the buffer.  <a href="group___ring_buff___exported___function.html#gaca870994fa3f0a3409cd5c2265d8fb65">More...</a><br /></td></tr>
 <tr class="separator:gaca870994fa3f0a3409cd5c2265d8fb65"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -158,8 +158,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ga8e05cd27d6af727496724b326b848fd2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga8e05cd27d6af727496724b326b848fd2">&#9670;&nbsp;</a></span>RING_Check()</h2>
+<a id="gae308d4e495b1ebfadfd61a5f250bec91"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gae308d4e495b1ebfadfd61a5f250bec91">&#9670;&nbsp;</a></span>RING_Check()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -168,25 +168,36 @@ Functions</h2></td></tr>
           <td class="memname">uint8_t RING_Check </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="struct_ring_buffer__t.html">RingBuffer_t</a> *const&#160;</td>
-          <td class="paramname"><em>pRing</em></td><td>)</td>
+          <td class="paramname"><em>pRing</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">uint8_t *const&#160;</td>
+          <td class="paramname"><em>pValue</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>&#x202A;View the last byte in the buffer. </p>
-<p class="DocNodeLTR">The function shows the last byte from the buffer without deleting it or returns the retrieval status.</p>
+<p class="DocNodeLTR">The function shows the last byte from the buffer without deleting it and returns the retrieval status.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">pRing</td><td>&#x202A;A pointer to a circular buffer object</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">pRing</td><td>&#x202A;A pointer to a circular buffer object </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">pRing</td><td>&#x202A;Pointer to the memory area where the cell value should be placed</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>&#x202A;Byte value or status </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>&#x202A;Status </dd></dl>
 <dl class="retval"><dt>Return values</dt><dd>
   <table class="retval">
     <tr><td class="paramname">0</td><td>&#x202A;If the buffer is empty </td></tr>
-    <tr><td class="paramname">uint8_t</td><td>&#x202A;Byte value </td></tr>
+    <tr><td class="paramname">1</td><td>&#x202A;If value viewed </td></tr>
   </table>
   </dd>
 </dl>
@@ -244,12 +255,7 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="retval"><dt>Return values</dt><dd>
-  <table class="retval">
-    <tr><td class="paramname">uint16_t</td><td>&#x202A;Number of bytes in the buffer </td></tr>
-  </table>
-  </dd>
-</dl>
+<dl class="section return"><dt>Returns</dt><dd>&#x202A;Number of bytes in the buffer </dd></dl>
 
 </div>
 </div>
@@ -299,8 +305,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ga9e0c0010fcd8903c221708f751114235"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga9e0c0010fcd8903c221708f751114235">&#9670;&nbsp;</a></span>RING_Pop()</h2>
+<a id="gad74a75b159dd4d0a97a9c7488a99f1ab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gad74a75b159dd4d0a97a9c7488a99f1ab">&#9670;&nbsp;</a></span>RING_Pop()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -309,25 +315,36 @@ Functions</h2></td></tr>
           <td class="memname">uint8_t RING_Pop </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="struct_ring_buffer__t.html">RingBuffer_t</a> *const&#160;</td>
-          <td class="paramname"><em>pRing</em></td><td>)</td>
+          <td class="paramname"><em>pRing</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">uint8_t *const&#160;</td>
+          <td class="paramname"><em>pValue</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>&#x202A;Retrieving data from the buffer. </p>
-<p class="DocNodeLTR">The function retrieves one byte from the buffer or returns the retrieval status</p>
+<p class="DocNodeLTR">The function retrieves one byte from the buffer and returns the retrieval status</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">pRing</td><td>&#x202A;A pointer to a circular buffer object</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">pRing</td><td>&#x202A;A pointer to a circular buffer object </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">pRing</td><td>&#x202A;Pointer to the memory area where the cell value should be placed</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>&#x202A;Byte value or status </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>&#x202A;Status </dd></dl>
 <dl class="retval"><dt>Return values</dt><dd>
   <table class="retval">
     <tr><td class="paramname">0</td><td>&#x202A;If the buffer is empty </td></tr>
-    <tr><td class="paramname">uint8_t</td><td>&#x202A;Byte value </td></tr>
+    <tr><td class="paramname">1</td><td>&#x202A;If value retrieves </td></tr>
   </table>
   </dd>
 </dl>

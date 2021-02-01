@@ -96,9 +96,9 @@ Functions</h2></td></tr>
 <tr class="memitem:gae60b5deb4ae27c0d20e312d770e56609"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___u_a_r_t___ring___exported___functions.html#gae60b5deb4ae27c0d20e312d770e56609">UART_Ring_Init</a> (<a class="el" href="struct_u_a_r_t___ring__t.html">UART_Ring_t</a> *const ptr)</td></tr>
 <tr class="memdesc:gae60b5deb4ae27c0d20e312d770e56609"><td class="mdescLeft">&#160;</td><td class="mdescRight">&#x202A;Ring Buffer UART Initialization.  <a href="group___u_a_r_t___ring___exported___functions.html#gae60b5deb4ae27c0d20e312d770e56609">More...</a><br /></td></tr>
 <tr class="separator:gae60b5deb4ae27c0d20e312d770e56609"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga73b35e5f7419c56f4e948fc19464d826"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___u_a_r_t___ring___exported___functions.html#ga73b35e5f7419c56f4e948fc19464d826">UART_Ring_PopByte</a> (<a class="el" href="struct_u_a_r_t___ring__t.html">UART_Ring_t</a> *const ptr)</td></tr>
-<tr class="memdesc:ga73b35e5f7419c56f4e948fc19464d826"><td class="mdescLeft">&#160;</td><td class="mdescRight">&#x202A;Extracting one byte from the UART buffer.  <a href="group___u_a_r_t___ring___exported___functions.html#ga73b35e5f7419c56f4e948fc19464d826">More...</a><br /></td></tr>
-<tr class="separator:ga73b35e5f7419c56f4e948fc19464d826"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaf8e4b40dea4556a8444e1038c9d2b40f"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___u_a_r_t___ring___exported___functions.html#gaf8e4b40dea4556a8444e1038c9d2b40f">UART_Ring_PopByte</a> (<a class="el" href="struct_u_a_r_t___ring__t.html">UART_Ring_t</a> *const ptr, uint8_t *pVarGetValue)</td></tr>
+<tr class="memdesc:gaf8e4b40dea4556a8444e1038c9d2b40f"><td class="mdescLeft">&#160;</td><td class="mdescRight">&#x202A;Extracting one byte from the UART buffer.  <a href="group___u_a_r_t___ring___exported___functions.html#gaf8e4b40dea4556a8444e1038c9d2b40f">More...</a><br /></td></tr>
+<tr class="separator:gaf8e4b40dea4556a8444e1038c9d2b40f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <p class="DocNodeLTR">UART functionality with a ring buffer to be reached from the outside. </p>
@@ -138,8 +138,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ga73b35e5f7419c56f4e948fc19464d826"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga73b35e5f7419c56f4e948fc19464d826">&#9670;&nbsp;</a></span>UART_Ring_PopByte()</h2>
+<a id="gaf8e4b40dea4556a8444e1038c9d2b40f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaf8e4b40dea4556a8444e1038c9d2b40f">&#9670;&nbsp;</a></span>UART_Ring_PopByte()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -148,25 +148,36 @@ Functions</h2></td></tr>
           <td class="memname">uint8_t UART_Ring_PopByte </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="struct_u_a_r_t___ring__t.html">UART_Ring_t</a> *const&#160;</td>
-          <td class="paramname"><em>ptr</em></td><td>)</td>
+          <td class="paramname"><em>ptr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname"><em>pVarGetValue</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>&#x202A;Extracting one byte from the UART buffer. </p>
-<p class="DocNodeLTR">The function returns the extracted byte from the UART buffer, or status 0 in case of an error</p>
+<p class="DocNodeLTR">The function retrieves one byte from the buffer, places it in memory by <code>pVarGetValue</code> pointer and returns the retrieval status</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">ptr</td><td>&#x202A;Pointer to UART object with ring buffer</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">ptr</td><td>&#x202A;Pointer to UART object with ring buffer </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">pVarGetValue</td><td>&#x202A;Pointer to a variable where to place the extracted byte </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>&#x202A;Byte value or status </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>&#x202A;Status </dd></dl>
 <dl class="retval"><dt>Return values</dt><dd>
   <table class="retval">
-    <tr><td class="paramname">0</td><td>&#x202A;If the buffer is empty </td></tr>
-    <tr><td class="paramname">uint8_t</td><td>&#x202A;Byte value </td></tr>
+    <tr><td class="paramname">0</td><td>&#x202A;If the extraction went smoothly </td></tr>
+    <tr><td class="paramname">1</td><td>&#x202A;If the buffer is empty </td></tr>
   </table>
   </dd>
 </dl>

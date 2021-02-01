@@ -103,8 +103,8 @@ void UARTComander(void)
 {
   if(strcmp(bufUART.bufIn, "Set date") == 0)
   {
-    DS3231.Date.Date = 25;
-    DS3231.Date.Month = 1;
+    DS3231.Date.Date = 1;
+    DS3231.Date.Month = 2;
     DS3231.Date.Year = 21;
     DS3231.Date.Day = 1;
 
@@ -112,8 +112,8 @@ void UARTComander(void)
   }
   else if (strcmp(bufUART.bufIn, "Set time") == 0)
   {
-    DS3231.Time.Hours = 15;
-    DS3231.Time.Minutes = 10;
+    DS3231.Time.Hours = 14;
+    DS3231.Time.Minutes = 23;
     DS3231.Time.Seconds = 20;
 
     DS3231_SetTime(&DS3231, &DS3231.Time);
@@ -153,9 +153,9 @@ int main(void)
   {
     while(1)
     {
-      const uint32_t statusExtraction = UART_Ring_PopByte(&uart1, (uint8_t*)&bufUART.bufIn[bufUART.count]);
+      const uint8_t statusExtraction = UART_Ring_PopByte(&uart1, (uint8_t*)&bufUART.bufIn[bufUART.count]);
 
-      if(statusExtraction != 0)
+      if(statusExtraction == 1)
       {
         break;
       }
