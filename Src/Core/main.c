@@ -76,7 +76,7 @@ uint16_t delay = 1000; ///< Stores the number of milliseconds of the RTC module 
  * @brief Variables used in the program loop and accessible from the outside
  */
 ///@{
-UART_Ring_t uart1;  ///< UART module object with circular buffer support
+UART_Ring_t uart2;  ///< UART module object with circular buffer support
 ///@}
 
 // Private Functions ----------------------------------------------------------
@@ -145,7 +145,7 @@ int main(void)
   RCC_Init();
   GPIO_Init();
   I2C1_Init();
-  UART_Ring_Init(&uart1);
+  UART_Ring_Init(&uart2);
 
   DS3231_SetAddress(&DS3231, 0xD0);
 
@@ -153,7 +153,7 @@ int main(void)
   {
     while(1)
     {
-      const uint8_t statusExtraction = UART_Ring_PopByte(&uart1, (uint8_t*)&bufUART.bufIn[bufUART.count]);
+      const uint8_t statusExtraction = UART_Ring_PopByte(&uart2, (uint8_t*)&bufUART.bufIn[bufUART.count]);
 
       if(statusExtraction == 1)
       {
@@ -161,7 +161,7 @@ int main(void)
       }
       else if(bufUART.bufIn[bufUART.count] == '\n')
       {
-        UART_Transmit(&uart1.uart, (uint8_t*)bufUART.bufIn, strlen(bufUART.bufIn), 1000);
+        UART_Transmit(&uart2.uart, (uint8_t*)bufUART.bufIn, strlen(bufUART.bufIn), 1000);
 
         bufUART.bufIn[bufUART.count] = '\0';
         UARTComander();
@@ -194,7 +194,7 @@ int main(void)
         DS3231.Date.Date, DS3231.Date.Month, DS3231.Date.Year, DS3231.Time.Hours, 
         DS3231.Time.Minutes, DS3231.Time.Seconds, DS3231.Date.Day, DS3231.Temp);
 
-      UART_Transmit(&uart1.uart, (uint8_t*)bufUART.strOut, strlen(bufUART.strOut), 1000);
+      UART_Transmit(&uart2.uart, (uint8_t*)bufUART.strOut, strlen(bufUART.strOut), 1000);
       GPIO_TogglePin(LED_BLUE_Port, LED_BLUE_Pin);
     }
 

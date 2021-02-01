@@ -90,9 +90,9 @@ $(document).ready(function(){initNavTree('group___u_a_r_t___private___function.h
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ga1c63a7847bce896aad4bae06f418ceb5"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___u_a_r_t___private___function.html#ga1c63a7847bce896aad4bae06f418ceb5">UART_WaitFlag</a> (const <a class="el" href="group___u_a_r_t___exported___types.html#ga085425eff4b0f4f117d6b8e860caca04">STM32F051_UART_t</a> *pUART, const uint32_t Flag, const FlagStatus Status, const uint32_t tickStart, const uint32_t Timeout)</td></tr>
-<tr class="memdesc:ga1c63a7847bce896aad4bae06f418ceb5"><td class="mdescLeft">&#160;</td><td class="mdescRight">&#x202A;Handle USART Communication Timeout.  <a href="group___u_a_r_t___private___function.html#ga1c63a7847bce896aad4bae06f418ceb5">More...</a><br /></td></tr>
-<tr class="separator:ga1c63a7847bce896aad4bae06f418ceb5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga05f51bec9ec351d51afb2642253f0dec"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___u_a_r_t___private___function.html#ga05f51bec9ec351d51afb2642253f0dec">UART_WaitFlag</a> (const <a class="el" href="group___u_a_r_t___exported___types.html#ga085425eff4b0f4f117d6b8e860caca04">STM32F051_UART_t</a> *pUART, const uint32_t flag, const FlagStatus status, const uint32_t tickStart, const uint32_t timeout)</td></tr>
+<tr class="memdesc:ga05f51bec9ec351d51afb2642253f0dec"><td class="mdescLeft">&#160;</td><td class="mdescRight">&#x202A;Handle USART Communication Timeout.  <a href="group___u_a_r_t___private___function.html#ga05f51bec9ec351d51afb2642253f0dec">More...</a><br /></td></tr>
+<tr class="separator:ga05f51bec9ec351d51afb2642253f0dec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga4ffe44a1191b603d9d89c050cd5b0178"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___u_a_r_t___private___function.html#ga4ffe44a1191b603d9d89c050cd5b0178">UART_Init</a> (const <a class="el" href="group___u_a_r_t___exported___types.html#ga085425eff4b0f4f117d6b8e860caca04">STM32F051_UART_t</a> *pUART)</td></tr>
 <tr class="memdesc:ga4ffe44a1191b603d9d89c050cd5b0178"><td class="mdescLeft">&#160;</td><td class="mdescRight">&#x202A;Initialization of peripheral UART module.  <a href="group___u_a_r_t___private___function.html#ga4ffe44a1191b603d9d89c050cd5b0178">More...</a><br /></td></tr>
 <tr class="separator:ga4ffe44a1191b603d9d89c050cd5b0178"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -134,8 +134,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ga1c63a7847bce896aad4bae06f418ceb5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga1c63a7847bce896aad4bae06f418ceb5">&#9670;&nbsp;</a></span>UART_WaitFlag()</h2>
+<a id="ga05f51bec9ec351d51afb2642253f0dec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga05f51bec9ec351d51afb2642253f0dec">&#9670;&nbsp;</a></span>UART_WaitFlag()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -150,13 +150,13 @@ Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const uint32_t&#160;</td>
-          <td class="paramname"><em>Flag</em>, </td>
+          <td class="paramname"><em>flag</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const FlagStatus&#160;</td>
-          <td class="paramname"><em>Status</em>, </td>
+          <td class="paramname"><em>status</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -168,7 +168,7 @@ Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const uint32_t&#160;</td>
-          <td class="paramname"><em>Timeout</em>&#160;</td>
+          <td class="paramname"><em>timeout</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -182,10 +182,10 @@ Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">pUART</td><td>&#x202A;Pointer to UART module object </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">Flag</td><td>&#x202A;Specifies the UART1 flag to check </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">Status</td><td>&#x202A;Flag status (SET or RESET) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">flag</td><td>&#x202A;Specifies the UART flag to check </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">status</td><td>&#x202A;Flag status (SET or RESET) </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">tickStart</td><td>&#x202A;Tick start value </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">Timeout</td><td>&#x202A;Timeout duration</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">timeout</td><td>&#x202A;Timeout duration</td></tr>
   </table>
   </dd>
 </dl>

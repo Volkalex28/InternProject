@@ -47,8 +47,9 @@ typedef struct sSTM32F051_UART_t
  */
 
 uint32_t UART1_Init(STM32F051_UART_t* pUART);
-uint32_t UART_Transmit(const STM32F051_UART_t* pUART, uint8_t* pData, uint16_t Size, const uint32_t Timeout);
-uint32_t UART_ReceiveIT(STM32F051_UART_t* pUART, uint8_t *pData, uint16_t Size);
+uint32_t UART2_Init(STM32F051_UART_t* pUART);
+uint32_t UART_Transmit(const STM32F051_UART_t* pUART, uint8_t* pData, uint16_t size, const uint32_t timeout);
+uint32_t UART_ReceiveIT(STM32F051_UART_t* pUART, uint8_t *pData, uint16_t size);
 
 void UART_IRQHandler(STM32F051_UART_t* pUART);
 ///@}

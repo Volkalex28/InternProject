@@ -92,7 +92,7 @@ uint32_t UART_Ring_Init(UART_Ring_t* const ptr)
 {
   ASSERT(ptr);
 
-  if(UART1_Init(&ptr->uart) != 0)
+  if(UART2_Init(&ptr->uart) != 0)
   {
     return 1;
   }
