@@ -45,8 +45,8 @@ typedef struct
 void RING_Init(RingBuffer_t* const pRing, uint8_t* const pMemory, const uint16_t size);
 void RING_Clear(RingBuffer_t* const pRing);
 uint32_t RING_Append(RingBuffer_t* const pRing, const uint8_t value);
-uint8_t RING_Pop(RingBuffer_t* const pRing);
-uint8_t RING_Check(const RingBuffer_t* const pRing);
+uint8_t RING_Pop(RingBuffer_t* const pRing, uint8_t*const pValue);
+uint8_t RING_Check(const RingBuffer_t* const pRing, uint8_t*const pValue);
 uint16_t RING_GetCount(const RingBuffer_t* const pRing);
 
 #endif //_RING_BUFFER_H_

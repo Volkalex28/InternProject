@@ -57,6 +57,6 @@ typedef struct
 ///@}
 
 uint32_t UART_Ring_Init(UART_Ring_t* const ptr);
-uint8_t UART_Ring_PopByte(UART_Ring_t* const ptr);
+uint8_t UART_Ring_PopByte(UART_Ring_t* const ptr, uint8_t* pVarGetValue);
 
 #endif // _UART_RING_H_

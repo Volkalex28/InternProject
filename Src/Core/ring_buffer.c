@@ -104,15 +104,16 @@ uint32_t RING_Append(RingBuffer_t* const pRing, const uint8_t value)
 /**
  * @brief Retrieving data from the buffer
  * 
- * The function retrieves one byte from the buffer or returns the retrieval status
+ * The function retrieves one byte from the buffer and returns the retrieval status
  * 
- * @param pRing A pointer to a circular buffer object
+ * @param[in] pRing A pointer to a circular buffer object
+ * @param[out] pRing Pointer to the memory area where the cell value should be placed
  * 
  * @return Byte value or status
  * @retval 0 If the buffer is empty
- * @retval uint8_t Byte value
+ * @retval 1 If value retrieves
  */
-uint8_t RING_Pop(RingBuffer_t* const pRing)
+uint8_t RING_Pop(RingBuffer_t* const pRing, uint8_t*const pValue)
 {
   ASSERT(pRing);
   ASSERT(pRing->pMemory);
@@ -122,7 +123,7 @@ uint8_t RING_Pop(RingBuffer_t* const pRing)
     return 0;
   }
 
-  const uint8_t rValue = pRing->pMemory[pRing->head++];
+  *pValue = pRing->pMemory[pRing->head++];
 
   pRing->head %= pRing->size;
 
@@ -132,32 +133,35 @@ uint8_t RING_Pop(RingBuffer_t* const pRing)
   }
   pRing->fulled = 0;
 
-  return rValue;
+  return 1;
 }
 
 /**
  * @brief View the last byte in the buffer
  * 
  * The function shows the last byte from the buffer 
- * without deleting it or returns the retrieval status.
+ * without deleting it and returns the retrieval status.
  * 
- * @param pRing A pointer to a circular buffer object
+ * @param[in] pRing A pointer to a circular buffer object
+ * @param[out] pRing Pointer to the memory area where the cell value should be placed
  * 
- * @return Byte value or status
+ * @return Status
  * @retval 0 If the buffer is empty
- * @retval uint8_t Byte value
+ * @retval 1 If value viewed
  */
-uint8_t RING_Check(const RingBuffer_t* const pRing)
+uint8_t RING_Check(const RingBuffer_t*const pRing, uint8_t*const pValue)
 {
   ASSERT(pRing);
   ASSERT(pRing->pMemory);
+  ASSERT(pValue);
 
   if(pRing->empty == 1)
   {
     return 0;
   }
+  *pValue = pRing->pMemory[pRing->head];
 
-  return pRing->pMemory[pRing->head];
+  return 1;
 }
 
 /**
@@ -167,20 +171,14 @@ uint8_t RING_Check(const RingBuffer_t* const pRing)
  * 
  * @param pRing A pointer to a circular buffer object
  * 
- * @retval uint16_t Number of bytes in the buffer
+ * @return Number of bytes in the buffer
  */
 uint16_t RING_GetCount(const RingBuffer_t* const pRing)
 {
   ASSERT(pRing);
 
-  if(pRing->empty == 1)
-  {
-    return 0;
-  }
-  else 
-  {
-    return (pRing->tail < pRing->head ? pRing->size : 0) + pRing->tail - pRing->head;
-  }
+  return ((pRing->fulled == 1 || pRing->tail < pRing->head) ? pRing->size : 0) + \
+    pRing->tail - pRing->head;
 }
 
 ///@}

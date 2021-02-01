@@ -153,9 +153,9 @@ int main(void)
   {
     while(1)
     {
-      bufUART.bufIn[bufUART.count] = UART_Ring_PopByte(&uart1);
+      const uint32_t statusExtraction = UART_Ring_PopByte(&uart1, (uint8_t*)&bufUART.bufIn[bufUART.count]);
 
-      if(bufUART.bufIn[bufUART.count] == 0)
+      if(statusExtraction != 0)
       {
         break;
       }
