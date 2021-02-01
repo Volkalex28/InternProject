@@ -7,13 +7,10 @@ cmake_minimum_required(VERSION 3.0)
 
 project(InternProject)
 
-enable_language(C ASM CXX)
+enable_language(C ASM)
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 set(CMAKE_C_EXTENSIONS OFF)
-set(CMAKE_CXX_STANDARD 11)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_EXTENSIONS OFF)
 
 # Build type
 set(EXECUTABLE_OUTPUT_PATH  ${CMAKE_SOURCE_DIR}/build/${CMAKE_BUILD_TYPE})
@@ -24,24 +21,7 @@ set(SOURCE_DIR ${CMAKE_SOURCE_DIR}/src)
 set(DRIVER_DIR ${SOURCE_DIR}/drivers)
 set(ASSERT_DIR ${SOURCE_DIR}/assert)
 set(CORE_DIR ${SOURCE_DIR}/core)
-set(TEST_DIR ${SOURCE_DIR}/tests)
 
-set(HEADER 
-  ${DRIVER_DIR}/STM32F051/stm32f051_rcc.h
-  ${DRIVER_DIR}/STM32F051/stm32f051_gpio.h
-  ${DRIVER_DIR}/STM32F051/stm32f051_uart.h
-  ${DRIVER_DIR}/STM32F051/stm32f051_i2c.h
-
-  ${DRIVER_DIR}/DS3231/ds3231.h
-
-  ${ASSERT_DIR}/user_assert.h
-
-  ${CORE_DIR}/main.h
-  ${CORE_DIR}/stm32f0xx_it.h
-  ${CORE_DIR}/pins.h
-  ${CORE_DIR}/ring_buffer.h
-  ${CORE_DIR}/uart_ring.h
-)
 set(SOURCE
   ${DRIVER_DIR}/STM32F051/stm32f051_rcc.c
   ${DRIVER_DIR}/STM32F051/stm32f051_gpio.c
@@ -63,7 +43,7 @@ set(STARTUP
 
 set(EXECUTABLE ${EXECUTABLE_OUTPUT_PATH}/${PROJECT_NAME})
 
-add_executable(${PROJECT_NAME} ${HEADER} ${SOURCE} ${STARTUP})
+add_executable(${PROJECT_NAME} ${SOURCE} ${STARTUP})
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE
   -DSTM32F051x8
@@ -106,7 +86,7 @@ target_link_options(${PROJECT_NAME} PRIVATE
   --specs=nano.specs
   --specs=nosys.specs
 
-  -Wl,-Map=${PROJECT_NAME}.map,--cref
+  -Wl,-Map=${EXECUTABLE}.map,--cref
   -Wl,--gc-sections
   -static
   -Wl,--start-group -lc -lm -Wl,--end-group
@@ -128,23 +108,6 @@ add_custom_command(TARGET ${PROJECT_NAME}
 include(ExternalProject)
 
 ExternalProject_Add(
-  cpputest
-  PREFIX            ${PROJECT_SOURCE_DIR}/tests/cpputest
-  SOURCE_DIR        ${PROJECT_SOURCE_DIR}/tests/cpputest
-  BINARY_DIR        ${PROJECT_SOURCE_DIR}/tests/cpputest/cpputest_build
-  STAMP_DIR         ${PROJECT_SOURCE_DIR}/tests/cpputest/cpputest_build
-  TMP_DIR           ${PROJECT_SOURCE_DIR}/tests/cpputest/cpputest_build
-  DOWNLOAD_COMMAND  ""
-  PATCH_COMMAND     ""
-  INSTALL_COMMAND   ""
-  UPDATE_COMMAND    ""
-  CONFIGURE_COMMAND ${CMAKE_COMMAND} -DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=TRUE -S ${PROJECT_SOURCE_DIR}/tests/cpputest -G ${CMAKE_GENERATOR} -DC++11=ON -DTESTS=OFF -DTESTS_BUILD_DISCOVER=OFF
-  BUILD_ALWAYS      TRUE
-  ALWAYS            TRUE
-  DEPENDS           ${PROJECT_NAME}
-)
-
-ExternalProject_Add(
   unit_tests
   PREFIX            ${CMAKE_SOURCE_DIR}/tests
   SOURCE_DIR        ${CMAKE_SOURCE_DIR}/tests
@@ -156,6 +119,23 @@ ExternalProject_Add(
   INSTALL_COMMAND   ""
   UPDATE_COMMAND    ""
   CONFIGURE_COMMAND ${CMAKE_COMMAND} -DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=TRUE -S ${CMAKE_SOURCE_DIR}/tests -G ${CMAKE_GENERATOR}
+  BUILD_ALWAYS      TRUE
+  ALWAYS            TRUE
+  DEPENDS           ${PROJECT_NAME}
+)
+
+ExternalProject_Add(
+  cpputest
+  PREFIX            ${CMAKE_SOURCE_DIR}/tests/cpputest
+  SOURCE_DIR        ${CMAKE_SOURCE_DIR}/tests/cpputest
+  BINARY_DIR        ${CMAKE_SOURCE_DIR}/tests/cpputest/cpputest_build
+  STAMP_DIR         ${CMAKE_SOURCE_DIR}/tests/cpputest/cpputest_build
+  TMP_DIR           ${CMAKE_SOURCE_DIR}/tests/cpputest/cpputest_build
+  DOWNLOAD_COMMAND  ""
+  PATCH_COMMAND     ""
+  INSTALL_COMMAND   ""
+  UPDATE_COMMAND    ""
+  CONFIGURE_COMMAND ${CMAKE_COMMAND} -DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=TRUE -S ${CMAKE_SOURCE_DIR}/tests/cpputest -G ${CMAKE_GENERATOR} -DC++11=ON -DTESTS=OFF -DTESTS_BUILD_DISCOVER=OFF
   BUILD_ALWAYS      TRUE
   ALWAYS            TRUE
   DEPENDS           ${PROJECT_NAME}
