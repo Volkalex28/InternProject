@@ -106,26 +106,41 @@ uint32_t UART_Ring_Init(UART_Ring_t* const ptr)
 }
 
 /**
- * @brief Extracting one byte from the UART buffer
+ * @brief 
  * 
  * The function returns the extracted byte from the UART buffer, 
  * or status 0 in case of an error
  * 
- * @param ptr Pointer to UART object with ring buffer
+ * @param ptr 
  * 
- * @return Byte value or status
+ * @return Status
  * @retval 0 If the buffer is empty
  * @retval uint8_t Byte value
  */
-uint8_t UART_Ring_PopByte(UART_Ring_t* const ptr)
+
+/**
+ * @brief Extracting one byte from the UART buffer
+ * 
+ * The function retrieves one byte from the buffer, places it 
+ * in memory by @p pVarGetValue pointer and returns the retrieval status
+ * 
+ * @param[in]  ptr Pointer to UART object with ring buffer
+ * @param[out] pVarGetValue Pointer to a variable where to place the extracted byte
+ * @return Status
+ * @retval 0 If the extraction went smoothly 
+ * @retval 1 If the buffer is empty
+ */
+uint8_t UART_Ring_PopByte(UART_Ring_t* const ptr, uint8_t* pVarGetValue)
 {
   ASSERT(ptr);
+  ASSERT(pVarGetValue);
 
   if(RING_GetCount(&ptr->ring) != 0)
   {
-    return RING_Pop(&ptr->ring);
+    *pVarGetValue = RING_Pop(&ptr->ring);
+    return 0;
   }
-  return 0;
+  return 1;
 }
 
 ///@}

@@ -64,7 +64,8 @@ AssertInfo_t g_assert_info; ///< A variable that stores data about the place whe
  * 
  * @return None
  */
-void my_assert(uint32_t *pc, uint32_t *lr) {
+void my_assert(uint32_t *pc, uint32_t *lr) 
+{
   // File and line deliberately left empty
   g_assert_info.pc = (uint32_t)pc;
   g_assert_info.lr = (uint32_t)lr;
