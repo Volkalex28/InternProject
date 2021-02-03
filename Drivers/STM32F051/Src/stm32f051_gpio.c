@@ -42,7 +42,7 @@
 inline void GPIO_SetPin(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin) 
 {
   ASSERT(GPIOx);
-  GPIOx->BSRR = (uint32_t)GPIO_Pin;
+  GPIOx->BSRR = GPIO_Pin;
 }
 
 /**
@@ -55,7 +55,7 @@ inline void GPIO_SetPin(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin)
 inline void GPIO_ResetPin(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin) 
 {
   ASSERT(GPIOx);
-  GPIOx->BRR = (uint32_t)GPIO_Pin;
+  GPIOx->BRR = GPIO_Pin;
 }
 
 /**
