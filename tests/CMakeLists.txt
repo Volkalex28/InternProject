@@ -1,19 +1,27 @@
-project (RunAllTest)
+project (RunAllTests)
 
 cmake_minimum_required(VERSION 3.0)
+
+enable_language(C CXX)
+set(CMAKE_C_STANDARD 11)
+set(CMAKE_C_STANDARD_REQUIRED ON)
+set(CMAKE_C_EXTENSIONS OFF)
+set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
 
 # include project source
 include_directories(${PROJECT_SOURCE_DIR}/../src/core)
 include_directories(${PROJECT_SOURCE_DIR}/../src/assert)
 include_directories(${PROJECT_SOURCE_DIR}/cpputest/include)
 
-add_library(imp_cpputest STATIC IMPORTED)
-set_property(TARGET imp_cpputest PROPERTY
-  IMPORTED_LOCATION ${PROJECT_SOURCE_DIR}/cpputest/cpputest_build/src/CppUTest/libCppUTest.a)
+set (CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/bin)
+set (CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/lib)
+set (CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/lib)
 
-add_library(RingBufferTest ${PROJECT_SOURCE_DIR}/src/RingBuffer/RingBufferTests.cpp)
-
-add_library(RingBuffer ${PROJECT_SOURCE_DIR}/../src/core/ring_buffer.c)
-
-add_executable(${PROJECT_NAME} ${PROJECT_SOURCE_DIR}/src/RunAllTests.cpp)
-target_link_libraries(${PROJECT_NAME} imp_cpputest RingBufferTest RingBuffer)
+add_executable(${PROJECT_NAME} 
+  ${PROJECT_SOURCE_DIR}/src/RunAllTests.cpp
+  ${PROJECT_SOURCE_DIR}/src/RingBuffer/RingBufferTests.cpp
+  ${PROJECT_SOURCE_DIR}/../src/core/ring_buffer.c
+)
+target_link_libraries(${PROJECT_NAME} ${PROJECT_SOURCE_DIR}/cpputest/cpputest_build/src/CppUTest/libCppUTest.a)

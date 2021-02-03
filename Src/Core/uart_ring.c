@@ -92,7 +92,7 @@ uint32_t UART_Ring_Init(UART_Ring_t* const ptr)
 {
   ASSERT(ptr);
 
-  if(UART1_Init(&ptr->uart) != 0)
+  if(UART2_Init(&ptr->uart) != 0)
   {
     return 1;
   }
@@ -108,8 +108,8 @@ uint32_t UART_Ring_Init(UART_Ring_t* const ptr)
 /**
  * @brief 
  * 
- * The function returns the extracted byte from the UART buffer, 
- * or status 0 in case of an error
+ * The function retrieves one byte from the buffer, places it 
+ * in memory by @p pVarGetValue pointer and returns the retrieval status
  * 
  * @param ptr 
  * 
@@ -135,12 +135,16 @@ uint8_t UART_Ring_PopByte(UART_Ring_t* const ptr, uint8_t* pVarGetValue)
   ASSERT(ptr);
   ASSERT(pVarGetValue);
 
+<<<<<<< HEAD
   if(RING_GetCount(&ptr->ring) != 0)
   {
     *pVarGetValue = RING_Pop(&ptr->ring);
     return 0;
   }
   return 1;
+=======
+  return 1 - RING_Pop(&ptr->ring, pVarGetValue);
+>>>>>>> testing
 }
 
 ///@}

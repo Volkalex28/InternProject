@@ -37,24 +37,24 @@
  * @brief Handle USART Communication Timeout
  * 
  * @param[in] pUART Pointer to UART module object
- * @param[in] Flag Specifies the UART1 flag to check
- * @param[in] Status Flag status (SET or RESET)
+ * @param[in] flag Specifies the UART flag to check
+ * @param[in] status Flag status (SET or RESET)
  * @param[in] tickStart Tick start value
- * @param[in] Timeout Timeout duration
+ * @param[in] timeout Timeout duration
  * 
  * @return Status
  * @retval 0 If no errors occurred
  * @retval 1 If an error occurs during the process
  */
-uint32_t UART_WaitFlag(const STM32F051_UART_t* pUART, const uint32_t Flag, 
-  const FlagStatus Status, const uint32_t tickStart, const uint32_t Timeout)
+uint32_t UART_WaitFlag(const STM32F051_UART_t* pUART, const uint32_t flag, 
+  const FlagStatus status, const uint32_t tickStart, const uint32_t timeout)
 {
   ASSERT(pUART);
   ASSERT(pUART->handle);
 
-  while((READ_BIT(pUART->handle->ISR, Flag) ? SET : RESET) == Status) 
+  while((READ_BIT(pUART->handle->ISR, flag) ? SET : RESET) == status) 
   {
-    if(GetTick() >= (tickStart + Timeout))
+    if(GetTick() >= (tickStart + timeout))
     {
       CLEAR_BIT(pUART->handle->CR1, (USART_CR1_RXNEIE | USART_CR1_PEIE | USART_CR1_TXEIE));
       CLEAR_BIT(pUART->handle->CR3, USART_CR3_EIE);
@@ -123,7 +123,7 @@ uint32_t UART_Init(const STM32F051_UART_t* pUART)
  */
 
 /**
- * @brief Callback at the end of receiving data via USART1
+ * @brief Callback at the end of receiving data via USART interface
  * 
  * The function is declared __weak, since it is assumed that 
  * the user will override it
@@ -196,37 +196,86 @@ uint32_t UART1_Init(STM32F051_UART_t* pUART)
 }
 
 /**
- * @brief  Function for sending via USART interface in blocking mode
+ * @brief Initialization of the UART2 module and its periphery
  * 
- * The function sends data via the USART1 interface from the @p pData 
- * memory area in the amount of @p Size
+ * The function adjusts the pins of the PA2 and PA3 microcontroller 
+ * to work with the UART2 module, configures the module itself with 
+ * the following parameters: 
+ * @verbatim
+  Speed:     115200
+  Parity:    None
+  Data bits: 8
+  Stop bits: 1
+  @endverbatim
+ * 
+ * @param[in, out] pUART Pointer to object of UART2 module
+ * 
+ * @return UART2 initialization status
+ * @retval 0 If initialization was successful.
+ * @retval 1 If an initialization error occurs. 
+ */
+
+uint32_t UART2_Init(STM32F051_UART_t* pUART) 
+{
+  ASSERT(pUART);
+
+  SET_BIT(RCC->APB1ENR, RCC_APB1ENR_USART2EN);
+  SET_BIT(RCC->AHBENR, RCC_AHBENR_GPIOAEN);
+
+  MODIFY_REG(GPIOA->OSPEEDR, 0, GPIO_OSPEEDER_OSPEEDR2);
+  CLEAR_BIT(GPIOA->OTYPER, GPIO_OTYPER_OT_2);
+  MODIFY_REG(GPIOA->PUPDR, GPIO_PUPDR_PUPDR2, 0);
+  MODIFY_REG(GPIOA->AFR[0], 0xE << GPIO_AFRL_AFSEL2_Pos, 1 << GPIO_AFRL_AFSEL2_Pos);
+  MODIFY_REG(GPIOA->MODER, GPIO_MODER_MODER2_0, GPIO_MODER_MODER2_1);
+
+  MODIFY_REG(GPIOA->OSPEEDR, 0, GPIO_OSPEEDER_OSPEEDR3);
+  CLEAR_BIT(GPIOA->OTYPER, GPIO_OTYPER_OT_3);
+  MODIFY_REG(GPIOA->PUPDR, GPIO_PUPDR_PUPDR3, 0);
+  MODIFY_REG(GPIOA->AFR[0], 0xE << GPIO_AFRL_AFSEL3_Pos, 1 << GPIO_AFRL_AFSEL3_Pos);
+  MODIFY_REG(GPIOA->MODER, GPIO_MODER_MODER3_0, GPIO_MODER_MODER3_1);
+
+  NVIC_SetPriority(USART2_IRQn, 0);
+  NVIC_EnableIRQ(USART2_IRQn);
+
+  pUART->handle = USART2;
+  pUART->baudRate = 115200;
+  pUART->pRxCall = UART_RxCallback;
+
+  return UART_Init(pUART);
+}
+
+/**
+ * @brief  Send function via @p pUART interface in blocking mode
+ * 
+ * The function sends data via the USART interface at the @p pUART pointer 
+ * from the @p pData memory area in @p Size
  * 
  * @param[in] pUART Pointer to UART module object
  * @param[in] pData Pointer to data buffer
- * @param[in] Size Amount of data elements to be sent
- * @param[in] Timeout Timeout duration
+ * @param[in] size Amount of data elements to be sent
+ * @param[in] timeout Timeout duration
  * 
  * @return UART Transmit status
  * @retval 0 If the sending was successful
  * @retval 1 If an error occurred during sending
  */
-uint32_t UART_Transmit(const STM32F051_UART_t* pUART, uint8_t* pData, uint16_t Size, const uint32_t Timeout)
+uint32_t UART_Transmit(const STM32F051_UART_t* pUART, uint8_t* pData, uint16_t size, const uint32_t timeout)
 {
   ASSERT(pUART);
   ASSERT(pUART->handle);
   ASSERT(pData);
-  ASSERT(Size > 0U);
+  ASSERT(size > 0U);
 
   const uint32_t tickStart = GetTick();
-  while((Size--) > 0)
+  while((size--) > 0)
   {
-    if(UART_WaitFlag(pUART, USART_ISR_TXE, RESET, tickStart, Timeout) != 0) 
+    if(UART_WaitFlag(pUART, USART_ISR_TXE, RESET, tickStart, timeout) != 0) 
     { 
       return 1; 
     }
     pUART->handle->TDR = *(pData++);
   }
-  if (UART_WaitFlag(pUART, USART_ISR_TC, RESET, tickStart, Timeout) != 0) 
+  if (UART_WaitFlag(pUART, USART_ISR_TC, RESET, tickStart, timeout) != 0) 
   { 
     return 1; 
   }
@@ -235,31 +284,31 @@ uint32_t UART_Transmit(const STM32F051_UART_t* pUART, uint8_t* pData, uint16_t S
 }
 
 /**
- * @brief Function for receive via USART1 interface in interrupt mode
+ * @brief Receive function via interface @p pUART in interrupt mode
  * 
- * The function configures the USART1 module to receive @p Size bytes, 
- * place them in the @p pData memory area, and then trigger an interrupt.
+ * The function configures the module at the @p pUART pointer to receive bytes of @p size
+ * , place them in the @p pData memory area, and then trigger an interrupt.
  * 
  * @note Interrupt handler: UART_IRQHandler()
  * @note Callback at the end of reception: UART_RxCallback()
  * 
  * @param[in] pUART Pointer to UART module object
  * @param[out] pData Pointer to data buffer
- * @param[in] Size Amount of data elements to be received
+ * @param[in] size Amount of data elements to be received
  * 
- * @return USART Receive status
+ * @return UART Receive status
  * @retval 0 If the reception was successful
  * @retval 1 If an error occurs during reception
  */
-uint32_t UART_ReceiveIT(STM32F051_UART_t* pUART, uint8_t *pData, uint16_t Size)
+uint32_t UART_ReceiveIT(STM32F051_UART_t* pUART, uint8_t *pData, uint16_t size)
 {
   ASSERT(pUART);
   ASSERT(pUART->handle);
   ASSERT(pData);
-  ASSERT(Size > 0U);
+  ASSERT(size > 0U);
 
   pUART->pDataRx = pData;
-  pUART->sizeRx = pUART->countRx = Size;
+  pUART->sizeRx = pUART->countRx = size;
 
   if(READ_BIT(pUART->handle->CR1, USART_CR1_RE) != 0)
   {
