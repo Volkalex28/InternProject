@@ -135,12 +135,7 @@ uint8_t UART_Ring_PopByte(UART_Ring_t* const ptr, uint8_t* pVarGetValue)
   ASSERT(ptr);
   ASSERT(pVarGetValue);
 
-  if(RING_GetCount(&ptr->ring) != 0)
-  {
-    *pVarGetValue = RING_Pop(&ptr->ring);
-    return 0;
-  }
-  return 1;
+  return RING_Pop(&ptr->ring, pVarGetValue);
 }
 
 ///@}
