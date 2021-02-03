@@ -10,7 +10,9 @@
  */
 
 /**
- * @addtogroup STM32f051_Driver Driver for STM32F051
+ * @addtogroup Drivers
+ * @addtogroup STM32f051_Driver STM32F051
+ * @ingroup Drivers
  */
 
 /**
@@ -24,7 +26,7 @@
 #include "user_assert.h"
 
 // Private Function -----------------------------------------------------------
-/** @defgroup I2C_Private_Function I2C Private Function
+/** @defgroup I2C_Private_Function Private Function
  * @ingroup I2C
  * 
  * Functions required for the needs of the I2C module driver
@@ -193,7 +195,7 @@ uint32_t I2C1_WaitSTOPFlag(const uint32_t tickStart, const uint32_t Timeout)
 ///@}
 
 // Exported Function ----------------------------------------------------------
-/** @defgroup I2C_Exported_Function I2C Exported Function
+/** @defgroup I2C_Exported_Function Exported Function
  * @ingroup I2C
  * 
  * I2C module function available from other files
@@ -310,7 +312,7 @@ uint32_t I2C1_Transmit(const uint16_t DevAddress, uint8_t *pData, uint16_t Size,
  * with the I2C1 module, configures the module itself to a frequency 
  * of 400 KHz, and also disables the analog and digital filters
  * 
- * @return I2C1 init status
+ * @return I2C1 initialization status
  * @retval 0 If initialization was successful.
  * @retval 1 If an initialization error occurs. 
  */

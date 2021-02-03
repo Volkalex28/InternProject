@@ -17,9 +17,17 @@
   */
 
 #include "stm32f0xx_it.h"
-#include "stm32f051_rcc.h"
-#include "stm32f051_uart.h"
+#include "main.h"
+#include "uart_ring.h"
 
+extern UART_Ring_t uart1;
+
+/**
+ * @defgroup IRQ_Handlers Interrupt Handlers
+ * @ingroup Core
+ * @brief Cortex-M0 Processor Interruption and Exception Handlers
+ */
+///@{
 /******************************************************************************/
 /*           Cortex-M0 Processor Interruption and Exception Handlers          */
 /******************************************************************************/
@@ -56,8 +64,9 @@ void SysTick_Handler(void)
   */
 void USART1_IRQHandler(void)
 {
-  UART1_IRQHandler();
+  UART_IRQHandler(&uart1.uart);
 }
+///@}
 
 /******************************************************************************/
 /* STM32F0xx Peripheral Interrupt Handlers                                    */

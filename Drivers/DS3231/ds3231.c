@@ -10,7 +10,9 @@
  */
 
 /**
- * @defgroup DS3231_Driver Driver for DS3231
+ * @addtogroup Drivers
+ * @defgroup DS3231_Driver DS3231
+ * @ingroup Drivers
  * 
  * DS3231 module (RTC, ZS-042) - This is a low cost board with an extremely 
  * accurate real time clock (RTC), with a temperature compensated crystal 
@@ -25,7 +27,7 @@
 #include "ds3231.h"
 
 // Exported Function ----------------------------------------------------------
-/** @defgroup DS3231_Exported_Function UDS3231 Exported Function
+/** @defgroup DS3231_Exported_Function Exported Function
  * @ingroup DS3231_Driver
  * 
  * DS3231 module function available from other files
