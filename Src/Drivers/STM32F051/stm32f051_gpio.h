@@ -9,6 +9,18 @@
  * 
  */
 
+/**
+ * @addtogroup Drivers
+ * @addtogroup STM32f051_Driver STM32F051
+ * @ingroup Drivers
+ */
+
+/**
+ * @defgroup GPIO GPIO
+ * @ingroup STM32f051_Driver
+ * @brief GPIO module driver
+ */
+
 #ifndef __STM32F051_GPIO__
 #define __STM32F051_GPIO__
 
@@ -69,16 +81,58 @@ enum GPIO_Pin_N
 ///@}
 
 // Exported Function ----------------------------------------------------------
-/**
- * @addtogroup GPIO_Exported_Function
+/** @defgroup GPIO_Exported_Function Exported Function
+ * @ingroup GPIO
  * 
+ * GPIO module function available from other files
+ * @{
  */
-uint32_t GPIO_Init(void);
 
-GPIO_PinState GPIO_ReadPin(GPIO_TypeDef* GPIO_Port, uint16_t GPIO_Pin);
-void GPIO_SetPin(GPIO_TypeDef* GPIO_Port, uint16_t GPIO_Pin);
-void GPIO_ResetPin(GPIO_TypeDef* GPIO_Port, uint16_t GPIO_Pin);
-void GPIO_TogglePin(GPIO_TypeDef* GPIO_Port, uint16_t GPIO_Pin);
+/**
+ * @brief Initializating GPIO
+ * 
+ * @return GPIO Init status
+ * @retval 0 If initialization was successful.
+ * @retval 1 If an initialization error occurs. 
+ */
+const uint32_t GPIO_Init(void);
+
+/**
+ * @brief Read the specified input port pin
+ * @param[in] GPIOx where x can be (A..F) to select the GPIO peripheral for STM32F0 family
+ * @param[in] GPIO_Pin specifies the pin
+ * 
+ * @return The input port pin value
+ */
+const GPIO_PinState GPIO_ReadPin(const GPIO_TypeDef * const GPIO_Port, const uint16_t GPIO_Pin);
+
+/**
+ * @brief Set the specified GPIO pin
+ * @param[in] GPIOx where x can be (A..F) to select the GPIO peripheral for STM32F0 family
+ * @param[in] GPIO_Pin specifies the pin
+ * 
+ * @retval None
+ */
+void GPIO_SetPin(GPIO_TypeDef * const GPIO_Port, const uint16_t GPIO_Pin);
+
+/**
+ * @brief Reset the specified GPIO pin
+ * @param[in] GPIOx where x can be (A..F) to select the GPIO peripheral for STM32F0 family
+ * @param[in] GPIO_Pin specifies the pin
+ * 
+ * @retval None
+ */
+void GPIO_ResetPin(GPIO_TypeDef * const GPIO_Port, const uint16_t GPIO_Pin);
+
+/**
+ * @brief Toggle the specified GPIO pin
+ * @param GPIOx where x can be (A..F) to select the GPIO peripheral for STM32F0 family
+ * @param GPIO_Pin specifies the pin
+ * 
+ * @retval None
+ */
+void GPIO_TogglePin(GPIO_TypeDef * const GPIO_Port, const uint16_t GPIO_Pin);
+
 ///@}
 
 #endif // __STM32F051_GPIO__

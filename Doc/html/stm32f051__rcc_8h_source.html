@@ -86,22 +86,26 @@ $(document).ready(function(){initNavTree('stm32f051__rcc_8h_source.html',''); in
 </div><!--header-->
 <div class="contents">
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#ifndef __STM32F051_RCC__</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#define __STM32F051_RCC__</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &quot;stm32f0xx.h&quot;</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">// Exported Function ---------------------------------------------------------</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment"></span>uint32_t <a class="code" href="group___r_c_c___exported___function.html#gad1b7b23c3272a5fe2176e22a0b7b27a1">RCC_Init</a>(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keywordtype">void</span> <a class="code" href="group___r_c_c___exported___function.html#ga2de0539bf52f448d4a68c5c1a35c845a">Delay</a>(<span class="keyword">volatile</span> uint32_t miliseconds);</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;uint32_t <a class="code" href="group___r_c_c___exported___function.html#ga657f82e3f1cdff88e4970e8d9686a0aa">GetTick</a>(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keywordtype">void</span> <a class="code" href="group___r_c_c___exported___function.html#ga51d8aabde6e7556de20d891b8c3f4020">IncTick</a>(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// __STM32F051_RCC__</span></div>
-<div class="ttc" id="agroup___r_c_c___exported___function_html_ga2de0539bf52f448d4a68c5c1a35c845a"><div class="ttname"><a href="group___r_c_c___exported___function.html#ga2de0539bf52f448d4a68c5c1a35c845a">Delay</a></div><div class="ttdeci">void Delay(volatile uint32_t timeout)</div><div class="ttdoc">Stops program execution.</div><div class="ttdef"><b>Definition:</b> stm32f051_rcc.c:141</div></div>
-<div class="ttc" id="agroup___r_c_c___exported___function_html_ga51d8aabde6e7556de20d891b8c3f4020"><div class="ttname"><a href="group___r_c_c___exported___function.html#ga51d8aabde6e7556de20d891b8c3f4020">IncTick</a></div><div class="ttdeci">__WEAK void IncTick(void)</div><div class="ttdoc">This function called to increment variable ticks.</div><div class="ttdef"><b>Definition:</b> stm32f051_rcc.c:170</div></div>
-<div class="ttc" id="agroup___r_c_c___exported___function_html_ga657f82e3f1cdff88e4970e8d9686a0aa"><div class="ttname"><a href="group___r_c_c___exported___function.html#ga657f82e3f1cdff88e4970e8d9686a0aa">GetTick</a></div><div class="ttdeci">__WEAK uint32_t GetTick(void)</div><div class="ttdoc">Provides a tick value in millisecond.</div><div class="ttdef"><b>Definition:</b> stm32f051_rcc.c:157</div></div>
-<div class="ttc" id="agroup___r_c_c___exported___function_html_gad1b7b23c3272a5fe2176e22a0b7b27a1"><div class="ttname"><a href="group___r_c_c___exported___function.html#gad1b7b23c3272a5fe2176e22a0b7b27a1">RCC_Init</a></div><div class="ttdeci">uint32_t RCC_Init(void)</div><div class="ttdoc">Initialization RCC, SysTick and Peripheral clocks.</div><div class="ttdef"><b>Definition:</b> stm32f051_rcc.c:64</div></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#ifndef __STM32F051_RCC__</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#define __STM32F051_RCC__</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#include &quot;stm32f0xx.h&quot;</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">// Exported Function ---------------------------------------------------------</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment"></span><span class="keyword">const</span> uint32_t <a class="code" href="group___r_c_c___exported___function.html#ga5bfaa83ba10cec9b25a1e4a2187dec6e">RCC_Init</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="keywordtype">void</span> <a class="code" href="group___r_c_c___exported___function.html#ga4754570a15dedaa987c9dba14fd73a29">Delay</a>(<span class="keyword">volatile</span> <span class="keyword">const</span> uint32_t miliseconds);</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="keyword">const</span> uint32_t <a class="code" href="group___r_c_c___exported___function.html#ga8306ca1d23afe333ef3fc94702fffbf4">GetTick</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="keywordtype">void</span> <a class="code" href="group___r_c_c___exported___function.html#ga51d8aabde6e7556de20d891b8c3f4020">IncTick</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// __STM32F051_RCC__</span></div>
+<div class="ttc" id="agroup___r_c_c___exported___function_html_ga4754570a15dedaa987c9dba14fd73a29"><div class="ttname"><a href="group___r_c_c___exported___function.html#ga4754570a15dedaa987c9dba14fd73a29">Delay</a></div><div class="ttdeci">void Delay(volatile const uint32_t miliseconds)</div><div class="ttdoc">Stops program execution.</div><div class="ttdef"><b>Definition:</b> stm32f051_rcc.c:97</div></div>
+<div class="ttc" id="agroup___r_c_c___exported___function_html_ga51d8aabde6e7556de20d891b8c3f4020"><div class="ttname"><a href="group___r_c_c___exported___function.html#ga51d8aabde6e7556de20d891b8c3f4020">IncTick</a></div><div class="ttdeci">void IncTick(void)</div><div class="ttdoc">This function called to increment variable ticks.</div><div class="ttdef"><b>Definition:</b> stm32f051_rcc.c:110</div></div>
+<div class="ttc" id="agroup___r_c_c___exported___function_html_ga5bfaa83ba10cec9b25a1e4a2187dec6e"><div class="ttname"><a href="group___r_c_c___exported___function.html#ga5bfaa83ba10cec9b25a1e4a2187dec6e">RCC_Init</a></div><div class="ttdeci">const uint32_t RCC_Init(void)</div><div class="ttdoc">Initialization RCC, SysTick and Peripheral clocks.</div><div class="ttdef"><b>Definition:</b> stm32f051_rcc.c:33</div></div>
+<div class="ttc" id="agroup___r_c_c___exported___function_html_ga8306ca1d23afe333ef3fc94702fffbf4"><div class="ttname"><a href="group___r_c_c___exported___function.html#ga8306ca1d23afe333ef3fc94702fffbf4">GetTick</a></div><div class="ttdeci">const uint32_t GetTick(void)</div><div class="ttdoc">Provides a tick value in millisecond.</div><div class="ttdef"><b>Definition:</b> stm32f051_rcc.c:105</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

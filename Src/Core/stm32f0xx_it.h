@@ -16,6 +16,12 @@
  ******************************************************************************
   */
 
+/**
+ * @defgroup IRQ_Handlers Interrupt Handlers
+ * @ingroup Core
+ * @brief Cortex-M0 Processor Interruption and Exception Handlers
+ */
+
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __STM32F0xx_IT_H
 #define __STM32F0xx_IT_H

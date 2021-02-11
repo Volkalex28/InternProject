@@ -9,6 +9,17 @@
  * 
  */
 
+/**
+ * @defgroup Core Core
+ * @brief Functionality that ensures the operation of the main program cycle
+ */
+
+/**
+ * @defgroup Main_program_body Main program body
+ * @ingroup Core
+ * @brief Contains the main program loop and program functionality
+ */
+
 #ifndef _MAIN_H_
 #define _MAIN_H_
 

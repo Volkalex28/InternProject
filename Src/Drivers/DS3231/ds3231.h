@@ -9,6 +9,19 @@
  * 
  */
 
+/**
+ * @addtogroup Drivers
+ * @defgroup DS3231_Driver DS3231
+ * @ingroup Drivers
+ * 
+ * DS3231 module (RTC, ZS-042) - This is a low cost board with an extremely 
+ * accurate real time clock (RTC), with a temperature compensated crystal 
+ * oscillator and crystal. The module includes a lithium battery which maintains 
+ * uninterrupted operation even when the power supply is disconnected. 
+ * An integrated generator improves the accuracy of the device and reduces 
+ * the number of components
+ */
+
 #ifndef _DS3231_H_
 #define _DS3231_H_
 
@@ -191,16 +204,96 @@ typedef struct
 ///@}
 
 // Exported Function ----------------------------------------------------------
-/** @addtogroup DS3231_Exported_Function
+/** @defgroup DS3231_Exported_Function Exported Function
+ * @ingroup DS3231_Driver
+ * 
+ * DS3231 module function available from other files
  * @{
  */
-uint32_t DS3231_GetDate(DS3231_t* pDS);
-uint32_t DS3231_GetTime(DS3231_t* pDS);
-uint32_t DS3231_GetTemp(DS3231_t* pDS);
-uint32_t DS3231_SetAddress(DS3231_t* pDS, const uint8_t addr);
 
-uint32_t DS3231_SetDate(const DS3231_t* pDS, const DS3231_Date_t* pDSDate);
-uint32_t DS3231_SetTime(const DS3231_t* pDS, const DS3231_Time_t* pDSTime);
+/**
+ * @brief Function for getting date from DS3231 module
+ * 
+ * The function reads the date from the module via the I2C1 interface 
+ * and returns it by the pointer to the @p pDS module object
+ * 
+ * @param[in, out] pDS Pointer to DS3231 module object
+ * 
+ * @return Data receiving status
+ * @retval 0 If no errors occurred
+ * @retval 1 If an error occurs during the process
+ */
+uint32_t DS3231_GetDate(DS3231_t * const pDS);
+
+/**
+ * @brief Function for getting time from DS3231 module
+ * 
+ * The function reads the time from the module via the I2C1 interface 
+ * and returns it by the pointer to the @p pDS module object
+ * 
+ * @param[in, out] pDS Pointer to DS3231 module object
+ * 
+ * @return Data receiving status
+ * @retval 0 If no errors occurred
+ * @retval 1 If an error occurs during the process
+ */
+uint32_t DS3231_GetTime(DS3231_t * const pDS);
+
+/**
+ * @brief Function for getting temperature from DS3231 module
+ * 
+ * The function reads the temperature from the module via the I2C1 interface 
+ * and returns it by the pointer to the @p pDS module object
+ * 
+ * @param[in, out] pDS Pointer to DS3231 module object
+ * 
+ * @return Data receiving status
+ * @retval 0 If no errors occurred
+ * @retval 1 If an error occurs during the process
+ */
+uint32_t DS3231_GetTemp(DS3231_t * const pDS);
+
+/**
+ * @brief DS3231 module address setting function
+ * 
+ * @param[in, out] pDS Pointer to DS3231 module object
+ * @param[in] addr DS3231 module address
+ * 
+ * @return Address setting status
+ * @retval 0 If no errors occurred
+ * @retval 1 If the pointer to the object of the DS3231 module refers to NULL
+ */
+uint32_t DS3231_SetAddress(DS3231_t * const pDS, const uint8_t addr);
+
+/**
+ * @brief Date setting function in DS3231 module
+ * 
+ * The function sets the date passed through the @p pDSDate pointer   
+ * to the module (pointed to by @p pDS) via the I2C1 interface
+ * 
+ * @param[in] pDS Pointer to DS3231 module object
+ * @param[in] pDSDate Pointer to DS3231 module date data structure
+ * 
+ * @return Data sending status
+ * @retval 0 If no errors occurred
+ * @retval 1 If an error occurs during the process
+ */
+uint32_t DS3231_SetDate(const DS3231_t * const pDS, const DS3231_Date_t * const pDSDate);
+
+/**
+ * @brief Time setting function in DS3231 module
+ * 
+ * The function sets the time passed through the @p pDSTime pointer   
+ * to the module (pointed to by @p pDS) via the I2C1 interface
+ * 
+ * @param[in] pDS Pointer to DS3231 module object
+ * @param[in] pDSTime Pointer to DS3231 module time data structure
+ * 
+ * @return Data sending status
+ * @retval 0 If no errors occurred
+ * @retval 1 If an error occurs during the process
+ */
+uint32_t DS3231_SetTime(const DS3231_t * const pDS, const DS3231_Time_t * const pDSTime);
 ///@}
 
 #endif // _DS3231_H_

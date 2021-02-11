@@ -9,6 +9,14 @@
  * 
  */
 
+/**
+ * @defgroup Asserts Asserts
+ * @brief Custom Asserts
+ * 
+ * Allows you to find gross errors when passing 
+ * arguments to a function in debug mode
+ */
+
 #ifndef _ASSERS_H_
 #define _ASSERS_H_
 
@@ -39,9 +47,9 @@
  */
 #define ASSERT_RECORD()     \
   do {                         \
-    void *pc;                  \
+    void * pc;                  \
     GET_PC(pc);                \
-    const void *lr = GET_LR(); \
+    const void * lr = GET_LR(); \
     my_assert(pc, (uint32_t *)lr);         \
   } while (0)
 
@@ -57,8 +65,28 @@
   } while (0)
 ///@}
 
-// Exported Function prototypes
-void my_assert(uint32_t *pc, uint32_t *lr);
+/**
+ * @defgroup Assert_Exported_Function Exported Function
+ * @ingroup Asserts
+ * 
+ * Assertion functions that are accessible from outside
+ */
+///@{
+
+/**
+ * @brief The function of saving data on the activation of the assert
+ * 
+ * This function saves data about the place where the assert 
+ * was fired into a variable @link g_assert_info  @endlink
+ * 
+ * @param[in] pc Programm counter
+ * @param[in] lr Function return address
+ * 
+ * @return None
+ */
+void my_assert(uint32_t * pc, uint32_t * lr);
+
+///@}
 
 #else
   /**
