@@ -148,12 +148,12 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <b>Value:</b><div class="fragment"><div class="line">  <span class="keywordflow">do</span> {                         \</div>
-<div class="line">    void *pc;                  \</div>
+<div class="line">    void * pc;                  \</div>
 <div class="line">    GET_PC(pc);                \</div>
-<div class="line">    const <span class="keywordtype">void</span> *lr = <a class="code" href="group___assert___exported___macros.html#ga2f0f9ffd5065fba27e3e804ced2dce45">GET_LR</a>(); \</div>
+<div class="line">    const <span class="keywordtype">void</span> * lr = <a class="code" href="group___assert___exported___macros.html#ga2f0f9ffd5065fba27e3e804ced2dce45">GET_LR</a>(); \</div>
 <div class="line">    my_assert(pc, (uint32_t *)lr);         \</div>
 <div class="line">  } <span class="keywordflow">while</span> (0)</div>
-<div class="ttc" id="agroup___assert___exported___macros_html_ga2f0f9ffd5065fba27e3e804ced2dce45"><div class="ttname"><a href="group___assert___exported___macros.html#ga2f0f9ffd5065fba27e3e804ced2dce45">GET_LR</a></div><div class="ttdeci">#define GET_LR()</div><div class="ttdoc">Getting the return address of a function.</div><div class="ttdef"><b>Definition:</b> user_assert.h:30</div></div>
+<div class="ttc" id="agroup___assert___exported___macros_html_ga2f0f9ffd5065fba27e3e804ced2dce45"><div class="ttname"><a href="group___assert___exported___macros.html#ga2f0f9ffd5065fba27e3e804ced2dce45">GET_LR</a></div><div class="ttdeci">#define GET_LR()</div><div class="ttdoc">Getting the return address of a function.</div><div class="ttdef"><b>Definition:</b> user_assert.h:38</div></div>
 </div><!-- fragment -->
 <p>&#x202A;Receiving data about the location of Assert firing and saving them. </p>
 

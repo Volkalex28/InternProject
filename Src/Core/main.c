@@ -9,17 +9,6 @@
  * 
  */
 
-/**
- * @defgroup Core Core
- * @brief Functionality that ensures the operation of the main program cycle
- */
-
-/**
- * @defgroup Main_program_body Main program body
- * @ingroup Core
- * @brief Contains the main program loop and program functionality
- */
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -58,15 +47,15 @@
 /**
  * @brief Responsible for the data used by the UART protocol
  */
-struct
+static struct
 {
   char strOut[SIZE_UART_BUFFERS]; ///< The string that is sent over the UART interface
   uint8_t count;                  ///< Received bytes counter
   char bufIn[SIZE_UART_BUFFERS];  ///< Command input buffer
 } bufUART;
 
-DS3231_t DS3231;    ///< Real time clock module object
-uint16_t delay = 1000; ///< Stores the number of milliseconds of the RTC module polling pause
+static DS3231_t DS3231;    ///< Real time clock module object
+static uint16_t delay = 1000; ///< Stores the number of milliseconds of the RTC module polling pause
 ///@}
 
 // Exported variable -----------------------------------------------------------
@@ -103,10 +92,10 @@ void UARTComander(void)
 {
   if(strcmp(bufUART.bufIn, "Set date") == 0)
   {
-    DS3231.Date.Date = 1;
+    DS3231.Date.Date = 11;
     DS3231.Date.Month = 2;
     DS3231.Date.Year = 21;
-    DS3231.Date.Day = 1;
+    DS3231.Date.Day = 4;
 
     DS3231_SetDate(&DS3231, &DS3231.Date);
   }
@@ -151,17 +140,11 @@ int main(void)
 
   while(1) 
   {
-    while(1)
+    while(UART_Ring_PopByte(&uart2, (uint8_t *)&bufUART.bufIn[bufUART.count]))
     {
-      const uint8_t statusExtraction = UART_Ring_PopByte(&uart2, (uint8_t*)&bufUART.bufIn[bufUART.count]);
-
-      if(statusExtraction == 1)
+      if(bufUART.bufIn[bufUART.count] == '\n')
       {
-        break;
-      }
-      else if(bufUART.bufIn[bufUART.count] == '\n')
-      {
-        UART_Transmit(&uart2.uart, (uint8_t*)bufUART.bufIn, strlen(bufUART.bufIn), 1000);
+        UART_Transmit(&uart2.uart, (uint8_t *)bufUART.bufIn, strlen(bufUART.bufIn), 1000);
 
         bufUART.bufIn[bufUART.count] = '\0';
         UARTComander();
@@ -194,19 +177,19 @@ int main(void)
         DS3231.Date.Date, DS3231.Date.Month, DS3231.Date.Year, DS3231.Time.Hours, 
         DS3231.Time.Minutes, DS3231.Time.Seconds, DS3231.Date.Day, DS3231.Temp);
 
-      UART_Transmit(&uart2.uart, (uint8_t*)bufUART.strOut, strlen(bufUART.strOut), 1000);
+      UART_Transmit(&uart2.uart, (uint8_t *)bufUART.strOut, strlen(bufUART.strOut), 1000);
       GPIO_TogglePin(LED_BLUE_Port, LED_BLUE_Pin);
     }
 
     Delay(5); 
   }
-  return 1;
+  return EXIT_SUCCESS;
 }
 
 /**
  * Toggles the green LED status when the expected number of bytes is received 
  */
-void UART_RxCallback(STM32F051_UART_t* pUART)
+void UART_RxCallback(STM32F051_UART_t * pUART)
 {
   GPIO_TogglePin(LED_GREEN_Port, LED_GREEN_Pin);
 }

@@ -22,36 +22,35 @@
 
 extern UART_Ring_t uart2;
 
-/**
- * @defgroup IRQ_Handlers Interrupt Handlers
- * @ingroup Core
- * @brief Cortex-M0 Processor Interruption and Exception Handlers
- */
-///@{
 /******************************************************************************/
 /*           Cortex-M0 Processor Interruption and Exception Handlers          */
 /******************************************************************************/
 /**
+  * @ingroup IRQ_Handlers
   * @brief This function handles Non maskable interrupt.
   */
 void NMI_Handler(void)
 {
   while (1)
   {
+    
   }
 }
 
 /**
+  * @ingroup IRQ_Handlers
   * @brief This function handles Hard fault interrupt.
   */
 void HardFault_Handler(void)
 {
   while (1)
   {
+    
   }
 }
 
 /**
+  * @ingroup IRQ_Handlers
   * @brief This function handles System tick timer.
   */
 void SysTick_Handler(void)
@@ -60,6 +59,7 @@ void SysTick_Handler(void)
 }
 
 /**
+  * @ingroup IRQ_Handlers
   * @brief This function handles USART1 global interrupt / USART1 wake-up interrupt through EXTI line 25.
   */
 void USART1_IRQHandler(void)
@@ -68,13 +68,13 @@ void USART1_IRQHandler(void)
 }
 
 /**
+  * @ingroup IRQ_Handlers
   * @brief This function handles USART2 global interrupt.
   */
 void USART2_IRQHandler(void)
 {
   UART_IRQHandler(&uart2.uart);
 }
-///@}
 
 /******************************************************************************/
 /* STM32F0xx Peripheral Interrupt Handlers                                    */

@@ -1,10 +1,10 @@
 var searchData=
 [
-  ['delay_196',['Delay',['../group___r_c_c___exported___function.html#ga2de0539bf52f448d4a68c5c1a35c845a',1,'stm32f051_rcc.c']]],
-  ['ds3231_5fgetdate_197',['DS3231_GetDate',['../group___d_s3231___exported___function.html#ga7333778b457042913e23a0d7b61268b8',1,'ds3231.c']]],
-  ['ds3231_5fgettemp_198',['DS3231_GetTemp',['../group___d_s3231___exported___function.html#ga4261bf95d306e2f4218d0fd5fd4c523d',1,'ds3231.c']]],
-  ['ds3231_5fgettime_199',['DS3231_GetTime',['../group___d_s3231___exported___function.html#gae39faa12c3c2cf23a8560d864fe4f420',1,'ds3231.c']]],
-  ['ds3231_5fsetaddress_200',['DS3231_SetAddress',['../group___d_s3231___exported___function.html#ga73dfaef3bd132c5ac77dfa6f90cb6f93',1,'ds3231.c']]],
-  ['ds3231_5fsetdate_201',['DS3231_SetDate',['../group___d_s3231___exported___function.html#ga96282b16a49509fdb5add333d3caff0a',1,'ds3231.c']]],
-  ['ds3231_5fsettime_202',['DS3231_SetTime',['../group___d_s3231___exported___function.html#gab8e2592a1abde5b7af35464e5d60d0b5',1,'ds3231.c']]]
+  ['delay_199',['Delay',['../group___r_c_c___exported___function.html#ga491a3d054f72425e9564fd3077664169',1,'Delay(volatile const uint32_t timeout):&#160;stm32f051_rcc.c'],['../group___r_c_c___exported___function.html#ga491a3d054f72425e9564fd3077664169',1,'Delay(volatile const uint32_t timeout):&#160;stm32f051_rcc.c']]],
+  ['ds3231_5fgetdate_200',['DS3231_GetDate',['../group___d_s3231___exported___function.html#ga4c363f577d49741f20ecf8758e1cc18b',1,'DS3231_GetDate(DS3231_t *const pDS):&#160;ds3231.c'],['../group___d_s3231___exported___function.html#ga4c363f577d49741f20ecf8758e1cc18b',1,'DS3231_GetDate(DS3231_t *const pDS):&#160;ds3231.c']]],
+  ['ds3231_5fgettemp_201',['DS3231_GetTemp',['../group___d_s3231___exported___function.html#ga5d4878cb1bbed4ca3c6434773930a067',1,'DS3231_GetTemp(DS3231_t *const pDS):&#160;ds3231.c'],['../group___d_s3231___exported___function.html#ga5d4878cb1bbed4ca3c6434773930a067',1,'DS3231_GetTemp(DS3231_t *const pDS):&#160;ds3231.c']]],
+  ['ds3231_5fgettime_202',['DS3231_GetTime',['../group___d_s3231___exported___function.html#ga833f683eb7cc56975c92fee68c9cd006',1,'DS3231_GetTime(DS3231_t *const pDS):&#160;ds3231.c'],['../group___d_s3231___exported___function.html#ga833f683eb7cc56975c92fee68c9cd006',1,'DS3231_GetTime(DS3231_t *const pDS):&#160;ds3231.c']]],
+  ['ds3231_5fsetaddress_203',['DS3231_SetAddress',['../group___d_s3231___exported___function.html#gaba0d1137412812d87a75fc30cb534174',1,'DS3231_SetAddress(DS3231_t *const pDS, const uint8_t addr):&#160;ds3231.c'],['../group___d_s3231___exported___function.html#gaba0d1137412812d87a75fc30cb534174',1,'DS3231_SetAddress(DS3231_t *const pDS, const uint8_t addr):&#160;ds3231.c']]],
+  ['ds3231_5fsetdate_204',['DS3231_SetDate',['../group___d_s3231___exported___function.html#ga0400c24b4c920ea23f7d79796da4ed7d',1,'DS3231_SetDate(const DS3231_t *const pDS, const DS3231_Date_t *const pDSDate):&#160;ds3231.c'],['../group___d_s3231___exported___function.html#ga0400c24b4c920ea23f7d79796da4ed7d',1,'DS3231_SetDate(const DS3231_t *const pDS, const DS3231_Date_t *const pDSDate):&#160;ds3231.c']]],
+  ['ds3231_5fsettime_205',['DS3231_SetTime',['../group___d_s3231___exported___function.html#ga200b9073ee68aa6aa76978421ddec904',1,'DS3231_SetTime(const DS3231_t *const pDS, const DS3231_Time_t *const pDSTime):&#160;ds3231.c'],['../group___d_s3231___exported___function.html#ga200b9073ee68aa6aa76978421ddec904',1,'DS3231_SetTime(const DS3231_t *const pDS, const DS3231_Time_t *const pDSTime):&#160;ds3231.c']]]
 ];

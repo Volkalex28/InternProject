@@ -19,10 +19,10 @@
  */
 ///@{
 
-#define LED_GREEN_Port  GPIOC
-#define LED_GREEN_Pin   GPIO_PIN_9
-#define LED_BLUE_Port   GPIOC
-#define LED_BLUE_Pin    GPIO_PIN_8
+#define LED_GREEN_Port  GPIOC         ///< IO port green LED
+#define LED_GREEN_Pin   GPIO_PIN_9    ///< Pin IO port of green LED
+#define LED_BLUE_Port   GPIOC         ///< IO port blue LED
+#define LED_BLUE_Pin    GPIO_PIN_8    ///< Pin IO port of blue LED
 
 ///@}
 

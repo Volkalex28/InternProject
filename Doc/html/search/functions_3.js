@@ -1,12 +1,12 @@
 var searchData=
 [
-  ['i2c1_5finit_210',['I2C1_Init',['../group___i2_c___exported___function.html#ga882ae96b5c99cbaa3dc5c1ac9e9b3d52',1,'stm32f051_i2c.c']]],
-  ['i2c1_5fisacknowledgefailed_211',['I2C1_IsAcknowledgeFailed',['../group___i2_c___private___function.html#gaed78f86f0500e64781b083a122102abb',1,'stm32f051_i2c.c']]],
-  ['i2c1_5freceive_212',['I2C1_Receive',['../group___i2_c___exported___function.html#gabdf8069735655c1c8a34d9c7b9fbd66d',1,'stm32f051_i2c.c']]],
-  ['i2c1_5ftransmit_213',['I2C1_Transmit',['../group___i2_c___exported___function.html#ga8f2a0218240af06f83ec943469159ccb',1,'stm32f051_i2c.c']]],
-  ['i2c1_5fwaitflag_214',['I2C1_WaitFlag',['../group___i2_c___private___function.html#ga8198396f68b5bc5ff93021c5c61bff4e',1,'stm32f051_i2c.c']]],
-  ['i2c1_5fwaitrxneflag_215',['I2C1_WaitRXNEFlag',['../group___i2_c___private___function.html#ga116d8b22faa31c888ae2ab93d2a96dac',1,'stm32f051_i2c.c']]],
-  ['i2c1_5fwaitstopflag_216',['I2C1_WaitSTOPFlag',['../group___i2_c___private___function.html#ga28e0d2c8c71fd681d9bd30f6fc9f9295',1,'stm32f051_i2c.c']]],
-  ['i2c1_5fwaittxisflag_217',['I2C1_WaitTXISFlag',['../group___i2_c___private___function.html#gaf93560246cfcea578acf76dc0db8eefb',1,'stm32f051_i2c.c']]],
-  ['inctick_218',['IncTick',['../group___r_c_c___exported___function.html#ga51d8aabde6e7556de20d891b8c3f4020',1,'stm32f051_rcc.c']]]
+  ['i2c1_5finit_213',['I2C1_Init',['../group___i2_c___exported___function.html#ga6b31b2d571653dd126315a266becbaf3',1,'I2C1_Init(void):&#160;stm32f051_i2c.c'],['../group___i2_c___exported___function.html#ga6b31b2d571653dd126315a266becbaf3',1,'I2C1_Init(void):&#160;stm32f051_i2c.c']]],
+  ['i2c1_5fisacknowledgefailed_214',['I2C1_IsAcknowledgeFailed',['../group___i2_c___private___function.html#ga377d911af7de3fe7442c31527a320d5a',1,'stm32f051_i2c.c']]],
+  ['i2c1_5freceive_215',['I2C1_Receive',['../group___i2_c___exported___function.html#ga9ee7fd2f1d0fde15ecb6c32dc121ad6a',1,'I2C1_Receive(const uint16_t DevAddress, uint8_t *pData, uint16_t Size, const uint32_t Timeout):&#160;stm32f051_i2c.c'],['../group___i2_c___exported___function.html#ga9ee7fd2f1d0fde15ecb6c32dc121ad6a',1,'I2C1_Receive(const uint16_t DevAddress, uint8_t *pData, uint16_t Size, const uint32_t Timeout):&#160;stm32f051_i2c.c']]],
+  ['i2c1_5ftransmit_216',['I2C1_Transmit',['../group___i2_c___exported___function.html#gaf00e5ac8f8968c01bc6fb68249023caf',1,'I2C1_Transmit(const uint16_t DevAddress, uint8_t *pData, uint16_t Size, const uint32_t Timeout):&#160;stm32f051_i2c.c'],['../group___i2_c___exported___function.html#gaf00e5ac8f8968c01bc6fb68249023caf',1,'I2C1_Transmit(const uint16_t DevAddress, uint8_t *pData, uint16_t Size, const uint32_t Timeout):&#160;stm32f051_i2c.c']]],
+  ['i2c1_5fwaitflag_217',['I2C1_WaitFlag',['../group___i2_c___private___function.html#ga02135d4c052051b34542f40f8f49a96c',1,'stm32f051_i2c.c']]],
+  ['i2c1_5fwaitrxneflag_218',['I2C1_WaitRXNEFlag',['../group___i2_c___private___function.html#gadc0e972de13994c52a2b49e08f10e046',1,'stm32f051_i2c.c']]],
+  ['i2c1_5fwaitstopflag_219',['I2C1_WaitSTOPFlag',['../group___i2_c___private___function.html#ga3ed46c98455b1c16e76251697d3d0dde',1,'stm32f051_i2c.c']]],
+  ['i2c1_5fwaittxisflag_220',['I2C1_WaitTXISFlag',['../group___i2_c___private___function.html#ga9bbff239b779dedfde805b64b45c9729',1,'stm32f051_i2c.c']]],
+  ['inctick_221',['IncTick',['../group___r_c_c___exported___function.html#ga51d8aabde6e7556de20d891b8c3f4020',1,'IncTick(void):&#160;stm32f051_rcc.c'],['../group___r_c_c___exported___function.html#ga51d8aabde6e7556de20d891b8c3f4020',1,'IncTick(void):&#160;stm32f051_rcc.c']]]
 ];
