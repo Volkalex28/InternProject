@@ -1,5 +1,6 @@
 var searchData=
 [
+<<<<<<< HEAD
   ['sec_147',['Sec',['../struct_d_s3231___mem___time__t.html#aba0dd5d75a356b633902e4b35e9d9a21',1,'DS3231_Mem_Time_t']]],
   ['sec10_148',['Sec10',['../struct_d_s3231___mem___time__t.html#a9cf77f04d9b3e157345f2e11590529de',1,'DS3231_Mem_Time_t']]],
   ['seconds_149',['Seconds',['../struct_d_s3231___mem___time__t.html#a5d6b3f08470401a99cccde45a83baf68',1,'DS3231_Mem_Time_t::Seconds()'],['../struct_d_s3231___time__t.html#a42120bdc40e6f49bb5b4dec78220c87b',1,'DS3231_Time_t::Seconds()']]],
@@ -13,4 +14,10 @@ var searchData=
   ['stm32f051_5fuart_5ft_157',['STM32F051_UART_t',['../group___u_a_r_t___exported___types.html#ga085425eff4b0f4f117d6b8e860caca04',1,'stm32f051_uart.h']]],
   ['strout_158',['strOut',['../group___main___private___variable.html#ga60de812f35560084a905aae2b510f4fe',1,'@7']]],
   ['systick_5fhandler_159',['SysTick_Handler',['../group___i_r_q___handlers.html#gab5e09814056d617c521549e542639b7e',1,'stm32f0xx_it.c']]]
+=======
+  ['tail_156',['tail',['../struct_ring_buffer__t.html#ace756213e1bd262b8d63eaf28e6249c9',1,'RingBuffer_t']]],
+  ['temp_157',['Temp',['../struct_d_s3231___mem__t.html#affbe7622d7d25015150d6014627dbf94',1,'DS3231_Mem_t::Temp()'],['../struct_d_s3231__t.html#a5e70dc44e38d796548adde233eef402e',1,'DS3231_t::Temp()']]],
+  ['ticks_158',['ticks',['../group___r_c_c___private___variables.html#gaa7e25380b955a5364bf9bbd7f269cd00',1,'stm32f051_rcc.c']]],
+  ['time_159',['Time',['../struct_d_s3231___mem__t.html#ae04ef39949accc35ca2d01fa65532649',1,'DS3231_Mem_t::Time()'],['../struct_d_s3231__t.html#a6aca883f277fd9e31730e4d6359ee506',1,'DS3231_t::Time()']]]
+>>>>>>> 4d849d9822cb2a823d3d3909ce00633c9debca16
 ];

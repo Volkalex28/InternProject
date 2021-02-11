@@ -1,5 +1,6 @@
 var searchData=
 [
+<<<<<<< HEAD
   ['uart_164',['uart',['../struct_u_a_r_t___ring__t.html#a2166f78fad97667876071f7c4cf36f26',1,'UART_Ring_t']]],
   ['uart_165',['UART',['../group___u_a_r_t.html',1,'']]],
   ['uart_20with_20ring_20buffer_166',['UART with ring buffer',['../group___u_a_r_t___ring.html',1,'']]],
@@ -21,4 +22,8 @@ var searchData=
   ['usart1_5firqhandler_182',['USART1_IRQHandler',['../group___i_r_q___handlers.html#ga7139cd4baabbbcbab0c1fe6d7d4ae1cc',1,'stm32f0xx_it.c']]],
   ['usart2_5firqhandler_183',['USART2_IRQHandler',['../group___i_r_q___handlers.html#ga0ca6fd0e6f77921dd1123539857ba0a8',1,'stm32f0xx_it.c']]],
   ['user_20named_20pins_184',['User named pins',['../group___user___named___pins.html',1,'']]]
+=======
+  ['year_181',['Year',['../struct_d_s3231___mem___date__t.html#ab1fa72fe40c7b93c140c766dec410e29',1,'DS3231_Mem_Date_t::Year()'],['../struct_d_s3231___mem___date__t.html#aafacc9dcd4fa8e976ec515e8f7ad0099',1,'DS3231_Mem_Date_t::Year()'],['../struct_d_s3231___date__t.html#ab1fa72fe40c7b93c140c766dec410e29',1,'DS3231_Date_t::Year()']]],
+  ['year10_182',['Year10',['../struct_d_s3231___mem___date__t.html#aa08b76b252434a9d1f79c0f645b12500',1,'DS3231_Mem_Date_t']]]
+>>>>>>> 4d849d9822cb2a823d3d3909ce00633c9debca16
 ];

@@ -4,7 +4,11 @@ var searchData=
   ['date10_23',['Date10',['../struct_d_s3231___mem___date__t.html#a5e779a51c4b7c0e5304bc5b0d2a35fec',1,'DS3231_Mem_Date_t']]],
   ['day_24',['Day',['../struct_d_s3231___mem___date__t.html#a685ae534ac9b397ce1b7e312cd180568',1,'DS3231_Mem_Date_t::Day()'],['../struct_d_s3231___date__t.html#a685ae534ac9b397ce1b7e312cd180568',1,'DS3231_Date_t::Day()']]],
   ['delay_25',['delay',['../group___main___private___variable.html#gadc4674f6ea53803d98fa2ec36759e77d',1,'main.c']]],
+<<<<<<< HEAD
   ['delay_26',['Delay',['../group___r_c_c___exported___function.html#ga491a3d054f72425e9564fd3077664169',1,'Delay(volatile const uint32_t timeout):&#160;stm32f051_rcc.c'],['../group___r_c_c___exported___function.html#ga491a3d054f72425e9564fd3077664169',1,'Delay(volatile const uint32_t timeout):&#160;stm32f051_rcc.c']]],
+=======
+  ['delay_26',['Delay',['../group___r_c_c___exported___function.html#ga4754570a15dedaa987c9dba14fd73a29',1,'Delay(volatile const uint32_t miliseconds):&#160;stm32f051_rcc.c'],['../group___r_c_c___exported___function.html#ga4754570a15dedaa987c9dba14fd73a29',1,'Delay(volatile const uint32_t timeout):&#160;stm32f051_rcc.c']]],
+>>>>>>> 4d849d9822cb2a823d3d3909ce00633c9debca16
   ['drivers_27',['Drivers',['../group___drivers.html',1,'']]],
   ['ds3231_28',['DS3231',['../group___main___private___variable.html#gaa9dab5536f1dc4dda161ba06f0b971a3',1,'DS3231():&#160;main.c'],['../group___d_s3231___driver.html',1,'(Global Namespace)']]],
   ['ds3231_5fcontrol_5ft_29',['DS3231_Control_t',['../struct_d_s3231___control__t.html',1,'']]],

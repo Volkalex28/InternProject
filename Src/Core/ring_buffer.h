@@ -99,7 +99,11 @@ const uint32_t RING_Append(RingBuffer_t * const pRing, const uint8_t value);
  * The function retrieves one byte from the buffer and returns the retrieval status
  * 
  * @param[in] pRing A pointer to a circular buffer object
+<<<<<<< HEAD
  * @param[out] pValue Pointer to the memory area where the cell value should be placed
+=======
+ * @param[out] pRing Pointer to the memory area where the cell value should be placed
+>>>>>>> 4d849d9822cb2a823d3d3909ce00633c9debca16
  * 
  * @return Status
  * @retval 0 If the buffer is empty
@@ -114,7 +118,11 @@ const uint8_t RING_Pop(RingBuffer_t * const pRing, uint8_t * const pValue);
  * without deleting it and returns the retrieval status.
  * 
  * @param[in] pRing A pointer to a circular buffer object
+<<<<<<< HEAD
  * @param[out] pValue Pointer to the memory area where the cell value should be placed
+=======
+ * @param[out] pRing Pointer to the memory area where the cell value should be placed
+>>>>>>> 4d849d9822cb2a823d3d3909ce00633c9debca16
  * 
  * @return Status
  * @retval 0 If the buffer is empty
