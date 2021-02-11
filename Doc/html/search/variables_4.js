@@ -1,12 +1,6 @@
 var searchData=
 [
-<<<<<<< HEAD
-  ['empty_269',['empty',['../struct_ring_buffer__t.html#a19bfb10ba0d4955f1e2d38ef71eafd52',1,'RingBuffer_t']]],
-  ['en32khz_270',['EN32kHz',['../struct_d_s3231___status__t.html#af0f5f2212050e791d96914e065b1d3d0',1,'DS3231_Status_t']]],
-  ['eosc_271',['EOSC',['../struct_d_s3231___control__t.html#ae85a1b43b4b529d3f97905fd5969851c',1,'DS3231_Control_t']]]
-=======
-  ['empty_265',['empty',['../struct_ring_buffer__t.html#a19bfb10ba0d4955f1e2d38ef71eafd52',1,'RingBuffer_t']]],
-  ['en32khz_266',['EN32kHz',['../struct_d_s3231___status__t.html#af0f5f2212050e791d96914e065b1d3d0',1,'DS3231_Status_t']]],
-  ['eosc_267',['EOSC',['../struct_d_s3231___control__t.html#ae85a1b43b4b529d3f97905fd5969851c',1,'DS3231_Control_t']]]
->>>>>>> 4d849d9822cb2a823d3d3909ce00633c9debca16
+  ['empty_273',['empty',['../struct_ring_buffer__t.html#a19bfb10ba0d4955f1e2d38ef71eafd52',1,'RingBuffer_t']]],
+  ['en32khz_274',['EN32kHz',['../struct_d_s3231___status__t.html#af0f5f2212050e791d96914e065b1d3d0',1,'DS3231_Status_t']]],
+  ['eosc_275',['EOSC',['../struct_d_s3231___control__t.html#ae85a1b43b4b529d3f97905fd5969851c',1,'DS3231_Control_t']]]
 ];

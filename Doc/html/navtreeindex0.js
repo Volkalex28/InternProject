@@ -46,17 +46,10 @@ var NAVTREEINDEX0 =
 "group___g_p_i_o___exported___enumeration.html#ggad68d556a7928d285e285632f1339ceeaae96889c5caeb4c9b9eac715c5998ddda":[0,2,1,0,0,0,14],
 "group___g_p_i_o___exported___enumeration.html#ggad68d556a7928d285e285632f1339ceeaaec3b1d7c31ae09b65edc3d23e35e649e":[0,2,1,0,0,0,2],
 "group___g_p_i_o___exported___function.html":[0,2,1,0,1],
-<<<<<<< HEAD
 "group___g_p_i_o___exported___function.html#ga696beb1b3d1c61a5da03983c0d46b49a":[0,2,1,0,1,1],
 "group___g_p_i_o___exported___function.html#ga9232f7fc565ec9aaf7f50a1ea773dda4":[0,2,1,0,1,4],
 "group___g_p_i_o___exported___function.html#gac5882c3d9e8e5b4605c22b112e300370":[0,2,1,0,1,3],
 "group___g_p_i_o___exported___function.html#gadcdd13101aca4b8324eef59b3d30fe93":[0,2,1,0,1,2],
-=======
-"group___g_p_i_o___exported___function.html#ga4da7913371f361e60ba0f3a773a03c15":[0,2,1,0,1,3],
-"group___g_p_i_o___exported___function.html#ga553de2b0155835178ef1939cb17e2cc8":[0,2,1,0,1,4],
-"group___g_p_i_o___exported___function.html#ga60d845a3f7c60d72d9f854be872db4de":[0,2,1,0,1,2],
-"group___g_p_i_o___exported___function.html#ga6db887f37b7664e1b834aa746aea9dac":[0,2,1,0,1,1],
->>>>>>> 4d849d9822cb2a823d3d3909ce00633c9debca16
 "group___g_p_i_o___exported___function.html#gafb1c08bd12bda120eee4f3d5eccdcc70":[0,2,1,0,1,0],
 "group___g_p_i_o___exported___types.html":[0,2,1,0,2],
 "group___g_p_i_o___exported___types.html#ga5b3ef0486b179415581eb342e0ea6b43":[0,2,1,0,2,0],
@@ -98,11 +91,7 @@ var NAVTREEINDEX0 =
 "group___main__program__body.html#ga840291bc02cba5474a4cb46a9b9566fe":[0,1,1,5],
 "group___r_c_c.html":[0,2,1,2],
 "group___r_c_c___exported___function.html":[0,2,1,2,0],
-<<<<<<< HEAD
 "group___r_c_c___exported___function.html#ga491a3d054f72425e9564fd3077664169":[0,2,1,2,0,0],
-=======
-"group___r_c_c___exported___function.html#ga4754570a15dedaa987c9dba14fd73a29":[0,2,1,2,0,0],
->>>>>>> 4d849d9822cb2a823d3d3909ce00633c9debca16
 "group___r_c_c___exported___function.html#ga51d8aabde6e7556de20d891b8c3f4020":[0,2,1,2,0,2],
 "group___r_c_c___exported___function.html#ga5bfaa83ba10cec9b25a1e4a2187dec6e":[0,2,1,2,0,3],
 "group___r_c_c___exported___function.html#ga8306ca1d23afe333ef3fc94702fffbf4":[0,2,1,2,0,1],
@@ -151,6 +140,9 @@ var NAVTREEINDEX0 =
 "index.html":[],
 "modules.html":[0],
 "pages.html":[],
+"struct_assert_info__t.html":[0,0,2,0],
+"struct_assert_info__t.html#a6ced3f4007bb60daf12191c058e55b8c":[0,0,2,0,0],
+"struct_assert_info__t.html#afaa20335217fae16f0e22b466017dae1":[0,0,2,0,1],
 "struct_d_s3231___control__t.html":[0,2,0,1,5],
 "struct_d_s3231___control__t.html#a106d669810c250ca2a2f519d54fb5e01":[0,2,0,1,5,5],
 "struct_d_s3231___control__t.html#a4a5d843b8da86cc6bc2f5e6bb689d324":[0,2,0,1,5,2],

@@ -1,5 +1,6 @@
 var annotated_dup =
 [
+    [ "\u202AAssertInfo_t", "struct_assert_info__t.html", "struct_assert_info__t" ],
     [ "\u202ADS3231_Control_t", "struct_d_s3231___control__t.html", "struct_d_s3231___control__t" ],
     [ "\u202ADS3231_Date_t", "struct_d_s3231___date__t.html", "struct_d_s3231___date__t" ],
     [ "\u202ADS3231_Mem_Date_t", "struct_d_s3231___mem___date__t.html", "struct_d_s3231___mem___date__t" ],

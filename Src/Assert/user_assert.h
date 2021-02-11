@@ -9,6 +9,9 @@
  * 
  */
 
+#ifndef _ASSERS_H_
+#define _ASSERS_H_
+
 /**
  * @defgroup Asserts Asserts
  * @brief Custom Asserts
@@ -16,9 +19,6 @@
  * Allows you to find gross errors when passing 
  * arguments to a function in debug mode
  */
-
-#ifndef _ASSERS_H_
-#define _ASSERS_H_
 
 #include <stdint.h>
 
