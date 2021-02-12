@@ -8,5 +8,6 @@ var searchData=
   ['alarms_5',['Alarms',['../struct_d_s3231___mem__t.html#a737fcf4c66b8f793462a7df30e60cfe9',1,'DS3231_Mem_t']]],
   ['assert_6',['ASSERT',['../group___assert___exported___macros.html#ga092bd7bb2cb7fd9f483b6995cee61bc0',1,'user_assert.h']]],
   ['assert_5frecord_7',['ASSERT_RECORD',['../group___assert___exported___macros.html#ga06d088e1a8c072044c89eb363e760f4b',1,'user_assert.h']]],
-  ['asserts_8',['Asserts',['../group___asserts.html',1,'']]]
+  ['assertinfo_5ft_8',['AssertInfo_t',['../struct_assert_info__t.html',1,'']]],
+  ['asserts_9',['Asserts',['../group___asserts.html',1,'']]]
 ];

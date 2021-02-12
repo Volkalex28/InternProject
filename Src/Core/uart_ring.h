@@ -9,6 +9,13 @@
  * 
  */
 
+/**
+ * @defgroup UART_Ring UART with ring buffer
+ * @ingroup Core
+ * 
+ * @brief UART interface that must support ring buffer
+ */
+
 #ifndef _UART_RING_H_
 #define _UART_RING_H_
 
@@ -51,12 +58,48 @@ typedef struct
    * @brief Pointer to the standard callback function 
    * for at the end of reception via the UART interface
    */
-  void (*UART_RxCallback)(STM32F051_UART_t*);
+  void (*UART_RxCallback)(STM32F051_UART_t * const);
   
 } UART_Ring_t;
 ///@}
 
-uint32_t UART_Ring_Init(UART_Ring_t* const ptr);
-uint8_t UART_Ring_PopByte(UART_Ring_t* const ptr, uint8_t* pVarGetValue);
+// Exported Functions ----------------------------------------------------------
+/**
+ * @defgroup UART_Ring_Exported_Functions Exported Functions
+ * @ingroup UART_Ring
+ * 
+ * @brief UART functionality with a ring buffer to be reached from the outside
+ */
+///@{
+
+/**
+ * @brief Ring Buffer UART Initialization
+ * 
+ * The function initializes the ring buffer and UART module, overrides the callback 
+ * and starts the reception of one byte via the UART interface in interrupt mode
+ * 
+ * @param ptr Pointer to UART object with ring buffer
+ * 
+ * @return Initialization status
+ * @retval 0 If initialization was successfully
+ * @retval 1 If problems occur during initialization
+ */
+const uint32_t UART_Ring_Init(UART_Ring_t * const ptr);
+
+/**
+ * @brief Extracting one byte from the UART buffer
+ * 
+ * The function retrieves one byte from the buffer, places it 
+ * in memory by @p pVarGetValue pointer and returns the retrieval status
+ * 
+ * @param[in]  ptr Pointer to UART object with ring buffer
+ * @param[out] pVarGetValue Pointer to a variable where to place the extracted byte
+ * @return Status
+ * @retval 0 If the extraction went smoothly 
+ * @retval 1 If the buffer is empty
+ */
+const uint8_t UART_Ring_PopByte(UART_Ring_t * const ptr, uint8_t * const pVarGetValue);
+
+///@}
 
 #endif // _UART_RING_H_
