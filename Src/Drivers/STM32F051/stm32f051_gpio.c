@@ -10,7 +10,7 @@
  */
 
 #include "stm32f051_gpio.h"
-#include "user_assert.h"
+#include <user_assert.h>
 
 // Exported Function ----------------------------------------------------------
 inline void GPIO_SetPin(GPIO_TypeDef * const GPIOx, const uint16_t GPIO_Pin) 

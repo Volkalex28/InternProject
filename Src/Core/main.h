@@ -23,12 +23,6 @@
 #ifndef _MAIN_H_
 #define _MAIN_H_
 
-#include "stm32f0xx.h"
-#include "stm32f051_rcc.h"
-#include "stm32f051_gpio.h"
-#include "stm32f051_uart.h"
-#include "stm32f051_i2c.h"
-
 // Exported Macros
 /** 
  * @defgroup Main_Exported_Macros Main Exported Macros

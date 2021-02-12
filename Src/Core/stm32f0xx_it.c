@@ -15,9 +15,10 @@
   *
   ******************************************************************************
   */
+ 
+#include <stm32f051_rcc.h>
 
 #include "stm32f0xx_it.h"
-#include "main.h"
 #include "uart_ring.h"
 
 extern UART_Ring_t uart2;

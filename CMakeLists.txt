@@ -36,6 +36,7 @@ set(SOURCE
   ${CORE_DIR}/stm32f0xx_it.c
   ${CORE_DIR}/ring_buffer.c
   ${CORE_DIR}/uart_ring.c
+  ${CORE_DIR}/uart.c
 )
 set(STARTUP
   ${CORE_DIR}/startup_stm32f051r8tx.s

@@ -24,7 +24,7 @@
 #ifndef __STM32F051_RCC__
 #define __STM32F051_RCC__
 
-#include "stm32f0xx.h"
+#include <stm32f0xx.h>
 
 // Exported Function ---------------------------------------------------------
 /** @defgroup RCC_Exported_Function Exported Function

@@ -13,10 +13,13 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include <stm32f051_rcc.h>
+#include <stm32f051_gpio.h>
+
 #include "main.h"
 #include "pins.h"
 
-#include "ds3231.h"
+#include <ds3231.h>
 #include "uart_ring.h"
 
 // Private macros -----------------------------------------------------------
@@ -50,7 +53,6 @@
 static struct
 {
   char strOut[SIZE_UART_BUFFERS]; ///< The string that is sent over the UART interface
-  uint8_t count;                  ///< Received bytes counter
   char bufIn[SIZE_UART_BUFFERS];  ///< Command input buffer
 } bufUART;
 
@@ -133,33 +135,24 @@ int main(void)
 {
   RCC_Init();
   GPIO_Init();
-  I2C1_Init();
   UART_Ring_Init(&uart2);
 
   DS3231_SetAddress(&DS3231, 0xD0);
 
   while(1) 
   {
-    while(UART_Ring_PopByte(&uart2, (uint8_t *)&bufUART.bufIn[bufUART.count]))
+    while(1)
     {
-      if(bufUART.bufIn[bufUART.count] == '\n')
+      int8_t pos = UART_Ring_GetStr(&uart2, bufUART.bufIn, SIZE_ARR(bufUART.bufIn), '\n');
+      if(pos < 0)
       {
-        UART_Transmit(&uart2.uart, (uint8_t *)bufUART.bufIn, strlen(bufUART.bufIn), 1000);
-
-        bufUART.bufIn[bufUART.count] = '\0';
-        UARTComander();
+        break;
       }
-      else 
-      {
-        bufUART.count++;
 
-        if(bufUART.count < SIZE_ARR(bufUART.bufIn))
-        {
-          continue;
-        }
-      }
-      memset(bufUART.bufIn, 0, strlen(bufUART.bufIn));
-      bufUART.count = 0;
+      UART_Transmit(&uart2.uart, (uint8_t *)bufUART.bufIn, strlen(bufUART.bufIn), 1000);
+
+      bufUART.bufIn[pos] = '\0';
+      UARTComander();
     }
 
     static uint32_t startTick = 0;

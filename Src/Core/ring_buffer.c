@@ -10,7 +10,7 @@
  */
 
 #include "ring_buffer.h"
-#include "user_assert.h"
+#include <user_assert.h>
 
 // Exported Function ----------------------------------------------------------
 void RING_Clear(RingBuffer_t * const pRing)

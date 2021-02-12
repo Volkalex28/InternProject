@@ -9,8 +9,8 @@
  * 
  */
 
+#include <user_assert.h>
 #include "uart_ring.h"
-#include "user_assert.h"
 
 // Private Variables ----------------------------------------------------------
 /**
@@ -84,4 +84,30 @@ const uint8_t UART_Ring_PopByte(UART_Ring_t * const ptr, uint8_t * const pVarGet
   ASSERT(pVarGetValue);
 
   return RING_Pop(&ptr->ring, pVarGetValue);
+}
+
+const int8_t UART_Ring_GetStr(UART_Ring_t * const ptr, char * const buffer,
+  const size_t size, const char endSym)
+{
+  while(UART_Ring_PopByte(ptr, (uint8_t *)&buffer[ptr->rxCountStr]))
+  {
+    if(buffer[ptr->rxCountStr] == endSym)
+    {
+      const uint16_t pos = ptr->rxCountStr;
+      ptr->rxCountStr = 0;
+      return pos;
+    }
+    else 
+    {
+      ptr->rxCountStr++;
+
+      if(ptr->rxCountStr < size)
+      {
+        continue;
+      }
+    }
+    ptr->rxCountStr = 0;
+    return -2;
+  }
+  return -1;
 }

@@ -10,7 +10,6 @@
  */
 
 #include <stm32f051_i2c.h>
-
 #include "ds3231.h"
 
 // Exported Function ----------------------------------------------------------
@@ -77,6 +76,8 @@ uint32_t DS3231_SetAddress(DS3231_t * const pDS, const uint8_t addr)
   }
 
   pDS->Adress = addr;
+  
+  I2C1_Init();
 
   return 0;
 }

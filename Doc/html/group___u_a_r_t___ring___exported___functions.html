@@ -99,10 +99,62 @@ Functions</h2></td></tr>
 <tr class="memitem:gae4b584d6397afcc9e55b5d2b2b26e58a"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___u_a_r_t___ring___exported___functions.html#gae4b584d6397afcc9e55b5d2b2b26e58a">UART_Ring_PopByte</a> (<a class="el" href="struct_u_a_r_t___ring__t.html">UART_Ring_t</a> *const ptr, uint8_t *const pVarGetValue)</td></tr>
 <tr class="memdesc:gae4b584d6397afcc9e55b5d2b2b26e58a"><td class="mdescLeft">&#160;</td><td class="mdescRight">&#x202A;Extracting one byte from the UART buffer.  <a href="group___u_a_r_t___ring___exported___functions.html#gae4b584d6397afcc9e55b5d2b2b26e58a">More...</a><br /></td></tr>
 <tr class="separator:gae4b584d6397afcc9e55b5d2b2b26e58a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga5b47e03e0e796da71c7dda8070313658"><td class="memItemLeft" align="right" valign="top">const int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___u_a_r_t___ring___exported___functions.html#ga5b47e03e0e796da71c7dda8070313658">UART_Ring_GetStr</a> (<a class="el" href="struct_u_a_r_t___ring__t.html">UART_Ring_t</a> *const ptr, char *const buffer, const size_t size, const char endSym)</td></tr>
+<tr class="separator:ga5b47e03e0e796da71c7dda8070313658"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <p class="DocNodeLTR">UART functionality with a ring buffer to be reached from the outside. </p>
 <h2 class="groupheader">Function Documentation</h2>
+<a id="ga5b47e03e0e796da71c7dda8070313658"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga5b47e03e0e796da71c7dda8070313658">&#9670;&nbsp;</a></span>UART_Ring_GetStr()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const int8_t UART_Ring_GetStr </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_u_a_r_t___ring__t.html">UART_Ring_t</a> *const&#160;</td>
+          <td class="paramname"><em>ptr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *const&#160;</td>
+          <td class="paramname"><em>buffer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const size_t&#160;</td>
+          <td class="paramname"><em>size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char&#160;</td>
+          <td class="paramname"><em>endSym</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ptr</td><td></td></tr>
+    <tr><td class="paramname">buffer</td><td></td></tr>
+    <tr><td class="paramname">size</td><td></td></tr>
+    <tr><td class="paramname">endSym</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>&#x202A;const uint8_t </dd></dl>
+
+</div>
+</div>
 <a id="gae54dee68ad5df2cdec624e90151016c2"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#gae54dee68ad5df2cdec624e90151016c2">&#9670;&nbsp;</a></span>UART_Ring_Init()</h2>
 

@@ -11,7 +11,7 @@
 
 #include "stm32f051_uart.h"
 #include "stm32f051_rcc.h"
-#include "user_assert.h"
+#include <user_assert.h>
 
 // Private Function ---------------------------------------------------------
 /** @defgroup UART_Private_Function Private Function
@@ -66,16 +66,16 @@ const uint32_t UART_WaitFlag(const STM32F051_UART_t * const pUART, const uint32_
   return 0;
 }
 
-/**
- * @brief Initialization of peripheral UART module
- * 
- * @param[in] pUART Pointer to UART module object
- * 
- * @return UART initialization status
- * @retval 0 If initialization completed successfully
- * @retval 1 If an error occurs during the process
- */
-const uint32_t UART_Init(const STM32F051_UART_t * const pUART)
+///@}
+
+// CallBack Function ---------------------------------------------------------
+__WEAK void UART_RxCallback(STM32F051_UART_t * const pUART)
+{
+
+}
+
+// Exported Function ---------------------------------------------------------
+const uint32_t UART_Init(STM32F051_UART_t * const pUART)
 {
   ASSERT(pUART);
   ASSERT(pUART->handle);
@@ -98,73 +98,9 @@ const uint32_t UART_Init(const STM32F051_UART_t * const pUART)
 
   SET_BIT(pUART->handle->CR1, USART_CR1_UE);
 
+  pUART->pRxCall = UART_RxCallback;
+
   return 0;
-}
-///@}
-
-// CallBack Function ---------------------------------------------------------
-__WEAK void UART_RxCallback(STM32F051_UART_t * const pUART)
-{
-
-}
-
-// Exported Function ---------------------------------------------------------
-const uint32_t UART1_Init(STM32F051_UART_t * const pUART) 
-{
-  ASSERT(pUART);
-
-  SET_BIT(RCC->APB2ENR, RCC_APB2ENR_USART1EN);
-  SET_BIT(RCC->AHBENR, RCC_AHBENR_GPIOAEN);
-
-  MODIFY_REG(GPIOA->OSPEEDR, 0, GPIO_OSPEEDER_OSPEEDR9);
-  CLEAR_BIT(GPIOA->OTYPER, GPIO_OTYPER_OT_9);
-  MODIFY_REG(GPIOA->PUPDR, GPIO_PUPDR_PUPDR9, 0);
-  MODIFY_REG(GPIOA->AFR[1], 0xE << GPIO_AFRH_AFSEL9_Pos, 1 << GPIO_AFRH_AFSEL9_Pos);
-  MODIFY_REG(GPIOA->MODER, GPIO_MODER_MODER9_0, GPIO_MODER_MODER9_1);
-
-  MODIFY_REG(GPIOA->OSPEEDR, 0, GPIO_OSPEEDER_OSPEEDR10);
-  CLEAR_BIT(GPIOA->OTYPER, GPIO_OTYPER_OT_10);
-  MODIFY_REG(GPIOA->PUPDR, GPIO_PUPDR_PUPDR10, 0);
-  MODIFY_REG(GPIOA->AFR[1], 0xE << GPIO_AFRH_AFSEL10_Pos, 1 << GPIO_AFRH_AFSEL10_Pos);
-  MODIFY_REG(GPIOA->MODER, GPIO_MODER_MODER10_0, GPIO_MODER_MODER10_1);
-
-  NVIC_SetPriority(USART1_IRQn, 0);
-  NVIC_EnableIRQ(USART1_IRQn);
-
-  pUART->handle = USART1;
-  pUART->baudRate = 19200;
-  pUART->pRxCall = UART_RxCallback;
-
-  return UART_Init(pUART);
-}
-
-const uint32_t UART2_Init(STM32F051_UART_t * const pUART) 
-{
-  ASSERT(pUART);
-
-  SET_BIT(RCC->APB1ENR, RCC_APB1ENR_USART2EN);
-  SET_BIT(RCC->AHBENR, RCC_AHBENR_GPIOAEN);
-
-  MODIFY_REG(GPIOA->OSPEEDR, 0, GPIO_OSPEEDER_OSPEEDR2);
-  CLEAR_BIT(GPIOA->OTYPER, GPIO_OTYPER_OT_2);
-  MODIFY_REG(GPIOA->PUPDR, GPIO_PUPDR_PUPDR2, 0);
-  MODIFY_REG(GPIOA->AFR[0], 0xE << GPIO_AFRL_AFSEL2_Pos, 1 << GPIO_AFRL_AFSEL2_Pos);
-  MODIFY_REG(GPIOA->MODER, GPIO_MODER_MODER2_0, GPIO_MODER_MODER2_1);
-
-  MODIFY_REG(GPIOA->OSPEEDR, 0, GPIO_OSPEEDER_OSPEEDR3);
-  CLEAR_BIT(GPIOA->OTYPER, GPIO_OTYPER_OT_3);
-  MODIFY_REG(GPIOA->PUPDR, GPIO_PUPDR_PUPDR3, 0);
-  MODIFY_REG(GPIOA->AFR[0], 0xE << GPIO_AFRL_AFSEL3_Pos, 1 << GPIO_AFRL_AFSEL3_Pos);
-  MODIFY_REG(GPIOA->MODER, GPIO_MODER_MODER3_0, GPIO_MODER_MODER3_1);
-
-  NVIC_SetPriority(USART2_IRQn, 0);
-  NVIC_EnableIRQ(USART2_IRQn);
-
-  pUART->handle = USART2;
-  pUART->baudRate = 115200;
-  pUART->pRxCall = UART_RxCallback;
-
-  return UART_Init(pUART);
 }
 
 const uint32_t UART_Transmit(STM32F051_UART_t * const pUART, 

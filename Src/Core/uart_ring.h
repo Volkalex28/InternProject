@@ -19,7 +19,7 @@
 #ifndef _UART_RING_H_
 #define _UART_RING_H_
 
-#include "stm32f051_uart.h"
+#include "uart.h"
 #include "ring_buffer.h"
 
 // Exported Macros ------------------------------------------------------------
@@ -54,6 +54,7 @@ typedef struct
   STM32F051_UART_t uart;         ///< UART module object
   RingBuffer_t ring;             ///< Ring buffer object
   uint8_t buff[UART_RING_SIZE];  ///< Ring buffer memory area
+  uint16_t rxCountStr;           ///< Counter for UART_Ring_GetStr() function
   /**
    * @brief Pointer to the standard callback function 
    * for at the end of reception via the UART interface
@@ -99,6 +100,18 @@ const uint32_t UART_Ring_Init(UART_Ring_t * const ptr);
  * @retval 1 If the buffer is empty
  */
 const uint8_t UART_Ring_PopByte(UART_Ring_t * const ptr, uint8_t * const pVarGetValue);
+
+/**
+ * @brief 
+ * 
+ * @param ptr 
+ * @param buffer 
+ * @param size 
+ * @param endSym 
+ * @return const uint8_t 
+ */
+const int8_t UART_Ring_GetStr(UART_Ring_t * const ptr, char * const buffer,
+  const size_t size, const char endSym);
 
 ///@}
 

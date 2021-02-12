@@ -90,12 +90,6 @@ $(document).ready(function(){initNavTree('group___u_a_r_t___exported___function.
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ga40dbab02491e03a574d39af8d946d914"><td class="memItemLeft" align="right" valign="top">const uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___u_a_r_t___exported___function.html#ga40dbab02491e03a574d39af8d946d914">UART1_Init</a> (<a class="el" href="group___u_a_r_t___exported___types.html#ga085425eff4b0f4f117d6b8e860caca04">STM32F051_UART_t</a> *const pUART)</td></tr>
-<tr class="memdesc:ga40dbab02491e03a574d39af8d946d914"><td class="mdescLeft">&#160;</td><td class="mdescRight">&#x202A;Initialization of the UART1 module and its periphery.  <a href="group___u_a_r_t___exported___function.html#ga40dbab02491e03a574d39af8d946d914">More...</a><br /></td></tr>
-<tr class="separator:ga40dbab02491e03a574d39af8d946d914"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gabda1522e5b64854d88abc2894ea86fd2"><td class="memItemLeft" align="right" valign="top">const uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___u_a_r_t___exported___function.html#gabda1522e5b64854d88abc2894ea86fd2">UART2_Init</a> (<a class="el" href="group___u_a_r_t___exported___types.html#ga085425eff4b0f4f117d6b8e860caca04">STM32F051_UART_t</a> *const pUART)</td></tr>
-<tr class="memdesc:gabda1522e5b64854d88abc2894ea86fd2"><td class="mdescLeft">&#160;</td><td class="mdescRight">&#x202A;Initialization of the UART2 module and its periphery.  <a href="group___u_a_r_t___exported___function.html#gabda1522e5b64854d88abc2894ea86fd2">More...</a><br /></td></tr>
-<tr class="separator:gabda1522e5b64854d88abc2894ea86fd2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga5a9166911eefa9f968d1fc30278a78a1"><td class="memItemLeft" align="right" valign="top">const uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___u_a_r_t___exported___function.html#ga5a9166911eefa9f968d1fc30278a78a1">UART_Transmit</a> (<a class="el" href="group___u_a_r_t___exported___types.html#ga085425eff4b0f4f117d6b8e860caca04">STM32F051_UART_t</a> *const pUART, const uint8_t *pData, uint16_t size, const uint32_t timeout)</td></tr>
 <tr class="memdesc:ga5a9166911eefa9f968d1fc30278a78a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">&#x202A;Send function via <code>pUART</code> interface in blocking mode.  <a href="group___u_a_r_t___exported___function.html#ga5a9166911eefa9f968d1fc30278a78a1">More...</a><br /></td></tr>
 <tr class="separator:ga5a9166911eefa9f968d1fc30278a78a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -109,82 +103,6 @@ Functions</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <p class="DocNodeLTR">UART module function available from other files </p>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="ga40dbab02491e03a574d39af8d946d914"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga40dbab02491e03a574d39af8d946d914">&#9670;&nbsp;</a></span>UART1_Init()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const uint32_t UART1_Init </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="group___u_a_r_t___exported___types.html#ga085425eff4b0f4f117d6b8e860caca04">STM32F051_UART_t</a> *const&#160;</td>
-          <td class="paramname"><em>pUART</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>&#x202A;Initialization of the UART1 module and its periphery. </p>
-<p class="DocNodeLTR">The function adjusts the pins of the PA9 and PA10 microcontroller to work with the UART1 module, configures the module itself with the following parameters: </p><pre class="fragment">Speed:     19200
-Parity:    None
-Data bits: 8
-Stop bits: 1
-</pre><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in,out]</td><td class="paramname">pUART</td><td>&#x202A;Pointer to object of UART1 module</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>&#x202A;UART1 initialization status </dd></dl>
-<dl class="retval"><dt>Return values</dt><dd>
-  <table class="retval">
-    <tr><td class="paramname">0</td><td>&#x202A;If initialization was successful. </td></tr>
-    <tr><td class="paramname">1</td><td>&#x202A;If an initialization error occurs. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="gabda1522e5b64854d88abc2894ea86fd2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gabda1522e5b64854d88abc2894ea86fd2">&#9670;&nbsp;</a></span>UART2_Init()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const uint32_t UART2_Init </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="group___u_a_r_t___exported___types.html#ga085425eff4b0f4f117d6b8e860caca04">STM32F051_UART_t</a> *const&#160;</td>
-          <td class="paramname"><em>pUART</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>&#x202A;Initialization of the UART2 module and its periphery. </p>
-<p class="DocNodeLTR">The function adjusts the pins of the PA2 and PA3 microcontroller to work with the UART2 module, configures the module itself with the following parameters: </p><pre class="fragment">Speed:     115200
-Parity:    None
-Data bits: 8
-Stop bits: 1
-</pre><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in,out]</td><td class="paramname">pUART</td><td>&#x202A;Pointer to object of UART2 module</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>&#x202A;UART2 initialization status </dd></dl>
-<dl class="retval"><dt>Return values</dt><dd>
-  <table class="retval">
-    <tr><td class="paramname">0</td><td>&#x202A;If initialization was successful. </td></tr>
-    <tr><td class="paramname">1</td><td>&#x202A;If an initialization error occurs. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
 <a id="gaed435dc7abc94b02c46b2a5ce064da06"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#gaed435dc7abc94b02c46b2a5ce064da06">&#9670;&nbsp;</a></span>UART_IRQHandler()</h2>
 

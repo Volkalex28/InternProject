@@ -24,7 +24,7 @@
 #ifndef __STM32F051_GPIO__
 #define __STM32F051_GPIO__
 
-#include "stm32f0xx.h"
+#include <stm32f0xx.h>
 
 // Exported Types -------------------------------------------------------------
 /**

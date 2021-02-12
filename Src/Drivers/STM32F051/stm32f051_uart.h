@@ -24,7 +24,7 @@
 #ifndef __STM32F051_UART__
 #define __STM32F051_UART__
 
-#include "stm32f0xx.h"
+#include <stm32f0xx.h>
 #include <stddef.h>
 
 // Exported types --------------------------------------------------------------
@@ -59,48 +59,6 @@ typedef struct sSTM32F051_UART_t
  * UART module function available from other files
  * @{
  */
-
-/**
- * @brief Initialization of the UART1 module and its periphery
- * 
- * The function adjusts the pins of the PA9 and PA10 microcontroller 
- * to work with the UART1 module, configures the module itself with 
- * the following parameters: 
- * @verbatim
-  Speed:     19200
-  Parity:    None
-  Data bits: 8
-  Stop bits: 1
-  @endverbatim
- * 
- * @param[in, out] pUART Pointer to object of UART1 module
- * 
- * @return UART1 initialization status
- * @retval 0 If initialization was successful.
- * @retval 1 If an initialization error occurs. 
- */
-const uint32_t UART1_Init(STM32F051_UART_t * const pUART);
-
-/**
- * @brief Initialization of the UART2 module and its periphery
- * 
- * The function adjusts the pins of the PA2 and PA3 microcontroller 
- * to work with the UART2 module, configures the module itself with 
- * the following parameters: 
- * @verbatim
-  Speed:     115200
-  Parity:    None
-  Data bits: 8
-  Stop bits: 1
-  @endverbatim
- * 
- * @param[in, out] pUART Pointer to object of UART2 module
- * 
- * @return UART2 initialization status
- * @retval 0 If initialization was successful.
- * @retval 1 If an initialization error occurs. 
- */
-const uint32_t UART2_Init(STM32F051_UART_t * const pUART);
 
 /**
  * @brief  Send function via @p pUART interface in blocking mode
@@ -172,6 +130,17 @@ void UART_IRQHandler(STM32F051_UART_t * const pUART);
  * @retval None
  */
 void UART_RxCallback(STM32F051_UART_t* pUART);
+
+/**
+ * @brief Initialization of peripheral UART module
+ * 
+ * @param[in] pUART Pointer to UART module object
+ * 
+ * @return UART initialization status
+ * @retval 0 If initialization completed successfully
+ * @retval 1 If an error occurs during the process
+ */
+const uint32_t UART_Init(STM32F051_UART_t * const pUART);
 
 ///@}
 

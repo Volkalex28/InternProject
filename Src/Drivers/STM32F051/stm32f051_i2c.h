@@ -24,7 +24,7 @@
 #ifndef __STM32F051_I2C__
 #define __STM32F051_I2C__
 
-#include "stm32f0xx.h"
+#include <stm32f0xx.h>
 
 // Exported Function ---------------------------------------------------------
 /** @defgroup I2C_Exported_Function Exported Function

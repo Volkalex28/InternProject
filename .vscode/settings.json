@@ -1,9 +1,5 @@
 {
-  "cmake.generator": "MinGW Makefiles",
   "files.associations": {
-    "uart_ring.h": "c",
-    "user_assert.h": "c",
-    "stdio.h": "c",
-    "stdlib.h": "c"
+    "stm32f051_i2c.h": "c"
   }
 }

@@ -11,7 +11,7 @@
 
 #include "stm32f051_i2c.h"
 #include "stm32f051_rcc.h"
-#include "user_assert.h"
+#include <user_assert.h>
 
 // Private Function -----------------------------------------------------------
 /** @defgroup I2C_Private_Function Private Function
