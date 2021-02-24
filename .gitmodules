@@ -2,3 +2,6 @@
 	path = tests/cpputest
 	url = https://github.com/cpputest/cpputest.git
   
+[submodule "src/parser/AT"]
+	path = src/parser/AT
+	url = https://github.com/Volkalex28/AT_Parser_CPP

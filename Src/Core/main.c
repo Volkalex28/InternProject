@@ -21,6 +21,7 @@
 
 #include <ds3231.h>
 #include "uart_ring.h"
+#include "esp8266.h"
 
 // Private macros -----------------------------------------------------------
 /** 
@@ -153,6 +154,7 @@ int main(void)
 
       bufUART.bufIn[pos] = '\0';
       UARTComander();
+      Parse(bufUART.bufIn[pos]);
     }
 
     static uint32_t startTick = 0;

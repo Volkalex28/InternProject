@@ -42,9 +42,11 @@ set(STARTUP
   ${CORE_DIR}/startup_stm32f051r8tx.s
 )
 
+add_subdirectory(${SOURCE_DIR}/parser)
+
 set(EXECUTABLE ${EXECUTABLE_OUTPUT_PATH}/${PROJECT_NAME})
 
-add_executable(${PROJECT_NAME} ${SOURCE} ${STARTUP})
+add_executable(${PROJECT_NAME} ${SOURCE} ${STARTUP} ${SOURCE_ESP})
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE
   -DSTM32F051x8
@@ -58,6 +60,8 @@ target_include_directories(${PROJECT_NAME} PRIVATE
   ${DRIVER_DIR}/CMSIS/Device/ST/STM32F0xx/Include
   ${DRIVER_DIR}/CMSIS/Include
   ${DRIVER_DIR}/DS3231
+
+  ${SOURCE_DIR}/parser
 )
 
 target_compile_options(${PROJECT_NAME} PRIVATE
@@ -74,7 +78,7 @@ target_compile_options(${PROJECT_NAME} PRIVATE
   --specs=nano.specs
 
   $<$<CONFIG:Debug>: -Og>
-  $<$<CONFIG:Release>: -O3>
+  $<$<CONFIG:Release>: -Os>
 )
 
 target_link_options(${PROJECT_NAME} PRIVATE
