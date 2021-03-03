@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['pc_296',['pc',['../struct_assert_info__t.html#afaa20335217fae16f0e22b466017dae1',1,'AssertInfo_t']]],
-  ['pdatarx_297',['pDataRx',['../structs_s_t_m32_f051___u_a_r_t__t.html#a1d009db3b7df128781d75fc2e6558d78',1,'sSTM32F051_UART_t']]],
-  ['plug_298',['plug',['../group___u_a_r_t___ring___private___variables.html#ga97442116f487b70e9136334f20203977',1,'uart_ring.c']]],
-  ['pmemory_299',['pMemory',['../struct_ring_buffer__t.html#a43593bd525758333beb9643bf6aa6a7b',1,'RingBuffer_t']]],
-  ['prxcall_300',['pRxCall',['../structs_s_t_m32_f051___u_a_r_t__t.html#a5a81c7db981e5cc0d90e76ed5f9566ec',1,'sSTM32F051_UART_t']]]
+  ['reserv_325',['Reserv',['../struct_d_s3231___status__t.html#a0d80d275ad0016e8014320bdfba86976',1,'DS3231_Status_t']]],
+  ['reserved_326',['Reserved',['../struct_d_s3231___temp__t.html#a68394408e82008fe25bfe2931b59ce58',1,'DS3231_Temp_t']]],
+  ['ring_327',['ring',['../struct_u_a_r_t___ring__t.html#a10d985b9d1dd168fb35efb9aff3c4292',1,'UART_Ring_t']]],
+  ['rs_328',['RS',['../struct_d_s3231___control__t.html#ac5592b998e061dd9ca3e48c5e8931a46',1,'DS3231_Control_t']]],
+  ['rxcountstr_329',['rxCountStr',['../struct_u_a_r_t___ring__t.html#a358cbfb00a11cc3e596e1449cf3888fc',1,'UART_Ring_t']]]
 ];

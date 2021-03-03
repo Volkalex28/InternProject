@@ -5,6 +5,8 @@
   extern "C" {
 #endif
 
+#include <user_assert.h>
+
 void Parse(const char sym);
 
 #ifdef __cplusplus

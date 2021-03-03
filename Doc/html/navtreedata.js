@@ -30,7 +30,9 @@ var NAVTREE =
       [ "\u202AData Structures", "annotated.html", "annotated_dup" ],
       [ "\u202AData Fields", "functions.html", [
         [ "\u202AAll", "functions.html", null ],
-        [ "\u202AVariables", "functions_vars.html", null ]
+        [ "\u202AFunctions", "functions_func.html", null ],
+        [ "\u202AVariables", "functions_vars.html", null ],
+        [ "\u202ATypedefs", "functions_type.html", null ]
       ] ]
     ] ]
   ] ]

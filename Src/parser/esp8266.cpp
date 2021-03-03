@@ -27,12 +27,12 @@ esp8266 esp([](const char *){ });
 
 void Parse(const char sym)
 {
-  static esp8266::parseline_t str;
+  static etl::string<80> str = "";
 
   str += sym;
 
   if(sym == '\r')
   { 
-    esp.Parse(std::move(str));
+    esp.Parse(str.c_str());
   } 
 }

@@ -1,8 +1,10 @@
 var searchData=
 [
-  ['reserv_301',['Reserv',['../struct_d_s3231___status__t.html#a0d80d275ad0016e8014320bdfba86976',1,'DS3231_Status_t']]],
-  ['reserved_302',['Reserved',['../struct_d_s3231___temp__t.html#a68394408e82008fe25bfe2931b59ce58',1,'DS3231_Temp_t']]],
-  ['ring_303',['ring',['../struct_u_a_r_t___ring__t.html#a10d985b9d1dd168fb35efb9aff3c4292',1,'UART_Ring_t']]],
-  ['rs_304',['RS',['../struct_d_s3231___control__t.html#ac5592b998e061dd9ca3e48c5e8931a46',1,'DS3231_Control_t']]],
-  ['rxcountstr_305',['rxCountStr',['../struct_u_a_r_t___ring__t.html#a358cbfb00a11cc3e596e1449cf3888fc',1,'UART_Ring_t']]]
+  ['sec_330',['Sec',['../struct_d_s3231___mem___time__t.html#aba0dd5d75a356b633902e4b35e9d9a21',1,'DS3231_Mem_Time_t']]],
+  ['sec10_331',['Sec10',['../struct_d_s3231___mem___time__t.html#a9cf77f04d9b3e157345f2e11590529de',1,'DS3231_Mem_Time_t']]],
+  ['seconds_332',['Seconds',['../struct_d_s3231___mem___time__t.html#a5d6b3f08470401a99cccde45a83baf68',1,'DS3231_Mem_Time_t::Seconds()'],['../struct_d_s3231___time__t.html#a42120bdc40e6f49bb5b4dec78220c87b',1,'DS3231_Time_t::Seconds()']]],
+  ['size_333',['size',['../struct_ring_buffer__t.html#aaba88b24a21a6c70c895c0d55f4a69a0',1,'RingBuffer_t']]],
+  ['sizerx_334',['sizeRx',['../structs_s_t_m32_f051___u_a_r_t__t.html#ae404e93a500429f1487df36799ff53bf',1,'sSTM32F051_UART_t']]],
+  ['status_335',['Status',['../struct_d_s3231___mem__t.html#a2004bcd17c3ec1c435475f2990a85023',1,'DS3231_Mem_t::Status()'],['../struct_d_s3231__t.html#a2004bcd17c3ec1c435475f2990a85023',1,'DS3231_t::Status()']]],
+  ['strout_336',['strOut',['../group___main___private___variable.html#ga60de812f35560084a905aae2b510f4fe',1,'@7']]]
 ];

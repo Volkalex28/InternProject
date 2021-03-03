@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['uart_5fring_5ft_203',['UART_Ring_t',['../struct_u_a_r_t___ring__t.html',1,'']]]
+  ['ringbuffer_5ft_218',['RingBuffer_t',['../struct_ring_buffer__t.html',1,'']]]
 ];

@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['uart_317',['uart',['../struct_u_a_r_t___ring__t.html#a2166f78fad97667876071f7c4cf36f26',1,'UART_Ring_t']]],
-  ['uart2_318',['uart2',['../group___main___exported___variable.html#ga69e6cf735b1b53d2e10b72e0429d88f8',1,'uart2():&#160;main.c'],['../group___main___exported___variable.html#ga69e6cf735b1b53d2e10b72e0429d88f8',1,'uart2():&#160;main.c']]],
-  ['uart_5frxcallback_319',['UART_RxCallback',['../struct_u_a_r_t___ring__t.html#a4bbfd0c3268caf9d0c90791e6b2ef05a',1,'UART_Ring_t']]]
+  ['year_344',['Year',['../struct_d_s3231___mem___date__t.html#ab1fa72fe40c7b93c140c766dec410e29',1,'DS3231_Mem_Date_t::Year()'],['../struct_d_s3231___mem___date__t.html#aafacc9dcd4fa8e976ec515e8f7ad0099',1,'DS3231_Mem_Date_t::Year()'],['../struct_d_s3231___date__t.html#ab1fa72fe40c7b93c140c766dec410e29',1,'DS3231_Date_t::Year()']]],
+  ['year10_345',['Year10',['../struct_d_s3231___mem___date__t.html#aa08b76b252434a9d1f79c0f645b12500',1,'DS3231_Mem_Date_t']]]
 ];

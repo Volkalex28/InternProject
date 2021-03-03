@@ -76,9 +76,10 @@ target_compile_options(${PROJECT_NAME} PRIVATE
   -fstack-usage
 
   --specs=nano.specs
+  --specs=nosys.specs
 
   $<$<CONFIG:Debug>: -Og>
-  $<$<CONFIG:Release>: -Os>
+  $<$<CONFIG:Release>: -O2>
 )
 
 target_link_options(${PROJECT_NAME} PRIVATE
@@ -86,7 +87,7 @@ target_link_options(${PROJECT_NAME} PRIVATE
   -mcpu=cortex-m0
   -mthumb
   -mfloat-abi=soft
-  -u _printf_float
+#  -u _printf_float
 
   --specs=nano.specs
   --specs=nosys.specs
