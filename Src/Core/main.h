@@ -33,4 +33,6 @@
 #define SIZE_ARR(_ARR_) (sizeof(_ARR_)/sizeof(_ARR_[0])) ///< Determining the size of an array
 ///@}
 
+void taskLoop(void * pvParametres);
+
 #endif /* _MAIN_H_ */

@@ -37,6 +37,17 @@ set(SOURCE
   ${CORE_DIR}/ring_buffer.c
   ${CORE_DIR}/uart_ring.c
   ${CORE_DIR}/uart.c
+  ${CORE_DIR}/FreeRTOSInit.c
+
+  ${SOURCE_DIR}/middlewares/FreeRTOS/croutine.c
+  ${SOURCE_DIR}/middlewares/FreeRTOS/event_groups.c
+  ${SOURCE_DIR}/middlewares/FreeRTOS/list.c
+  ${SOURCE_DIR}/middlewares/FreeRTOS/queue.c
+  ${SOURCE_DIR}/middlewares/FreeRTOS/stream_buffer.c
+  ${SOURCE_DIR}/middlewares/FreeRTOS/tasks.c
+  ${SOURCE_DIR}/middlewares/FreeRTOS/timers.c
+  ${SOURCE_DIR}/middlewares/FreeRTOS/portable/GCC/ARM_CM0/port.c
+  ${SOURCE_DIR}/middlewares/FreeRTOS/portable/MemMang/heap_2.c
 )
 set(STARTUP
   ${CORE_DIR}/startup_stm32f051r8tx.s
@@ -60,8 +71,40 @@ target_include_directories(${PROJECT_NAME} PRIVATE
   ${DRIVER_DIR}/CMSIS/Device/ST/STM32F0xx/Include
   ${DRIVER_DIR}/CMSIS/Include
   ${DRIVER_DIR}/DS3231
+  ${SOURCE_DIR}/middlewares/FreeRTOS/include
+  ${SOURCE_DIR}/middlewares/FreeRTOS/portable/GCC/ARM_CM0
 
   ${SOURCE_DIR}/parser
+)
+
+set_target_properties(${PROJECT_NAME} PROPERTIES
+  C_STANDARD ${CMAKE_C_STANDARD}
+
+  if(CMAKE_C_STANDARD_REQUIRED)
+    C_STANDARD_REQUIRED YES
+  else()
+    C_STANDARD_REQUIRED NO
+  endif()
+
+  if(CMAKE_C_EXTENSIONS)
+    C_EXTENSIONS YES
+  else()
+    C_EXTENSIONS NO
+  endif()
+  
+  # CXX_STANDARD ${CMAKE_CXX_STANDARD}
+
+  # if(CMAKE_CXX_STANDARD_REQUIRED)
+  #   CXX_STANDARD_REQUIRED YES
+  # else()
+  #   CXX_STANDARD_REQUIRED NO
+  # endif()
+
+  # if(CMAKE_CXX_EXTENSIONS)
+  #   CXX_EXTENSIONS YES
+  # else()
+  #   CXX_EXTENSIONS NO
+  # endif()
 )
 
 target_compile_options(${PROJECT_NAME} PRIVATE
@@ -79,7 +122,7 @@ target_compile_options(${PROJECT_NAME} PRIVATE
   --specs=nosys.specs
 
   $<$<CONFIG:Debug>: -Og>
-  $<$<CONFIG:Release>: -O2>
+  $<$<CONFIG:Release>: -Os>
 )
 
 target_link_options(${PROJECT_NAME} PRIVATE
