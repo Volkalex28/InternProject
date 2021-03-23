@@ -24,6 +24,7 @@
 
 #include "uart_ring.h"
 
+extern UART_Ring_t uart1;
 extern UART_Ring_t uart2;
 
 /******************************************************************************/
@@ -77,6 +78,7 @@ void SysTick_Handler(void)
  */
 void USART1_IRQHandler(void)
 {
+  UART_IRQHandler(&uart1.uart);
 }
 
 /**

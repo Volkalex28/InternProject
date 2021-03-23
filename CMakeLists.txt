@@ -47,7 +47,7 @@ set(SOURCE
   ${SOURCE_DIR}/middlewares/FreeRTOS/tasks.c
   ${SOURCE_DIR}/middlewares/FreeRTOS/timers.c
   ${SOURCE_DIR}/middlewares/FreeRTOS/portable/GCC/ARM_CM0/port.c
-  ${SOURCE_DIR}/middlewares/FreeRTOS/portable/MemMang/heap_2.c
+  ${SOURCE_DIR}/middlewares/FreeRTOS/portable/MemMang/heap_4.c
 )
 set(STARTUP
   ${CORE_DIR}/startup_stm32f051r8tx.s

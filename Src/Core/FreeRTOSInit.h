@@ -10,6 +10,10 @@
 
 #include "FreeRTOS.h"
 #include "task.h"
+#include "semphr.h"
+
+extern xSemaphoreHandle endReadUART;
+extern xSemaphoreHandle endCommandUART;
 
 void FreeRTOS_Init(void);
 

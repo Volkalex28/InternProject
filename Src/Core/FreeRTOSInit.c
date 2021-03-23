@@ -11,9 +11,22 @@
 static StaticTask_t Loop_TCB;
 static StackType_t Loop_Stack[configMINIMAL_STACK_SIZE];
 
+static StaticTask_t ESP_TCB;
+static StackType_t ESP_Stack[configMINIMAL_STACK_SIZE];
+static StaticTask_t UART_TCB;
+static StackType_t UART_Stack[configMINIMAL_STACK_SIZE];
+
+xSemaphoreHandle endReadUART;
+xSemaphoreHandle endCommandUART;
+
 void FreeRTOS_Init(void)
 {
   xTaskCreateStatic(&taskLoop, "Loop", sizeof(Loop_Stack) / sizeof(StackType_t), NULL, 1, Loop_Stack, &Loop_TCB);
+  xTaskCreateStatic(&taskReadESP, "ESP", sizeof(ESP_Stack) / sizeof(StackType_t), NULL, 2, ESP_Stack, &ESP_TCB);
+  xTaskCreateStatic(&taskReadUART, "UART", sizeof(UART_Stack) / sizeof(StackType_t), NULL, 2, UART_Stack, &UART_TCB);
+
+  vSemaphoreCreateBinary(endCommandUART);
+  vSemaphoreCreateBinary(endReadUART);
 }
 
 /* Idle task control block and stack */
