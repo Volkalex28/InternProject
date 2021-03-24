@@ -26,7 +26,8 @@
  * 
  * It is incremented in SysTick_Handler() and used in the Delay() function.
  */
-static volatile uint32_t ticks = 0;
+volatile uint32_t ticks = 0;
+uint32_t SystemCoreClock;
 /// @}
 
 // Exported Function ---------------------------------------------------------
@@ -78,6 +79,7 @@ const uint32_t RCC_Init(void)
   SysTick->CTRL  = SysTick_CTRL_CLKSOURCE_Msk | SysTick_CTRL_TICKINT_Msk | SysTick_CTRL_ENABLE_Msk;
   // Set NVIC for working
   NVIC_SetPriority(SysTick_IRQn, 0);
+  SystemCoreClock = 48000000;
 
   // ---- ----
   // Enable SYSCFG & COMP clock

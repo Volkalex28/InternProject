@@ -1,0 +1,20 @@
+BasedOnStyle: Microsoft
+
+Language: Cpp
+
+AccessModifierOffset: -2
+IndentWidth: 2
+TabWidth: 2
+ColumnLimit: 120
+AlignAfterOpenBracket: DontAlign
+
+ConstructorInitializerIndentWidth: 2
+ContinuationIndentWidth: 2
+Cpp11BracedListStyle: false
+FixNamespaceComments: true
+
+ContinuationIndentWidth: 2
+
+PointerAlignment: Middle
+BinPackArguments: true
+AllowAllParametersOfDeclarationOnNextLine: true

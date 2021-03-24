@@ -12,16 +12,36 @@
 #pragma once
 
 #include "AT/src/Parser.hpp"
+#include "AT/src/etl/include/etl/vector.h"
 
-class esp8266 : public Parser<5>
+class esp8266 : public Parser<8>
 {
+  bool _init = false;
+  bool _connected = false;
+  bool _connectServer = false;
+
 public:
   AT_Command<> AT;
   AT_Command<int, string_t, int, string_t> CWLAP;
-  AT_Command<int> Echo;
-  AT_Command<> Test;
-  AT_Command<> Test2;
+  AT_Command<> CWJAP;
+  AT_Command<> WIFI_GotIP;
+  AT_Command<> WIFI_Disconnected;
+  AT_Command<> ServerConnect;
+  AT_Command<> ServerClose;
+  AT_Command<> ServerSend;
+  AT_Command<> ServerSended;
 
   esp8266(printf_t write);
+
+  void init(void);
+  const bool getInit(void) const;
+  const bool getConnected(void) const;
+  void setInit(const bool state);
+  void setConnected(const bool state);
+  const bool getConnectedServer(void) const;
+  void setConnectedServer(const bool state);
+
+  etl::vector<Parser::string_t, 10> Nets;
+  bool _sendServerReady = false;
 };
 

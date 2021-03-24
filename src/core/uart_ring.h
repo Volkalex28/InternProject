@@ -37,6 +37,9 @@
 #define UART_RING_SIZE 20
 ///@}
 
+// Exported Enums ------------------------------------------------------------
+typedef enum {UART1_INIT, UART2_INIT} UART_Ring_Init_t;
+ 
 // Exported Types ------------------------------------------------------------
 /**
  * @defgroup UART_Ring_Exported_Types Exported Types
@@ -85,7 +88,7 @@ typedef struct
  * @retval 0 If initialization was successfully
  * @retval 1 If problems occur during initialization
  */
-const uint32_t UART_Ring_Init(UART_Ring_t * const ptr);
+const uint32_t UART_Ring_Init(UART_Ring_t * const ptr, const UART_Ring_Init_t number);
 
 /**
  * @brief Extracting one byte from the UART buffer

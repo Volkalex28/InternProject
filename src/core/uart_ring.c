@@ -4,19 +4,20 @@
  * @brief Source file for UART with ring buffer support
  * @version 0.1
  * @date 2021-01-26
- * 
+ *
  * @copyright Copyright (c) 2021
- * 
+ *
  */
 
-#include <user_assert.h>
 #include "uart_ring.h"
+#include <user_assert.h>
+
 
 // Private Variables ----------------------------------------------------------
 /**
  * @defgroup UART_Ring_Private_Variables Private Variables
  * @ingroup UART_Ring
- * 
+ *
  * @brief Variables for internal needs UART with a ring buffer
  */
 ///@{
@@ -28,20 +29,20 @@ static uint8_t plug; ///< Cap for receiving function
 /**
  * @defgroup UART_Ring_Private_Functions Private Functions
  * @ingroup UART_Ring
- * 
+ *
  * @brief Functions for internal needs UART with a ring buffer
  */
 ///@{
 
 /**
  * @brief Callback for receiving one byte via UART interface
- * 
- * The function reads the received byte via the UART interface, 
- * adds it to the ring buffer and calls the standard callback at the end 
+ *
+ * The function reads the received byte via the UART interface,
+ * adds it to the ring buffer and calls the standard callback at the end
  * of the reception. It also restarts the reception of one byte.
- * 
+ *
  * @param[in, out] pUART Pointer to the object of the UART module
- * 
+ *
  * @return None
  */
 void UART_Ring_RxCallback(STM32F051_UART_t * const pUART)
@@ -51,7 +52,7 @@ void UART_Ring_RxCallback(STM32F051_UART_t * const pUART)
 
   RING_Append(&((UART_Ring_t *)pUART)->ring, (uint8_t)pUART->handle->RDR);
 
-  if(((UART_Ring_t *)pUART)->UART_RxCallback != NULL)
+  if (((UART_Ring_t *)pUART)->UART_RxCallback != NULL)
   {
     ((UART_Ring_t *)pUART)->UART_RxCallback(pUART);
   }
@@ -61,13 +62,23 @@ void UART_Ring_RxCallback(STM32F051_UART_t * const pUART)
 ///@}
 
 // Exported Functions ----------------------------------------------------------
-const uint32_t UART_Ring_Init(UART_Ring_t * const ptr)
+const uint32_t UART_Ring_Init(UART_Ring_t * const ptr, const UART_Ring_Init_t number)
 {
   ASSERT(ptr);
 
-  if(UART2_Init(&ptr->uart) != 0)
+  if (number == UART1_INIT)
   {
-    return 1;
+    if (UART1_Init(&ptr->uart) != 0)
+    {
+      return 1;
+    }
+  }
+  else if(number == UART2_INIT)
+  {
+    if (UART2_Init(&ptr->uart) != 0)
+    {
+      return 1;
+    }
   }
 
   RING_Init(&ptr->ring, ptr->buff, UART_RING_SIZE);
@@ -86,22 +97,21 @@ const uint8_t UART_Ring_PopByte(UART_Ring_t * const ptr, uint8_t * const pVarGet
   return RING_Pop(&ptr->ring, pVarGetValue);
 }
 
-const int8_t UART_Ring_GetStr(UART_Ring_t * const ptr, char * const buffer,
-  const size_t size, const char endSym)
+const int8_t UART_Ring_GetStr(UART_Ring_t * const ptr, char * const buffer, const size_t size, const char endSym)
 {
-  while(UART_Ring_PopByte(ptr, (uint8_t *)&buffer[ptr->rxCountStr]))
+  while (UART_Ring_PopByte(ptr, (uint8_t *)&buffer[ptr->rxCountStr]))
   {
-    if(buffer[ptr->rxCountStr] == endSym)
+    if (buffer[ptr->rxCountStr] == endSym)
     {
       const uint16_t pos = ptr->rxCountStr;
       ptr->rxCountStr = 0;
       return pos;
     }
-    else 
+    else
     {
       ptr->rxCountStr++;
 
-      if(ptr->rxCountStr < size)
+      if (ptr->rxCountStr < size)
       {
         continue;
       }
