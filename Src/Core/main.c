@@ -18,11 +18,11 @@
 
 #include "main.h"
 #include "pins.h"
+#include "uart_ring.h"
 
 #include "FreeRTOSInit.h"
 
 #include "esp8266.h"
-#include "uart_ring.h"
 #include <ds3231.h>
 
 // Private macros -----------------------------------------------------------
@@ -60,8 +60,8 @@ static struct
   char bufIn[SIZE_UART_BUFFERS];  ///< Command input buffer
 } bufUART;
 
-static DS3231_t DS3231;       ///< Real time clock module object
-static uint16_t delay = 1000; ///< Stores the number of milliseconds of the RTC module polling pause
+static DS3231_t DS3231;    ///< Real time clock module object
+static uint16_t delay = 1; ///< Stores the number of seconds of the RTC module polling pause
 ///@}
 
 // Exported variable -----------------------------------------------------------
@@ -71,7 +71,8 @@ static uint16_t delay = 1000; ///< Stores the number of milliseconds of the RTC 
  * @brief Variables used in the program loop and accessible from the outside
  */
 ///@{
-UART_Ring_t uart2; ///< UART module object with circular buffer support
+UART_Ring_t uart1; ///< UART module object for ESP with circular buffer support
+UART_Ring_t uart2; ///< UART module object for PC with circular buffer support
 ///@}
 
 // Private Functions ----------------------------------------------------------
@@ -143,7 +144,8 @@ int main(void)
 {
   RCC_Init();
   GPIO_Init();
-  UART_Ring_Init(&uart2);
+  UART_Ring_Init(&uart1, UART1_INIT);
+  UART_Ring_Init(&uart2, UART2_INIT);
 
   DS3231_SetAddress(&DS3231, 0xD0);
 
@@ -152,9 +154,10 @@ int main(void)
 
   while (1)
   {
-    continue;
+    Delay(500);
+    GPIO_TogglePin(LED_GREEN_Port, LED_GREEN_Pin);
   }
-  return EXIT_SUCCESS;
+  return EXIT_FAILURE;
 }
 
 /**
@@ -165,44 +168,99 @@ void UART_RxCallback(STM32F051_UART_t * pUART)
   GPIO_TogglePin(LED_GREEN_Port, LED_GREEN_Pin);
 }
 
-void taskLoop(void * pvParametres)
+void ConnectWIFI(void)
+{
+  xSemaphoreTake(endReadUART, portMAX_DELAY);
+
+  const uint8_t lengthStr = strlen(bufUART.bufIn);
+  uint16_t positionComa;
+  for (positionComa = 0; positionComa < lengthStr; positionComa++)
+  {
+    if (bufUART.bufIn[positionComa] == ',')
+    {
+      break;
+    }
+  }
+  ESP_ConnectWIFI(bufUART.bufIn, bufUART.bufIn + positionComa, 3000);
+
+  xSemaphoreGive(endCommandUART);
+}
+
+void taskLoop(void * pvParameters)
+{
+  ESP_Init(1000);
+  ESP_Scan();
+  vTaskDelay(3000);
+  GPIO_SetPin(LED_BLUE_Port, LED_BLUE_Pin);
+  ESP_PrintSSIDs(&uart2.uart, 3000);
+  ConnectWIFI();
+  ESP_ConnectServer("192.168.0.140", 3390, 3000);
+
+  GPIO_TogglePin(LED_BLUE_Port, LED_BLUE_Pin);
+
+  while (1)
+  {
+    if (xSemaphoreTake(endReadUART, 0) == pdTRUE)
+    {
+      UARTComander();
+      xSemaphoreGive(endCommandUART);
+    }
+
+    DS3231_GetDate(&DS3231);
+    DS3231_GetTime(&DS3231);
+    DS3231_GetTemp(&DS3231);
+
+    snprintf(bufUART.strOut, (size_t)SIZE_ARR(bufUART.strOut),
+      "\nDate: %02d/%02d/20%02d\nTime: %02d:%02d:%02d\nCurrent Day: "
+      "%d\nTemp: %02d.%02d\n",
+      DS3231.Date.Date, DS3231.Date.Month, DS3231.Date.Year, DS3231.Time.Hours, DS3231.Time.Minutes,
+      DS3231.Time.Seconds, DS3231.Date.Day, (int)DS3231.Temp, (int)(DS3231.Temp * 100) % 100);
+
+    ESP_SendToServer(bufUART.strOut, 3000);
+
+    vTaskDelay(delay * 1000);
+  }
+
+  vTaskDelete(NULL);
+}
+
+void taskReadESP(void * pvParameters)
+{
+  uint8_t temp = 0;
+  while (1)
+  {
+    while (UART_Ring_PopByte(&uart1, &temp) != 0)
+    {
+      ESP_Parse(temp);
+    }
+    taskYIELD();
+    vTaskDelay(1);
+  }
+
+  vTaskDelete(NULL);
+}
+
+void taskReadUART(void * pvParametres)
 {
   while (1)
   {
+    xSemaphoreTake(endCommandUART, portMAX_DELAY);
     while (1)
     {
       int8_t pos = UART_Ring_GetStr(&uart2, bufUART.bufIn, SIZE_ARR(bufUART.bufIn), '\n');
       if (pos < 0)
       {
-        break;
+        taskYIELD();
+        vTaskDelay(1);
+        continue;
       }
 
-      UART_Transmit(&uart2.uart, (uint8_t *)bufUART.bufIn, strlen(bufUART.bufIn), 1000);
-
       bufUART.bufIn[pos] = '\0';
-      UARTComander();
-      Parse(bufUART.bufIn[pos]);
+      xSemaphoreGive(endReadUART);
+      break;
     }
 
-    static uint32_t startTick = 0;
-
-    if (startTick + delay < GetTick())
-    {
-      startTick = GetTick();
-
-      DS3231_GetDate(&DS3231);
-      DS3231_GetTime(&DS3231);
-      DS3231_GetTemp(&DS3231);
-
-      snprintf(bufUART.strOut, (size_t)SIZE_ARR(bufUART.strOut),
-        "\nDate: %02d/%02d/20%02d\nTime: %02d:%02d:%02d\nCurrent Day: "
-        "%d\nTemp: %02d.%02d\n", DS3231.Date.Date,
-        DS3231.Date.Month, DS3231.Date.Year, DS3231.Time.Hours, DS3231.Time.Minutes, DS3231.Time.Seconds,
-        DS3231.Date.Day, (int)DS3231.Temp, (int)(DS3231.Temp * 100) % 100);
-
-      UART_Transmit(&uart2.uart, (uint8_t *)bufUART.strOut, strlen(bufUART.strOut), 1000);
-      GPIO_TogglePin(LED_BLUE_Port, LED_BLUE_Pin);
-    }
+    taskYIELD();
     vTaskDelay(1);
   }
 
