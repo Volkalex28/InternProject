@@ -50,7 +50,7 @@
     void * pc;                  \
     GET_PC(pc);                \
     const void * lr = GET_LR(); \
-    my_assert(pc, (uint32_t *)lr);         \
+    my_assert((uint32_t *)pc, (uint32_t *)lr);         \
   } while (0)
 
 /**

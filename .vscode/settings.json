@@ -1,5 +1,7 @@
 {
   "files.associations": {
-    "stm32f051_i2c.h": "c"
+    "initfreertos.h": "c",
+    "*.ipp": "cpp",
+    "main.h": "c"
   }
 }
